@@ -5,19 +5,19 @@
       max-height="128px"
       app fixed>
     <v-img max-height="120px" max-width="120px" src="../assets/logoOnFit.png"/>
-    <v-tabs dark class="text--white" v-if="!loggedIn">
-      <v-tab v-for="tab in tabsLoggedOut" v-bind:key="tab.name" :to="tab.route">
-        <div>{{ tab.name }}</div>
+    <v-tabs class="text--white" v-if="!loggedIn">
+      <v-tab v-for="tab in tabsLoggedOut" v-bind:key="tab.name" class="text--white" :to="tab.route">
+        {{ tab.name }}
         <v-icon right>{{ tab.icon }}</v-icon>
       </v-tab>
     </v-tabs>
-    <v-tabs dark v-else>
-      <v-tab v-for="tab in tabsLoggedIn" v-bind:key="tab.name" :to="tab.route">
-        <div>{{ tab.name }}</div>
+    <v-tabs v-else>
+      <v-tab v-for="tab in tabsLoggedIn" v-bind:key="tab.name" class="text--white" :to="tab.route">
+        {{ tab.name }}
         <v-icon right>{{ tab.icon }}</v-icon>
       </v-tab>
       <v-spacer/>
-      <v-btn large color="rgb(87, 71, 255)" @click="loggedIn = false" depressed to='/' dark height="64px">
+      <v-btn large color="rgb(87, 71, 255)" @click="logOut" depressed dark height="64px">
         Cerrar Sesión
         <v-icon>mdi-exit-to-app</v-icon>
       </v-btn>
@@ -52,7 +52,14 @@ export default {
       {name: "Mi Perfil", icon: null, route: "/profile"},
     ],
     active: 0,
-  })
+
+  }),
+  methods: {
+    logOut() {
+      this.loggedIn = false;
+      this.$router.reload();
+    }
+  }
 };
 </script>
 
