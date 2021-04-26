@@ -5,14 +5,23 @@
       max-height="128px"
       app fixed>
     <v-img max-height="120px" max-width="120px" src="../assets/logoOnFit.png"/>
-    <v-tabs class="text--white" v-if="!loggedIn">
-      <v-tab v-for="tab in tabsLoggedOut" v-bind:key="tab.name" class="text--white" :to="tab.route">
+    <v-tabs class="white--text" v-if="!loggedIn">
+      <v-tab class="white--text" v-for="tab in tabsLoggedOut" v-bind:key="tab.name" :to="tab.route">
         {{ tab.name }}
-        <v-icon right>{{ tab.icon }}</v-icon>
+        <v-icon class="white--text" right>{{ tab.icon }}</v-icon>
       </v-tab>
+      <v-spacer/>
+      <v-btn large color="rgb(87, 71, 255)" @click="logOut" depressed dark height="64px">
+        Iniciar Sesión
+        <v-icon>mdi-login</v-icon>
+      </v-btn>
+      <v-btn large color="rgb(87, 71, 255)" @click="logOut" depressed dark height="64px">
+        Crear Cuenta
+        <v-icon>mdi-account-plus-outline</v-icon>
+      </v-btn>
     </v-tabs>
     <v-tabs v-else>
-      <v-tab v-for="tab in tabsLoggedIn" v-bind:key="tab.name" class="text--white" :to="tab.route">
+      <v-tab v-for="tab in tabsLoggedIn" v-bind:key="tab.name" class="white--text" :to="tab.route">
         {{ tab.name }}
         <v-icon right>{{ tab.icon }}</v-icon>
       </v-tab>
@@ -32,17 +41,7 @@ export default {
     key: 0,
     loggedIn: true,//esto se cambia por lo que traiga el api
     tabsLoggedOut: [
-      {name: "Menú", icon: null, route: "/"},
-      {
-        name: "Iniciar Sesion",
-        icon: "mdi-login",
-        route: "/login",
-      },
-      {
-        name: "Crear Cuenta",
-        icon: "mdi-account-plus-outline",
-        route: "/signin",
-      },
+      {name: "Menú", icon: null, route: "/"}
     ],
     tabsLoggedIn: [
       {name: "Menú", icon: null, route: "/"},
