@@ -2,16 +2,9 @@
   <v-app>
     <BackgroundImage/>
     <Header/>
-    <v-btn
-        height="300"
-        style="margin-top: 70px; margin-left: 5%"
-        width="500">
-      <v-img
-          height="300"
-          width="500"
-          src="./assets/logoOnFit.png"
-      ></v-img>
-    </v-btn>
+    <v-main>
+      <router-view/>
+    </v-main>
   </v-app>
 </template>
 
@@ -21,12 +14,10 @@ import BackgroundImage from "./components/BackgroundImage";
 
 export default {
   name: 'App',
-
   components: {
     BackgroundImage,
     Header
   },
-
   data: () => ({
     //
   }),
