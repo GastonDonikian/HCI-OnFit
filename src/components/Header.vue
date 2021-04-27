@@ -11,7 +11,7 @@
         <v-icon class="white--text" right>{{ tab.icon }}</v-icon>
       </v-tab>
       <v-spacer/>
-      <v-btn large color="rgb(87, 71, 255)" @click="logOut" depressed dark height="64px">
+      <v-btn large color="rgb(87, 71, 255)" @click="logIn" depressed dark height="64px">
         Iniciar Sesión
         <v-icon>mdi-login</v-icon>
       </v-btn>
@@ -56,6 +56,10 @@ export default {
   methods: {
     logOut() {
       this.loggedIn = false;
+      this.$router.reload();
+    },
+    logIn() {
+      this.loggedIn = true;
       this.$router.reload();
     }
   }
