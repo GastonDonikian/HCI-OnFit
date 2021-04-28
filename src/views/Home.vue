@@ -6,7 +6,7 @@
     <v-img
         height="300"
         width="500"
-        src="@/assets/logoOnFit.png"
+        src="@/assets/LogoAzul.png"
     ></v-img>
   </v-btn>
 </template>
