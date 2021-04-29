@@ -11,7 +11,8 @@
         <v-icon class="white--text" right>{{ tab.icon }}</v-icon>
       </v-tab>
       <v-spacer/>
-      <v-btn large color="rgb(87, 71, 255)" @click="logIn" depressed dark height="64px">
+<!--      @click="logIn"    tendria que estar en v-btn-->
+      <v-btn large color="rgb(87, 71, 255)"  depressed dark height="64px" :to="'/LogIn'">
         Iniciar Sesión
         <v-icon>mdi-login</v-icon>
       </v-btn>

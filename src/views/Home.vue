@@ -1,5 +1,5 @@
 <template>
-  <v-btn
+  <v-img
       height="300" plain
       style="margin-top: 70px; margin-left: 5%"
       width="500">
@@ -8,7 +8,7 @@
         width="500"
         src="@/assets/LogoAzul.png"
     ></v-img>
-  </v-btn>
+  </v-img>
 </template>
 
 <script>
