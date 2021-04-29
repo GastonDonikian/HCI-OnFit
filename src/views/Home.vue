@@ -12,8 +12,8 @@
     ></v-img>
   </v-img>
   <h3>¡Dejanos a nosotros armarte la rutina!</h3>
-  <h3>Empeza a entrenar hoy con rutinas pensadas</h3>
-    <h3>para vos… y sin cargo  </h3>
+  <h3>Empeza a entrenar hoy con rutinas</h3>
+  <h3>pensadas para vos… y sin cargo  </h3>
   </div>
 </template>
 
