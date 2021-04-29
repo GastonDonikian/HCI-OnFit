@@ -1,8 +1,9 @@
 <template>
-  <div class ="menu" style="margin-top: 40px; margin-left: 2%" >
+  <div class ="menu" style="margin-left: 2%" >
   <v-img
     height="300"
     plain
+    style="margin-top: 40px"
     width="500">
     <v-img
         height="300"
