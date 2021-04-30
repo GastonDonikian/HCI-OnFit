@@ -14,10 +14,10 @@
             color="grey"
         ></v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="headline mb-1">
+          <v-list-item-title class="headline mb-1 black--text" >
             Headline 5
           </v-list-item-title>
-          <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+          <v-list-item-subtitle class="black--text">Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
           <v-rating
             v-model="rating"
             background-color="black"
@@ -31,7 +31,7 @@
                 rounded
                 small
                 text
-                color="white"
+                color="black"
             >
               Ver rutina
             </v-btn>

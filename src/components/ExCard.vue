@@ -5,14 +5,13 @@
       max-width="344"
       min-height="170"
       color="#EBEBEB"
-      style="opacity: 0.8"
   ><!--color cambia con la API-->
     <v-list-item three-line>
       <v-list-item-content>
-        <v-list-item-title class="headline mb-1">
+        <v-list-item-title class="headline mb-1 black--text">
           Headline 5
         </v-list-item-title>
-        <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+        <v-list-item-subtitle class="black--text">Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
         <v-card-actions >
           <v-spacer></v-spacer>
           <v-btn
