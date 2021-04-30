@@ -46,7 +46,7 @@ export default {
     ],
     tabsLoggedIn: [
       {name: "Menú", icon: null, route: "/Home"},
-      {name: "Crear Rutinas", icon: null, route: "/rutinas"},
+      {name: "Crear Rutinas", icon: null, route: "/Rutinas"},
       {name: "Mis Rutinas", icon: null, route: "/explore"},
       {name: "Mis Trofeos", icon: null, route: "/trophies"},
       {name: "Mi Perfil", icon: null, route: "/profile"},
