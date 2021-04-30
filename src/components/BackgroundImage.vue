@@ -17,7 +17,7 @@ export default {
   margin: 0 0 0 0;
   left: 0;
   z-index: 0;
-  background: url('../assets/backgroundImage.jpg') no-repeat center center fixed;
+  background: url('../assets/backgroundImage.png') no-repeat center center fixed;
   background-size: cover;
 }
 </style>
