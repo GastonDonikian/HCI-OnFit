@@ -48,7 +48,7 @@ export default {
       {name: "Menú", icon: null, route: "/Home"},
       {name: "Mis Rutinas", icon: null, route: "/Rutinas"},
       {name: "Explorar", icon: null, route: "/Explore"},
-      {name: "Mis Trofeos", icon: null, route: "/trophies"},
+      {name: "Mis Trofeos", icon: null, route: "/Logros"},
       {name: "Mi Perfil", icon: null, route: "/profile"},
     ],
     active: 0,
