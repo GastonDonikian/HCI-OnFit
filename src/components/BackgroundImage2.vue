@@ -21,5 +21,4 @@ export default {
   background: url('../assets/backgroundImage2.png') no-repeat center center fixed;
   background-size: cover;
 }
->>>>>>> origin/master
 </style>
