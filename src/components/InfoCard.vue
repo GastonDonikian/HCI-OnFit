@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="300px" min-height="450px" align="center">
+  <v-card max-width="300px" min-height="450px" align="center" color="#EBEBEB" >
     <v-row>
       <v-spacer></v-spacer>
       <v-btn
@@ -19,47 +19,42 @@
     </v-row>
     <v-list-item-title style="margin-top: 5%" class="headline mb-1">NOMBRE</v-list-item-title>
     <v-btn
+        disabled
         class="profileButton"
         rounded
-        large
         dark
+        large
         text
         min-width="240px"
-        background-color="#E46271"
     >
       X rutinas completadas
     </v-btn>
     <v-btn
+        disabled
         class="profileButton"
         rounded
         large
         dark
         text
         min-width="240px"
-        background-color="#E46271"
     >
       X trofeos ganados
     </v-btn>
     <v-btn
+        disabled
         class="profileButton"
         rounded
         large
         dark
         text
         min-width="240px"
-        background-color="#E46271"
     >
       X días entrenando
     </v-btn>
-    <v-icon color="black">mdi-account-plus-outlin</v-icon>
   </v-card>
 </template>
 
 <script>
-
-export default {
-  name: "InfoCard"
-}
 </script>
 
 <style scoped>
@@ -67,6 +62,5 @@ export default {
   background-color:#E46271;
   margin-top: 5%;
   color: #EBEBEB !important;
-  opacity: 1 !important;
 }
 </style>
