@@ -3,7 +3,7 @@
   <v-img
     height="300"
     plain
-    style="margin-top: 40px"
+    style="margin-top: 3%"
     width="500">
     <v-img
         height="300"
