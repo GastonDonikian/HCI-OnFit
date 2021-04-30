@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import LogIn from '../views/LogIn.vue'
 import Rutinas from '../views/Rutinas.vue'
 import Profile from "../views/Profile";
-
+import Logros from "../views/Logros";
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +32,11 @@ const routes = [
     path: '/Profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/Logros',
+    name: 'Logros',
+    component: Logros
   }
 ]
 
