@@ -18,8 +18,17 @@ export default {
     BackgroundImage,
     Header
   },
-  data: () => ({
-    //
-  }),
+  data() {
+
+    return {
+      tasks: []
+    }
+  },
+  methods: {
+
+  },
+  computed: {
+
+  }
 };
 </script>

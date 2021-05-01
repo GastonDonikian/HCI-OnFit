@@ -10,11 +10,13 @@
         color="#E46271"
     >mdi-plus</v-icon>
     </v-btn>
-    <v-carousel hide-delimiters height="200px" >
-      <v-carousel-item>
-        <RutinCard style="margin-bottom: 10px"></RutinCard>
-      </v-carousel-item>
-    </v-carousel>
+    <RoutineList></RoutineList>
+
+<!--    <v-carousel hide-delimiters height="200px" v-for="routine in routines" :key="routine">-->
+<!--      <v-carousel-item>-->
+<!--        <RutinCard style="margin-bottom: 10px"></RutinCard>-->
+<!--      </v-carousel-item>-->
+<!--    </v-carousel>-->
     <h2 style="margin-bottom: 10px; margin-top: 10px; display: inline-block;">MIS EJERCICIOS</h2>
     <v-btn
         fab
@@ -35,13 +37,25 @@
 </template>
 
 <script>
-import RutinCard from "../components/RutinCard";
 import ExCard from "../components/ExCard";
+import RoutineList from "../components/RoutineList";
 
 export default {
   name: "Rutinas.vue",
-  components: {RutinCard, ExCard}
+  components: {RoutineList, ExCard},
+  data() {
+    return {
+      routines: []
+    }
+  },
+  methods: {
 
+  },
+  computed: {
+    isValidDescriptionName() {
+      return (this.description.length)
+    }
+  }
 }
 </script>
   export default {}
