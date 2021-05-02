@@ -67,7 +67,11 @@ export default {
     isValidDescriptionName() {
       return (this.description.length)
     },
-
+  },
+  watch: {
+    innerWidth() {
+      console.log("cambie");
+    }
   }
 }
 </script>

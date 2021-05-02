@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-carousel height="200px">
-      <v-carousel-item v-for="(routines,index) in routineArray" :key="routines">
+    <v-carousel hide-delimiters height="200px">
+      <v-carousel-item v-for="routines in routineArray" :key="routines.id">
         <v-row>
-          <v-col v-for="routine in routineArray[index]" :key="routine">
+          <v-col v-for="(routine) in routines" :key="routine.id">
             <RoutineCard style="margin-bottom: 10px"
                          v-bind:routine="routine"/>
           </v-col>
@@ -25,14 +25,15 @@ export default {
     return {
       store: RoutineStore,
       routineArray: this.getDisplayRoutine(),
-      winWidth: 0
+      somethingChanged: false
     }
   },
   methods: {
     getDisplayRoutine() {
+      console.log('entrey');
       let i;
       let routineArray = [];
-      let routines = RoutineStore.routines;
+      let routines = RoutineStore.getAll();
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));
@@ -41,15 +42,25 @@ export default {
       return routineArray;
     },
     getListSize() { //Veo cuantas cartas puedo mostrar el -200 es lo del costado
-      return (innerWidth - 400) / 344;
+      if (innerWidth <= 750)
+        return 1;
+      if (innerWidth <= 1050)
+        return 2;
+      if (innerWidth <= 1400)
+        return 3;
+      return 4;
+    },
+    onResize() {
+      this.routineArray = this.getDisplayRoutine();
     },
 
-
   },
-  computed: {
-
+  mounted() {
+    window.addEventListener('resize', this.onResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
   }
-
 }
 </script>
 
