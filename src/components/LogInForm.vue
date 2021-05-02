@@ -15,13 +15,21 @@
         counter
         @click:append="show1 = !show1">
     </v-text-field>
-    <v-btn color="#E77381" class="white--text" rounded large :to="'/Rutinas'">Ingresar</v-btn>
+    <v-btn color="#E77381" class="white--text" rounded large @click="store.startSession()"  :to="'/Rutinas'">Ingresar</v-btn>
   </v-card>
 </template>
 
+
 <script>
+import LoginStore from "../store/LoginStore";
+
 export default {
-  name: "LogInForm"
+  data: () => ({
+    name: "LogInForm",
+    store: LoginStore
+  }),
+  methods: {
+  }
 }
 </script>
 
