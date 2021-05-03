@@ -1,6 +1,6 @@
 <template>
-  <div width="600px" class="estadisticas" >
-    <v-card width="560px" class="cardClass">
+  <div width="600px" class="estadisticasHerni" >
+    <v-card width="560px" min-height="309px" class="cardClass">
       <v-row>
         <v-col>
           <h3>Entrenamientos completados</h3>
@@ -30,9 +30,8 @@ export default {
   border-radius: 20px;
   padding: 20px;
 }
-/*.estadisticas {*/
-/*  margin: 10% auto ;*/
-/*  !*padding-right: 20px;*!*/
-/*  !*padding-left: 20px;*!*/
-/*}*/
+.estadisticasHerni {
+  margin: 5% auto ;
+  padding-right: 20px;
+}
 </style>
