@@ -36,12 +36,6 @@ export default {
       this.loggedIn = true;
       this.$router.reload();
     }
-  },
-  computed: {
-    // eslint-disable-next-line vue/return-in-computed-property
-    toggleSideBar() {
-      console.log("hola");
-    },
   }
 }
 </script>

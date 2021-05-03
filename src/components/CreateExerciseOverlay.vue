@@ -1,5 +1,5 @@
 <template>
-  <v-container  style="background-color: grey;opacity: 0.9; border-radius: 10px">
+  <v-container  style="background-color: grey;opacity: 1; border-radius: 10px">
     <v-row class="justify-center">
       <h1>Crear nuevo ejercicio</h1>
     </v-row>

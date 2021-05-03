@@ -1,6 +1,8 @@
 <template>
-  <v-card max-width="300px" min-height="450px" color="#EBEBEB">
-    <div align="left" style="color: #E46271"><s2>CONFIGURACIÓN</s2></div>
+  <v-card max-width="300px" min-height="300px" color="#EBEBEB">
+    <div align="left" style="color: #E46271">
+      <h3>CONFIGURACIÓN</h3>
+    </div>
     <v-avatar @click="editAvatar" style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="50">
       <v-img draggable="false"
              @load="viewImg">
@@ -18,39 +20,6 @@
       >
       <v-icon>mdi-key-variant</v-icon>
       Cambiar Contraseña
-    </v-btn>
-    <v-btn
-        class="settingsButton"
-        rounded
-        large
-        dark
-        text
-        min-width="240px"
-    >
-      <v-icon>mdi-bell</v-icon>
-      Notificación
-    </v-btn>
-    <v-btn
-        class="settingsButton"
-        rounded
-        large
-        dark
-        text
-        min-width="240px"
-    >
-      <v-icon>mdi-hand-right</v-icon>
-      Accesibilidad
-    </v-btn>
-    <v-btn
-        class="settingsButton"
-        rounded
-        large
-        dark
-        text
-        min-width="240px"
-    >
-      <v-icon>mdi-translate</v-icon>
-      Idioma
     </v-btn>
     <v-btn
         class="settingsButton"

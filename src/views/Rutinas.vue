@@ -21,17 +21,14 @@
         color="#EBEBEB"
         @click="overlayExercise = !overlayExercise"
     >
-      <v-icon
-          color="#E46271"
-      >mdi-plus
-      </v-icon>
+      <v-icon color="#E46271" >mdi-plus </v-icon>
     </v-btn>
     <v-overlay
         :z-index="zIndexExercise" :value="overlayExercise">
 
       <v-btn
           class="white--text"
-          color="warning"
+          color="#E46271"
           style="margin-bottom:10px"
           @click="overlayExercise = false"
       >
