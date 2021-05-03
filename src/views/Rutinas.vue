@@ -6,6 +6,7 @@
         x-small
         style="margin-left: 10px; margin-top: -10px"
         color="#EBEBEB"
+        :to="'../RoutineCreator'"
     >
       <v-icon
           color="#E46271"

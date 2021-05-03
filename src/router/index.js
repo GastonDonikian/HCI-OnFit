@@ -6,6 +6,7 @@ import Rutinas from '../views/Rutinas.vue'
 import Profile from "../views/Profile";
 import Logros from "../views/Logros";
 import Explore from "../views/Explore";
+import RoutineCreator from "../views/RoutineCreator";
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,6 +39,11 @@ const routes = [
     path: '/Profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/RoutineCreator',
+    name: 'RoutineCreator',
+    component: RoutineCreator
   },
   {
     path: '/Logros',
