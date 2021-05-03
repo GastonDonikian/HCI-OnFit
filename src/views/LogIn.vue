@@ -11,6 +11,7 @@
 <script>
 import LogInForm from "../components/LogInForm";
 import RegisterForm from "../components/RegisterForm";
+
 export default {
   components: {RegisterForm, LogInForm},
   data () {

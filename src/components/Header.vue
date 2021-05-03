@@ -5,18 +5,19 @@
       max-height="128px"
       app fixed>
     <v-img max-height="120px" max-width="120px" src="../assets/logoOnFit.png"/>
-    <v-tabs class="white--text" v-if="!loggedIn">
+    <v-tabs class="white--text" v-if="!store.isLogged()">
       <v-tab class="white--text" v-for="tab in tabsLoggedOut" v-bind:key="tab.name" :to="tab.route">
         {{ tab.name }}
         <v-icon class="white--text" right>{{ tab.icon }}</v-icon>
       </v-tab>
       <v-spacer/>
-<!--      @click="logIn"    tendria que estar en v-btn-->
-      <v-btn large color="rgb(87, 71, 255)"  depressed dark height="64px" :to="'/LogIn'">
+
+      <v-btn large color="rgb(87, 71, 255)" @click="store.startSession()"  depressed dark height="64px" :to="'/LogIn'">
         Iniciar Sesión
+<!--        AGREGUE EL START SESSION ACA PARA ACTUALIZARLO1!!!!-->
         <v-icon>mdi-login</v-icon>
       </v-btn>
-      <v-btn large color="rgb(87, 71, 255)" @click="logOut" depressed dark height="64px">
+      <v-btn large color="rgb(87, 71, 255)" @click="store.startSession()" :to="'/LogIn'" depressed dark height="64px">
         Crear Cuenta
         <v-icon>mdi-account-plus-outline</v-icon>
       </v-btn>
@@ -36,18 +37,22 @@
 </template>
 
 <script>
+import LoginStore from "../store/LoginStore";
+
+
 export default {
   name: "Header",
   data: () => ({
     key: 0,
-    loggedIn: true,//esto se cambia por lo que traiga el api
+    store : LoginStore,
+    loggedIn: LoginStore.loggedIn,//esto se cambia por lo que traiga el api
     tabsLoggedOut: [
       {name: "Menú", icon: null, route: "/Home"}
     ],
     tabsLoggedIn: [
       {name: "Menú", icon: null, route: "/Home"},
-      {name: "Crear Rutinas", icon: null, route: "/Rutinas"},
-      {name: "Mis Rutinas", icon: null, route: "/explore"},
+      {name: "Mis Rutinas", icon: null, route: "/Rutinas"},
+      {name: "Explorar", icon: null, route: "/Explore"},
       {name: "Mis Trofeos", icon: null, route: "/Logros"},
       {name: "Mi Perfil", icon: null, route: "/profile"},
     ],
@@ -56,14 +61,13 @@ export default {
   }),
   methods: {
     logOut() {
-      this.loggedIn = false;
-      this.$router.reload();
+      window.location.href = '/#/Home';
+      return LoginStore.closeSession();
     },
-    logIn() {
-      this.loggedIn = true;
+    update() {
       this.$router.reload();
     }
-  }
+  },
 };
 </script>
 

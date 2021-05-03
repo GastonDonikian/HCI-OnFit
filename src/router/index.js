@@ -5,6 +5,7 @@ import LogIn from '../views/LogIn.vue'
 import Rutinas from '../views/Rutinas.vue'
 import Profile from "../views/Profile";
 import Logros from "../views/Logros";
+import Explore from "../views/Explore";
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,6 +18,11 @@ const routes = [
     path: '/',
     name: '',
     component: Home
+  },
+  {
+    path: '/Explore',
+    name: 'Explore',
+    component: Explore
   },
   {
     path: '/Rutinas',
