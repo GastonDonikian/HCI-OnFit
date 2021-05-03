@@ -19,7 +19,7 @@
           </v-list-item-title>
           <v-list-item-subtitle class="black--text">{{ routine.description }}</v-list-item-subtitle>
           <v-rating
-              v-model="routine.rating"
+              v-model=this.routine.estrellas
               background-color="black"
               color="black"
               small

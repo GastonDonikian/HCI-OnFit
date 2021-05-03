@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     getDisplayExercises() {
-
       let i;
       let exercisesArray = [];
       let exercises = ExerciseStore.getAllExercises();
@@ -51,6 +50,7 @@ export default {
     onResize() {
       this.exercisesArray = this.getDisplayExercises();
     },
+
 
   },
   mounted() {

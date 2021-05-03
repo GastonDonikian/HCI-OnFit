@@ -1,5 +1,5 @@
 <template>
-  <div max-width="600px" class="estadisticas" >
+  <div width="600px" class="estadisticas" >
     <v-card width="560px" class="cardClass">
       <v-row>
         <v-col>

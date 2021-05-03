@@ -25,7 +25,6 @@ export default {
     return {
       store: RoutineStore,
       routineArray: this.getDisplayRoutine(),
-      somethingChanged: false
     }
   },
   methods: {
