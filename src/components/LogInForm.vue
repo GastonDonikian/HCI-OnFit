@@ -1,5 +1,5 @@
 <template>
-  <v-card width="570px" max-height="412px" class="principal" style="background-color: #EBEBEB">
+  <v-card width="570px" max-height="412px" class="principal" style="background-color: #EBEBEB; border-radius: 25px;">
     <h3>INICIAR SESIÓN</h3>
     <p>MAIL</p>
     <v-text-field v-model="userName" outlined background-color="#FFFFFF" label="usuario@ejemplo.com"></v-text-field>
@@ -11,7 +11,6 @@
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show1 ? 'text' : 'password'"
         name="input-10-1"
-        counter
         @click:append="show1 = !show1">
     </v-text-field>
     <v-checkbox
@@ -49,7 +48,6 @@ export default {
         //  pero me parece redundante ya que puedo usar directamente las variables de LoginStore
         this.store.save() ;
       }
-      console.log("algo");
       this.store.startSession();
       window.location.href = '/#/Rutinas';
     }
@@ -59,7 +57,10 @@ export default {
 
 <style scoped>
 .principal {
+  padding-top: 15px;
   padding-right: 30px;
   padding-left: 30px;
+  border-radius: 50px;
+  padding-bottom: 15px;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div style="margin-right: 5%">
+    <span class="imgBack"></span>
     <v-row>
       <v-col class="estadisticas">
         <div class="divPrincipal" >
@@ -50,6 +51,18 @@ export default {
 
 .divPrincipal {
   max-width: 560px;
+}
+
+.imgBack {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  margin: 0 0 0 0;
+  left: 0;
+  z-index: 0;
+  background: url('../assets/backgroundImage2.png') no-repeat center center fixed;
+  background-size: cover;
 }
 
 </style>

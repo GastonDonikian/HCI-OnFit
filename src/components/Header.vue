@@ -12,12 +12,12 @@
       </v-tab>
       <v-spacer/>
 
-      <v-btn large color="rgb(87, 71, 255)" @click="store.startSession()"  depressed dark height="64px" :to="'/LogIn'">
+      <v-btn large color="rgb(87, 71, 255)" @click="iniciarSesion" depressed dark height="64px" >
         Iniciar Sesión
 <!--        AGREGUE EL START SESSION ACA PARA ACTUALIZARLO1!!!!-->
         <v-icon>mdi-login</v-icon>
       </v-btn>
-      <v-btn large color="rgb(87, 71, 255)" @click="store.startSession()" :to="'/LogIn'" depressed dark height="64px">
+      <v-btn large color="rgb(87, 71, 255)"  @click="iniciarSesion" depressed dark height="64px">
         Crear Cuenta
         <v-icon>mdi-account-plus-outline</v-icon>
       </v-btn>
@@ -66,6 +66,9 @@ export default {
     },
     update() {
       this.$router.reload();
+    },
+    iniciarSesion() {
+      window.location.href = '/#/LogIn';
     }
   },
 };

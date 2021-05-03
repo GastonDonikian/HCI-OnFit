@@ -1,5 +1,5 @@
 <template>
-  <v-card class="principal" max-width="400px">
+  <v-card class="principal" max-width="400px" style="border-radius: 25px;">
     <h3>REGISTRARSE</h3>
     <!--      <v-text-field outlined background-color="#FFFFFF" class="cortados"></v-text-field>-->
     <!--      <v-text-field outlined background-color="#FFFFFF" class="cortados"></v-text-field>-->
@@ -66,5 +66,7 @@ export default {
   padding-right: 30px;
   padding-left: 30px;
   background-color: #EBEBEB;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 </style>
