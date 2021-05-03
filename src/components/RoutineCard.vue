@@ -4,7 +4,7 @@
     <v-card
         class="mx-auto"
         width="344"
-        v-bind:color= this.routine.color
+        v-bind:color= this.routine.disciplina
     ><!--color cambia con la API-->
       <v-list-item three-line>
         <v-list-item-avatar

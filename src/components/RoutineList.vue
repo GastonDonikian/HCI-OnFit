@@ -29,13 +29,13 @@ export default {
   },
   methods: {
     getDisplayRoutine() {
-      console.log('entrey');
       let i;
       let routineArray = [];
       let routines = RoutineStore.getAll();
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));
+        console.log(routineArray);
       }
       routineArray.push(routines.slice(i));
       return routineArray;
