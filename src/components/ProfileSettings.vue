@@ -1,13 +1,13 @@
 <template>
   <v-card max-width="300px" min-height="450px" color="#EBEBEB">
-    <div align="left"><s2>CONFIGURACIÓN</s2></div>
+    <div align="left" style="color: #E46271"><s2>CONFIGURACIÓN</s2></div>
     <v-avatar @click="editAvatar" style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="50">
       <v-img draggable="false"
              @load="viewImg">
       </v-img>
     </v-avatar>
-    <s1>David Visbal</s1>
-    <v-icon>mdi-account-edit</v-icon>
+    <s1 style="color: black">David Visbal</s1>
+    <v-icon style="color: black">mdi-account-edit</v-icon>
     <v-btn
       class="settingsButton"
       rounded

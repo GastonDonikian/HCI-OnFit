@@ -6,9 +6,22 @@
           fab
           x-small
           color="#EBEBEB"
-      ><v-icon color="#E46271"
-      >mdi-cog</v-icon>
+          @click="overlaySettings = !overlaySettings"
+      >
+        <v-icon color="#E46271">mdi-cog</v-icon>
       </v-btn>
+      <v-overlay
+        :value="overlaySettings">
+        <v-btn
+            class="white--text"
+            color="#E46271"
+            style="margin-bottom:10px"
+            @click="overlaySettings = false"
+        >
+          Salir
+        </v-btn>
+        <ProfileSettings></ProfileSettings>
+      </v-overlay>
     </v-row>
     <v-row justify="center">
       <v-avatar @click="editAvatar" style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="130">
@@ -55,7 +68,19 @@
 </template>
 
 <script>
+
+import ProfileSettings from "../components/ProfileSettings";
+export default {
+  name: "InfoCard.vue",
+  components: {ProfileSettings},
+  data(){
+    return{
+      overlaySettings:false,
+    }
+  }
+}
 </script>
+
 
 <style scoped>
 .profileButton {

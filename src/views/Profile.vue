@@ -1,20 +1,14 @@
 <template>
   <div align="center" style="margin-left: 2%; margin-top: 5%" >
     <InfoCard></InfoCard>
-    <ProfileSettings></ProfileSettings>
-    <div id="vue-auxiliar">
-      <h1 @click="toggleSideBar">holaaaaaaaa</h1>
-      <h1 v-if="sideBarFlag">hola como andas</h1>
-    </div>
   </div>
 </template>
 
 <script>
 import InfoCard from "../components/InfoCard";
-import ProfileSettings from "../components/ProfileSettings";
 export default {
   name: "Profile.vue",
-  components: {ProfileSettings, InfoCard},
+  components: {InfoCard},
   sideBarFlag: false,
   data: () => ({
     key: 0,
