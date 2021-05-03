@@ -17,7 +17,7 @@
 <!--        AGREGUE EL START SESSION ACA PARA ACTUALIZARLO1!!!!-->
         <v-icon>mdi-login</v-icon>
       </v-btn>
-      <v-btn large color="rgb(87, 71, 255)" @click="logOut" depressed dark height="64px">
+      <v-btn large color="rgb(87, 71, 255)" @click="store.startSession()" :to="'/LogIn'" depressed dark height="64px">
         Crear Cuenta
         <v-icon>mdi-account-plus-outline</v-icon>
       </v-btn>
@@ -61,6 +61,7 @@ export default {
   }),
   methods: {
     logOut() {
+      window.location.href = '/#/Home';
       return LoginStore.closeSession();
     },
     update() {
