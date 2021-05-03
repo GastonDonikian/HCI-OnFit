@@ -4,7 +4,6 @@
         block
         outlined
         rounded
-        color="#707070"
         height="60px"
         @click="store.activate()"
     ><v-icon

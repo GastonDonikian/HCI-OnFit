@@ -30,6 +30,7 @@
           <MinusPlusField></MinusPlusField>
         </v-col>
       </v-row>
+        <ExBanner></ExBanner>
         <AddExToRoutine></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -56,9 +57,10 @@
 <script>
 import MinusPlusField from "./MinusPlusField";
 import AddExToRoutine from "./AddExToRoutine";
+import ExBanner from "./ExBanner";
 export default {
   name: "CreateRoutineCard",
-  components: {AddExToRoutine, MinusPlusField},
+  components: {ExBanner, AddExToRoutine, MinusPlusField},
   data: () => ({
     dropdown_icon: [
       { text: 'Pesas', callback: () => console.log('Pesas')},
