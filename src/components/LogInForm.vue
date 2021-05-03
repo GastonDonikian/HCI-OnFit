@@ -11,7 +11,6 @@
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show1 ? 'text' : 'password'"
         name="input-10-1"
-        counter
         @click:append="show1 = !show1">
     </v-text-field>
     <v-checkbox
@@ -49,7 +48,6 @@ export default {
         //  pero me parece redundante ya que puedo usar directamente las variables de LoginStore
         this.store.save() ;
       }
-      console.log("algo");
       this.store.startSession();
       window.location.href = '/#/Rutinas';
     }

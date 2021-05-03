@@ -9,6 +9,7 @@ const LoginStore = {
     },
     closeSession(){
         this.loggedIn = false;
+        localStorage.clear();
     },
     setUserName(userName) {
         this.userName = userName;
