@@ -1,5 +1,5 @@
 <template>
-  <v-card width="570px" max-height="412px" class="principal" style="background-color: #EBEBEB">
+  <v-card width="570px" max-height="412px" class="principal" style="background-color: #EBEBEB; border-radius: 25px;">
     <h3>INICIAR SESIÓN</h3>
     <p>MAIL</p>
     <v-text-field v-model="userName" outlined background-color="#FFFFFF" label="usuario@ejemplo.com"></v-text-field>
@@ -59,7 +59,10 @@ export default {
 
 <style scoped>
 .principal {
+  padding-top: 15px;
   padding-right: 30px;
   padding-left: 30px;
+  border-radius: 50px;
+  padding-bottom: 15px;
 }
 </style>

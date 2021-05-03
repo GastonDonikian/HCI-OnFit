@@ -1,5 +1,6 @@
 <template>
   <div style="margin-top: 20px">
+    <span class="imgBack"></span>
     <v-row>
       <v-col>
         <div align="center">
@@ -73,16 +74,60 @@
         </div>
       </v-col>
     </v-row>
+
+
+
+
+    <v-card
+        width="344"
+    ><!--color cambia con la API-->
+      <v-list-item three-line>
+        <v-list-item-avatar
+            rounded
+            height="150"
+            width="80"
+            color="grey"
+        ></v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title class="headline mb-1 black--text">
+            titulo
+          </v-list-item-title>
+          <v-list-item-subtitle class="black--text">la description de la rutina</v-list-item-subtitle>
+<!--          <v-rating-->
+<!--              v-model=this.routine.estrellas-->
+<!--              background-color="black"-->
+<!--              color="black"-->
+<!--              small-->
+<!--              readonly-->
+<!--          ></v-rating>-->
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                rounded
+                small
+                text
+                color="black"
+            >
+              Ver rutina
+            </v-btn>
+          </v-card-actions>
+        </v-list-item-content>
+      </v-list-item>
+    </v-card>
+
+
+
   </div>
 </template>
 
 
 <script>
 import RoutineStore from "../store/RoutineStore";
-// import RutinasEnum from "../store/RutinasEnum";
+
 
 export default {
   name: "Explore.vue",
+  components: {},
   data: function () {
     return {
       routineStore: RoutineStore,
@@ -104,5 +149,16 @@ export default {
   .textStyle{
     font-size: 20px;
     color: #EBEBEB;
+  }
+  .imgBack {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    margin: 0 0 0 0;
+    left: 0;
+    z-index: 0;
+    background: url('../assets/backgroundImage2.png') no-repeat center center fixed;
+    background-size: cover;
   }
 </style>

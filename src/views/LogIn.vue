@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <LogInForm class="LogIn"></LogInForm>
+      <LogInForm class="LogIn" style="margin-top: 4%"></LogInForm>
       <RegisterForm class="my-12 Register"></RegisterForm>
     </v-row>
   </div>

@@ -68,11 +68,6 @@ export default {
       return (this.description.length)
     },
   },
-  watch: {
-    innerWidth() {
-      console.log("cambie");
-    }
-  }
 }
 </script>
 export default {}
