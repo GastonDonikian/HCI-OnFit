@@ -11,7 +11,7 @@
         <v-icon color="#E46271">mdi-cog</v-icon>
       </v-btn>
       <v-overlay
-        :value="overlaySettings">
+        :z-index="zIndexSettings" :value="overlaySettings">
         <v-btn
             class="white--text"
             color="#E46271"
@@ -24,9 +24,8 @@
       </v-overlay>
     </v-row>
     <v-row justify="center">
-      <v-avatar @click="editAvatar" style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="130">
-        <v-img draggable="false"
-               @load="viewImg">
+      <v-avatar style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="130">
+        <v-img draggable="false">
         </v-img>
       </v-avatar>
     </v-row>
@@ -43,6 +42,7 @@
       X rutinas completadas
     </v-btn>
     <v-btn
+        color="rgb(87,71,255)"
         disabled
         class="profileButton"
         rounded
@@ -76,6 +76,7 @@ export default {
   data(){
     return{
       overlaySettings:false,
+      zIndexSettings:1
     }
   }
 }
