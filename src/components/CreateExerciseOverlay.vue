@@ -39,7 +39,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn @click="this.store.addExercise(titulo,description,repetitions,duration)" style="margin-left: 240px" color="success">Crear ejercicio</v-btn>
+        <v-btn @click="this.addExercise()" style="margin-left: 240px" color="success">Crear ejercicio</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -58,6 +58,9 @@ export default {
     duration: null
   }),
   methods: {
+    addExercise(titulo, description, repetitions, duration) {
+      this.store.addExercise(titulo,description,repetitions,duration);
+    }
   }
 }
 </script>

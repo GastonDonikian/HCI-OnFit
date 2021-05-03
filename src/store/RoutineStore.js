@@ -32,7 +32,7 @@ const RoutineStore = {
     }, {
         titulo: "Rutina 7",
         description: "Rutina de entrenamiento partido",
-        estrellas: 4,
+        estrellas: 2,
         color: "#F1B0B8"
     }, {
         titulo: "Rutina 8",
