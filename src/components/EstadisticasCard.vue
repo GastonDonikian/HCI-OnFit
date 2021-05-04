@@ -3,15 +3,15 @@
     <v-card width="560px" min-height="309px" class="cardClass">
       <v-row>
         <v-col>
-          <h3>Entrenamientos completados</h3>
+          <h4>Entrenamientos completados</h4>
           <h2>(Num)</h2>
-          <h3>Horas entrenadas</h3>
+          <h4>Horas entrenadas</h4>
           <h2>(Num)</h2>
-          <h3>Calorias quemadas</h3>
+          <h4>Calorias quemadas</h4>
           <h2>(Num)</h2>
         </v-col>
         <v-col>
-          <h3>Entrenadores</h3>
+          <h4>Entrenadores</h4>
           <h1>Fotitos</h1>
         </v-col>
       </v-row>

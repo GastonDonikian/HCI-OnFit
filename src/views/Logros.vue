@@ -4,7 +4,12 @@
     <v-row>
       <v-col class="estadisticas">
         <div class="divPrincipal" >
-            <h1>ESTADISTICAS</h1>
+            <v-btn
+                style="color: black !important; font-size: 1.5rem; font-family: Roboto,sans-serif; font-weight: 600; margin-left: -5%"
+                text
+                disabled
+                x-large
+            > <!--          Si lo pones en una categoria abajo no aparece y si es un h1 etc tampoco -->ESTADISTICAS</v-btn>
             <div >
               <v-btn class="btnFilto white--text" color="#E77381" rounded x-large>SEMANAL</v-btn>
               <v-btn class="btnFilto white--text" color="#E77381" rounded x-large>MENSUAL</v-btn>
@@ -14,10 +19,12 @@
         </div>
       </v-col>
       <v-col class="estadisticas">
-          <div>
-            <h1>TUS LOGROS</h1>
+            <v-btn
+                style="color: black !important; font-size: 1.5rem; font-family: Roboto,sans-serif; font-weight: 600; margin-left: -5%"
+                text
+                disabled
+                x-large>TUS LOGROS</v-btn>
             <LogrosCard></LogrosCard>
-          </div>
       </v-col>
     </v-row>
 
@@ -41,8 +48,10 @@ export default {
 </script>
 
 <style scoped>
+
 .estadisticas {
-  margin: 5% 2%;
+  margin: 5% 2% -5%;
+  visibility: visible;
 }
 
 .btnFilto {
