@@ -1,9 +1,6 @@
 <template>
-  <v-card class="principal" max-width="400px" style="border-radius: 25px;">
+  <v-card class="principal" max-width="450px" style="border-radius: 25px;">
     <h3>REGISTRARSE</h3>
-    <!--      <v-text-field outlined background-color="#FFFFFF" class="cortados"></v-text-field>-->
-    <!--      <v-text-field outlined background-color="#FFFFFF" class="cortados"></v-text-field>-->
-
     <v-layout wrap>
       <v-flex xs12 sm6  class="pa-1">
         <v-text-field
@@ -36,7 +33,6 @@
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show1 ? 'text' : 'password'"
         name="input-10-1"
-        counter
         @click:append="show1 = !show1">
     </v-text-field>
     <p>CONFIRMAR CONTRASEÑA</p>
@@ -44,11 +40,10 @@
         background-color="#FFFFFF"
         outlined
         v-model="password"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="show1 ? 'text' : 'password'"
+        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show2 ? 'text' : 'password'"
         name="input-10-1"
-        counter
-        @click:append="show1 = !show1">
+        @click:append="show2 = !show2">
     </v-text-field>
     <v-btn color="#E77381" class="white--text" rounded large>Ingresar</v-btn>
 
@@ -57,7 +52,13 @@
 
 <script>
 export default {
-  name: "RegisterForm"
+  name: "RegisterForm",
+  data () {
+    return {
+      show1: false,
+      show2:false
+    }
+  }
 }
 </script>
 

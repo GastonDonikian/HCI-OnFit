@@ -31,7 +31,8 @@ export default {
     userName: null,
     userPassword: null,
     store: LoginStore,
-    remindMe: false
+    remindMe: false,
+    show1: false
   }),
   methods: {
     arrancaElBaile() {
