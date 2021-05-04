@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-carousel hide-delimiters height="200px">
+    <v-carousel v-on:cl="store.deleteExercise()" hide-delimiters height="200px" :key="exercisesArray.id">
       <v-carousel-item v-for="(exercises) in exercisesArray" :key="exercises.id">
         <v-row>
           <v-col v-for="exercise in exercises" :key="exercise.id">
@@ -50,14 +50,20 @@ export default {
     onResize() {
       this.exercisesArray = this.getDisplayExercises();
     },
+    onChange(){
+      this.exercisesArray = this.getDisplayExercises();
+    }
 
 
   },
   mounted() {
     window.addEventListener('resize', this.onResize);
+    addEventListener('exerciseChange',this.onChange);
+
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('exerciseChange',this.onChange);
   }
 
 }

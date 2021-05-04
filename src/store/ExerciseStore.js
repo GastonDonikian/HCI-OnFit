@@ -58,13 +58,14 @@ const ExerciseStore = {
     },
 
     deleteExercise(titulo) {
+        console.log("llegue aca wtf");
         for(let i = 0; i < this.exercises.length; i++) {
             if(this.exercises[i].titulo === titulo) {
                 this.exercises.splice(i, 1);
                 return true;
             }
         }
-        return false;
+        return true;
     },
 
 
