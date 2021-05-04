@@ -50,7 +50,6 @@ export default {
       {name: "Menú", icon: null, route: "/Home"}
     ],
     tabsLoggedIn: [
-      {name: "Menú", icon: null, route: "/Home"},
       {name: "Mis Rutinas", icon: null, route: "/Rutinas"},
       {name: "Explorar", icon: null, route: "/Explore"},
       {name: "Mis Trofeos", icon: null, route: "/Logros"},
