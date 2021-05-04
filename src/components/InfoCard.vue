@@ -32,7 +32,7 @@
     <v-list-item-title style="margin-top: 5%" class="headline mb-1">NOMBRE</v-list-item-title>
     <v-btn
         disabled
-        class="profileButton"
+        style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
         rounded
         dark
         large
@@ -42,20 +42,19 @@
       X rutinas completadas
     </v-btn>
     <v-btn
-        color="rgb(87,71,255)"
         disabled
-        class="profileButton"
+        style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
         rounded
         large
         dark
         text
         min-width="240px"
-    >
+    ><!--si  pongo el style abajo no funciona bien-->
       X trofeos ganados
     </v-btn>
     <v-btn
         disabled
-        class="profileButton"
+        style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
         rounded
         large
         dark
@@ -84,9 +83,4 @@ export default {
 
 
 <style scoped>
-.profileButton {
-  background-color:#E46271;
-  margin-top: 5%;
-  color: #EBEBEB !important;
-}
 </style>
