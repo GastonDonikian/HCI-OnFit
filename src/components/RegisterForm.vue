@@ -22,21 +22,19 @@
         </v-text-field>
       </v-flex>
     </v-layout>
-
-    <p>MAIL</p>
-    <v-text-field outlined background-color="#FFFFFF" label="usuario@ejemplo.com"></v-text-field>
-    <p>CONTRASEÑA</p>
+    <v-text-field outlined background-color="#FFFFFF" label = "Mail" placeholder="usuario@ejemplo.com"></v-text-field>
     <v-text-field
         background-color="#FFFFFF"
         outlined
+        label="Contraseña"
         v-model="password"
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show1 ? 'text' : 'password'"
         name="input-10-1"
         @click:append="show1 = !show1">
     </v-text-field>
-    <p>CONFIRMAR CONTRASEÑA</p>
     <v-text-field
+        label="Confirmar contraseña"
         background-color="#FFFFFF"
         outlined
         v-model="password"

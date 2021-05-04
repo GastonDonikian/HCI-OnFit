@@ -1,12 +1,17 @@
 <template>
-  <v-card width="570px" max-height="412px" class="principal" style="background-color: #EBEBEB; border-radius: 25px;">
+  <v-card width="570px" max-height="350px" class="principal" style="background-color: #EBEBEB; border-radius: 25px;">
     <h3>INICIAR SESIÓN</h3>
-    <p>MAIL</p>
-    <v-text-field v-model="userName" outlined background-color="#FFFFFF" label="usuario@ejemplo.com"></v-text-field>
-    <p>CONTRASEÑA</p>
+    <v-text-field
+        v-model="userName"
+        outlined
+        background-color="#FFFFFF"
+        label ="Mail"
+        placeholder="usuario@ejemplo.com">
+    </v-text-field>
     <v-text-field
         background-color="#FFFFFF"
         outlined
+        label="Contraseña"
         v-model="userPassword"
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show1 ? 'text' : 'password'"
