@@ -18,9 +18,13 @@
 import RoutineCard from "./RoutineCard";
 import RoutineStore from "../store/RoutineStore";
 
+
 export default {
   name: "RoutineList",
   components: {RoutineCard},
+  props: {
+    category: null
+  },
   data: function () {
     return {
       store: RoutineStore,
@@ -31,7 +35,7 @@ export default {
     getDisplayRoutine() {
       let i;
       let routineArray = [];
-      let routines = RoutineStore.getAll();
+      let routines = RoutineStore.getAllByCategory(this.category);
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));
@@ -51,6 +55,7 @@ export default {
     onResize() {
       this.routineArray = this.getDisplayRoutine();
     },
+
 
   },
   mounted() {
