@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-carousel v-on:cl="store.deleteExercise()" hide-delimiters height="200px" :key="exercisesArray.id">
+    <v-carousel hide-delimiters height="200px">
       <v-carousel-item v-for="(exercises) in exercisesArray" :key="exercises.id">
         <v-row>
           <v-col v-for="exercise in exercises" :key="exercise.id">
@@ -16,6 +16,7 @@
 <script>
 import ExerciseStore from "../store/ExerciseStore";
 import ExCard from "./ExCard";
+import {bus} from "../main";
 
 export default {
   name: "ExerciseList",
@@ -38,7 +39,7 @@ export default {
       exercisesArray.push(exercises.slice(i));
       return exercisesArray;
     },
-    getListSize() { //Veo cuantas cartas puedo mostrar el -200 es lo del costado
+    getListSize() {
       if (innerWidth <= 750)
         return 1;
       if (innerWidth <= 1050)
@@ -50,7 +51,8 @@ export default {
     onResize() {
       this.exercisesArray = this.getDisplayExercises();
     },
-    onChange(){
+
+    onChange() {
       this.exercisesArray = this.getDisplayExercises();
     }
 
@@ -58,12 +60,10 @@ export default {
   },
   mounted() {
     window.addEventListener('resize', this.onResize);
-    addEventListener('exerciseChange',this.onChange);
-
+    bus.$on('exercisechange',this.onChange);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);
-    window.removeEventListener('exerciseChange',this.onChange);
   }
 
 }

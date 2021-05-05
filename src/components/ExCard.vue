@@ -1,4 +1,4 @@
-<template :key="">
+<template>
   <div>
     <v-card
         class="mx-auto"
@@ -58,6 +58,7 @@ export default {
     exercise: {title: String, description: String, repetitions: Number, duration: Number}
   },
   methods: {
+
   },
   computed : {
     deleteExercise() {
