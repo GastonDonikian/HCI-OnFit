@@ -1,20 +1,20 @@
 <template>
-  <v-container  style="background-color: grey;opacity: 1; border-radius: 10px">
+  <v-container style="background-color: grey;opacity: 1; border-radius: 10px">
     <v-row class="justify-center">
       <h1>Crear nuevo ejercicio</h1>
     </v-row>
     <v-row>
       <v-col>
         <v-text-field
-        label="Nombre del ejercicio" v-model="titulo"></v-text-field>
+            label="Nombre del ejercicio" v-model="titulo"></v-text-field>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col>
         <v-textarea
-        label="Descripción"
-        v-model="description"
-        counter></v-textarea>
+            label="Descripción"
+            v-model="description"
+            counter></v-textarea>
       </v-col>
     </v-row>
     <v-row>
@@ -39,7 +39,9 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn @click="this.addExercise()" style="margin-left: 240px" color="success">Crear ejercicio</v-btn>
+        <v-btn @click="addExercise.addExercise(titulo,description,repetitions,duration)" style="margin-left: 240px"
+               color="success">Crear ejercicio
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -52,14 +54,15 @@ export default {
   name: "CreateExerciseOverlay",
   data: () => ({
     store: ExerciseStore,
-    titulo: "",
-    description: "",
-    repetitions: null,
+    titulo: "Prueba",
+    description: "De boton",
+    repetitions: 1,
     duration: null
   }),
-  methods: {
-    addExercise(titulo, description, repetitions, duration) {
-      this.store.addExercise(titulo,description,repetitions,duration);
+
+  computed: {
+    addExercise() {
+      return ExerciseStore;
     }
   }
 }

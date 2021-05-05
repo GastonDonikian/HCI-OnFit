@@ -16,6 +16,7 @@
 <script>
 import ExerciseStore from "../store/ExerciseStore";
 import ExCard from "./ExCard";
+import {bus} from "../main";
 
 export default {
   name: "ExerciseList",
@@ -38,7 +39,7 @@ export default {
       exercisesArray.push(exercises.slice(i));
       return exercisesArray;
     },
-    getListSize() { //Veo cuantas cartas puedo mostrar el -200 es lo del costado
+    getListSize() {
       if (innerWidth <= 750)
         return 1;
       if (innerWidth <= 1050)
@@ -51,10 +52,15 @@ export default {
       this.exercisesArray = this.getDisplayExercises();
     },
 
+    onChange() {
+      this.exercisesArray = this.getDisplayExercises();
+    }
+
 
   },
   mounted() {
     window.addEventListener('resize', this.onResize);
+    bus.$on('exercisechange',this.onChange);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);

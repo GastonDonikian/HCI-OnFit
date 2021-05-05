@@ -10,7 +10,7 @@
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">
             {{ exercise.titulo }}
-            <v-btn @click="this.deleteExercise(exercise.titulo)" depressed style="margin-left: 10px" color="red"
+            <v-btn @click="deleteExercise.deleteExercise(exercise.titulo)" depressed style="margin-left: 10px" color="red"
                    fab x-small>
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
@@ -58,9 +58,11 @@ export default {
     exercise: {title: String, description: String, repetitions: Number, duration: Number}
   },
   methods: {
-    deleteExercise(titulo) {
-      this.store.deleteExercise(titulo);
 
+  },
+  computed : {
+    deleteExercise() {
+      return ExerciseStore;
     }
   }
 }

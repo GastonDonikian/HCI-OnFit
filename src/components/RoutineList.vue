@@ -35,12 +35,11 @@ export default {
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));
-        console.log(routineArray);
       }
       routineArray.push(routines.slice(i));
       return routineArray;
     },
-    getListSize() { //Veo cuantas cartas puedo mostrar el -200 es lo del costado
+    getListSize() {
       if (innerWidth <= 750)
         return 1;
       if (innerWidth <= 1050)

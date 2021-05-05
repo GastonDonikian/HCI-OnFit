@@ -1,4 +1,7 @@
+import {bus} from "../main";
+
 const ExerciseStore = {
+
     exercises: [
         {
             titulo: "Burpees",
@@ -42,32 +45,35 @@ const ExerciseStore = {
             repetitions: null,
             duration: 30
         }],
-    addExercise(titulo, description, repetitions,duration){
-        if(repetitions !== null  && duration !== null )
+    addExercise(titulo, description, repetitions, duration) {
+        if (repetitions !== null && duration !== null)
             return false;
-        for(let i = 0; i < this.exercises.length; i++) {
-            if(this.exercises[i].titulo === titulo)
+        for (let i = 0; i < this.exercises.length; i++) {
+            if (this.exercises[i].titulo === titulo)
                 return false;
         }
-        this.exercises.push({titulo,description,repetitions,duration});
+
+        this.exercises.unshift({titulo, description, repetitions, duration});
+        bus.$emit('exercisechange');
         return true;
     },
 
-    getAllExercises(){
+    getAllExercises() {
         return this.exercises;
     },
 
     deleteExercise(titulo) {
-        for(let i = 0; i < this.exercises.length; i++) {
-            if(this.exercises[i].titulo === titulo) {
+        for (let i = 0; i < this.exercises.length; i++) {
+            if (this.exercises[i].titulo === titulo) {
                 this.exercises.splice(i, 1);
+                bus.$emit('exercisechange');
                 return true;
             }
         }
         return false;
     },
 
-
-
 }
 export default ExerciseStore;
+
+

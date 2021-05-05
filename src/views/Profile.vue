@@ -25,7 +25,6 @@ export default {
       {name: "Mi Perfil", icon: null, route: "/profile"},
     ],
     active: 0,
-
   }),
   methods: {
     logOut() {
