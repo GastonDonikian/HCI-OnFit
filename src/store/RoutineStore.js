@@ -1,7 +1,6 @@
 import RutinasEnum from "./RutinasEnum";
 
 const RoutineStore = {
-
     routines: [{
         titulo: "Rutina 1",
         description: "Rutina de entrenamiento partido",
@@ -79,7 +78,15 @@ const RoutineStore = {
 
         return this.routines[index];
     },
-    getAll() {
+    getAllByCategory(category) {
+        if (category === 'En Casa')
+            return this.routines.filter(routine => routine.disciplina === RutinasEnum.EnCasa);
+        if (category === 'Running')
+            return this.routines.filter(routine => routine.disciplina === RutinasEnum.Running);
+        if (category === 'Pesas')
+            return this.routines.filter(routine => routine.disciplina === RutinasEnum.Pesas);
+        if (category === 'Destacados') //ESTA OBVIO QUE VA A CAMBIAR CON LA API
+            return this.routines.filter(routine => routine.disciplina === RutinasEnum.Destacados);
         return this.routines;
     }
 }

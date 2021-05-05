@@ -32,6 +32,7 @@
                 small
                 text
                 color="black"
+                :to="'../ViewRutine'"
             >
               Ver rutina
             </v-btn>
@@ -43,6 +44,7 @@
 </template>
 
 <script>
+
 export default {
   name: "RoutineCard",
   props: {
