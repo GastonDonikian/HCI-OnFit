@@ -47,7 +47,6 @@ export default {
     store : LoginStore,
     loggedIn: LoginStore.loggedIn,//esto se cambia por lo que traiga el api
     tabsLoggedOut: [
-      {name: "Menú", icon: null, route: "/Home"}
     ],
     tabsLoggedIn: [
       {name: "Mis Rutinas", icon: null, route: "/Rutinas"},
