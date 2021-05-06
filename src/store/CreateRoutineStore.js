@@ -35,8 +35,8 @@ const CreateRoutineStore = {
     },
 
     addRoutine() {
-        console.log("llegue")
-        RoutineStore.add(this.tempRoutine);
+        let aux = this.tempRoutine
+        RoutineStore.add(aux);
     },
 
     addExercise(exercise) {
@@ -48,7 +48,12 @@ const CreateRoutineStore = {
             this.tempRoutine.elongacion.push(exercise);
     },
 
-
+    vaciarTemp(){
+        this.popup = false;
+        this.tempRoutine.elongacion = []
+        this.tempRoutine.principal = []
+        this.tempRoutine.entradaEnCalor = []
+    },
     activate(seccion) {
         this.currentSeccion = seccion;
         this.popup = true;

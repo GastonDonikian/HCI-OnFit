@@ -5,6 +5,7 @@
         class="mx-auto"
         width="344"
         v-bind:color= this.routine.disciplina
+        @click="toView"
     ><!--color cambia con la API-->
       <v-list-item three-line>
         <v-list-item-avatar
@@ -32,9 +33,9 @@
                 small
                 text
                 color="black"
-                :to="'../ViewRutine'"
+                :to="'../RoutineCreator'"
             >
-              Ver rutina
+              Editar rutina
             </v-btn>
           </v-card-actions>
         </v-list-item-content>
@@ -63,6 +64,9 @@ export default {
       this.description = description;
       this.estrellas = estrellas;
       this.color = color;
+    },
+    toView(){
+      window.location.href = '/#/ViewRutine';
     }
   },
   computed: {

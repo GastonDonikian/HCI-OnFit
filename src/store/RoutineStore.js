@@ -11,7 +11,10 @@ const RoutineStore = {
         elongacion: []
     }],
     add(routine) {
-        this.routines.push(routine);
+        let array = JSON.parse(JSON.stringify(this.routines));
+        array.push(routine);
+        this.routines = JSON.parse(JSON.stringify(array));
+        console.log(this.routines)
     },
     remove(routine) {
         let index = this.routines.findIndex(i => (i === routine));

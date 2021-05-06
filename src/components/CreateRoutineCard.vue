@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <v-text-field
-              :v-model="this.titulo"
+              v-model = "titulo"
               type="text"
               label="Nombre"
               style="padding-left: 5%; padding-right: 2%; display: inline-block"
@@ -16,6 +16,7 @@
         </v-col>
         <v-col id="dropdown-example-2">
           <v-overflow-btn
+              v-model="category"
               class="my-2"
               :items="dropdown_icon"
               label="Categorias"
@@ -58,7 +59,7 @@
       <ExBanner v-for="exercise in store.tempRoutine.elongacion" :key="exercise.id"
                 :nombreejercicio="exercise.titulo"></ExBanner>
       <AddExToRoutine seccion="elongacion"></AddExToRoutine>
-      <v-btn right color="success" @click="this.finalizeRoutine"></v-btn>
+      <v-btn right color="#E46271" @click="this.finalizeRoutine" class="white--text">Aceptar</v-btn>
     </v-card>
   </div>
 </template>
@@ -69,31 +70,33 @@ import AddExToRoutine from "./AddExToRoutine";
 import ExBanner from "./ExBanner";
 import CreateRoutineStore from "../store/CreateRoutineStore";
 
+
 export default {
   name: "CreateRoutineCard",
   components: {ExBanner, AddExToRoutine, MinusPlusField},
-  data: () => ({
-    store: CreateRoutineStore,
-    titulo: "",
-    category: "",
-    repeticionesEntradaEnCalor: null,
-    repeticionesPrincipal: null,
-    repeticionesElongacion: null,
-    dropdown_icon: [
-      {text: 'Pesas', callback: () => this.changeCategory("Pesas")},
-      {text: 'Running', callback: () => this.changeCategory("Running")},
-      {text: 'En casa', callback: () => this.changeCategory("En casa")},
-    ]
-  }),
+  data(){
+    return{
+      store: CreateRoutineStore,
+      titulo: "",
+      category: "",
+      repeticionesEntradaEnCalor: null,
+      repeticionesPrincipal: null,
+      repeticionesElongacion: null,
+      dropdown_icon: [
+        {text: 'Pesas', callback: () => null},
+        {text: 'Running', callback: () => null},
+        {text: 'En casa', callback: () => null},
+      ]
+    }
+  },
   methods: {
     finalizeRoutine() {
       this.store.setName(this.titulo);
       this.store.setDisciplina(this.category);
       this.store.addRoutine();
+      this.store.vaciarTemp();
+      window.location.href = '/#/Rutinas'
     },
-    changeCategory(category){
-      this.category = category;
-    }
   },
 }
 </script>

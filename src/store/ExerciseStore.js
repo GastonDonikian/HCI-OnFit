@@ -44,6 +44,12 @@ const ExerciseStore = {
             description: "Tirate al piso y disfruta hacer nada",
             repetitions: null,
             duration: 30
+        },
+        {
+            titulo: "Estirar Espalda",
+            description: "Hacete una bolita",
+            repetitions: null,
+            duration: 10
         }],
     addExercise(titulo, description, repetitions, duration) {
         if (repetitions !== null && duration !== null)
