@@ -4,11 +4,19 @@
       <v-row>
         <v-col>
           <v-text-field
+              v-if="!store.edit"
               v-model = "titulo"
               type="text"
               label="Nombre"
               style="padding-left: 5%; padding-right: 2%; display: inline-block"
-              ></v-text-field>
+          ></v-text-field>
+          <v-text-field
+              v-if="store.edit"
+              v-model="store.tempRoutine.titulo"
+              type="text"
+              label="Nombre"
+              disabled
+              style="padding-left: 5%; padding-right: 2%; display: inline-block"></v-text-field>
           <v-icon
               style="color: #E46271"
           >mdi-square-edit-outline
@@ -16,11 +24,23 @@
         </v-col>
         <v-col id="dropdown-example-2">
           <v-overflow-btn
+              v-if="!store.edit"
               v-model="category"
               class="my-2"
               :items="dropdown_icon"
               label="Categorias"
               segmented
+              target="#dropdown-example-2"
+              style="padding-right: 5%"
+          ></v-overflow-btn>
+          <v-overflow-btn
+              v-if="store.edit"
+              v-model="store.tempRoutine.disciplina"
+              class="my-2"
+              :items="dropdown_icon"
+              label="NI IDEA LOCO"
+              segmented
+              disabled
               target="#dropdown-example-2"
               style="padding-right: 5%"
           ></v-overflow-btn>
@@ -35,7 +55,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.entradaEnCalor" :key="exercise.id"
-                :nombreejercicio="exercise.titulo"></ExBanner>
+                :nombreejercicio="exercise.titulo" :category="'entradaEnCalor'"></ExBanner>
       <AddExToRoutine seccion="entradaEnCalor"></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -46,7 +66,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.principal" :key="exercise.id"
-                :nombreejercicio="exercise.titulo"></ExBanner>
+                :nombreejercicio="exercise.titulo" :category="'principal'"></ExBanner>
       <AddExToRoutine seccion="principal"></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -57,7 +77,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.elongacion" :key="exercise.id"
-                :nombreejercicio="exercise.titulo"></ExBanner>
+                :nombreejercicio="exercise.titulo" :category="'elongacion'"></ExBanner>
       <AddExToRoutine seccion="elongacion"></AddExToRoutine>
       <v-btn right color="#E46271" @click="this.finalizeRoutine" class="white--text">Aceptar</v-btn>
     </v-card>
@@ -91,12 +111,17 @@ export default {
   },
   methods: {
     finalizeRoutine() {
-      this.store.setName(this.titulo);
-      this.store.setDisciplina(this.category);
+      if(!this.store.edit) {
+        this.store.setName(this.titulo);
+        this.store.setDisciplina(this.category);
+      }
       this.store.addRoutine();
       this.store.vaciarTemp();
       window.location.href = '/#/Rutinas'
     },
+    setCreatedtitle(){
+
+    }
   },
 }
 </script>

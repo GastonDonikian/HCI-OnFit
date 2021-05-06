@@ -12,7 +12,8 @@
       >mdi-minus
       </v-icon>
     </v-btn>
-    <v-text-field v-model="foo" label="Series" style="display: inline-block; width: 40px" align="center"></v-text-field>
+    <v-text-field v-if="!store.edit" v-model="foo" label="Series" style="display: inline-block; width: 40px" align="center"></v-text-field>
+    <v-text-field v-if="store.edit" v-model="foo" label="Series" style="display: inline-block; width: 40px" align="center"></v-text-field>
     <v-btn
         icon
         color="#E46271"
@@ -58,7 +59,7 @@ export default {
         this.store.tempRoutine.repeticionesPrincipal = number;
       else
         this.store.tempRoutine.repeticionesElongacion = number;
-    }
+    },
   }
 }
 </script>

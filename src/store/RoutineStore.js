@@ -6,6 +6,9 @@ const RoutineStore = {
         description: "Rutina de entrenamiento partido",
         estrellas: 4,
         disciplina: RutinasEnum.Pesas,
+        repeticionesEntradaEnCalor: null,
+        repeticionesPrincipal: null,
+        repeticionesElongacion: null,
         entradaEnCalor: [],
         principal: [],
         elongacion: []
@@ -28,6 +31,17 @@ const RoutineStore = {
             return null;
 
         return this.routines[index];
+    },
+
+    findByName(title){
+        console.log(title)
+        for (const routine of this.routines) {
+            if(routine.titulo === title) {
+                let aux = JSON.parse(JSON.stringify(routine));
+                this.remove(routine)
+                return aux;
+            }
+        }
     },
     getAllByCategory(category) {
         if (category === 'En Casa')

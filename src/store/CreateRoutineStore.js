@@ -3,6 +3,7 @@ import RutinasEnum from "./RutinasEnum";
 
 const CreateRoutineStore = {
     popup: false,
+    edit: false,
     currentSeccion: "",
     tempRoutine: {
         titulo: "",
@@ -50,6 +51,7 @@ const CreateRoutineStore = {
 
     vaciarTemp(){
         this.popup = false;
+        this.edit = false;
         this.tempRoutine.elongacion = []
         this.tempRoutine.principal = []
         this.tempRoutine.entradaEnCalor = []
@@ -61,7 +63,44 @@ const CreateRoutineStore = {
 
     deactivate() {
         this.popup = false;
+    },
+
+    cargarRutina(routine){
+        this.edit = true;
+        this.tempRoutine = routine;
+    },
+
+    remove(name, category)  {
+        if (category === "entradaEnCalor")
+            this.removeCalor(name);
+        else if (category === "principal")
+            this.removePrincipal(name)
+        else
+            this.removeElongacion(name);
+    },
+    //hay algo mal aca y no se que es
+    removeCalor(name){
+        let index = this.tempRoutine.entradaEnCalor.findIndex(i => (i === name));
+        if (index === -1)
+            return false;
+
+        this.tempRoutine.entradaEnCalor.splice(index, 1);
+    },
+    removePrincipal(name){
+        let index = this.tempRoutine.principal.findIndex(i => (i === name));
+        if (index === -1)
+            return false;
+
+        this.tempRoutine.principal.splice(index, 1);
+    },
+    removeElongacion(name){
+        let index = this.tempRoutine.elongacion.findIndex(i => (i === name));
+        if (index === -1)
+            return false;
+
+        this.tempRoutine.elongacion.splice(index, 1);
     }
+
 }
 
 export default CreateRoutineStore;

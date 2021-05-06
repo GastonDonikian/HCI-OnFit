@@ -20,7 +20,8 @@
           <v-btn
           fab
           depressed
-          tile>
+          tile
+          @click="deleteEx">
             <v-icon
                 color="#5767FF"
             >mdi-trash-can-outline
@@ -34,12 +35,24 @@
 </template>
 
 <script>
+import CreateRoutineStore from "../store/CreateRoutineStore";
+
 export default {
   name: "ExBanner",
+  data() {
+    return{
+      store: CreateRoutineStore
+    }
+  },
   props: {
     nombreejercicio: String,
+    category: String,
   },
-  components: {}
+  methods:{
+    deleteEx(){
+      this.store.remove(this.nombreejercicio, this.category)
+    }
+  }
 }
 </script>
 

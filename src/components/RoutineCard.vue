@@ -33,7 +33,7 @@
                 small
                 text
                 color="black"
-                :to="'../RoutineCreator'"
+                @click="buscarRutina"
             >
               Editar rutina
             </v-btn>
@@ -46,27 +46,36 @@
 
 <script>
 
+import RoutineStore from "../store/RoutineStore";
+import CreateRoutineStore from "../store/CreateRoutineStore";
+
 export default {
   name: "RoutineCard",
   props: {
     routine: {title: String,description: String,rating: Number,color: String}
   },
   data: () => ({
-    titulo: "Rutina 1",
-    description: "Rutina de entrenamiento partido",
-    estrellas: 4,
-    color: "#F1B0B8"
+    store: RoutineStore,
+    storeCreate: CreateRoutineStore
   }),
   methods: {
-    //Decido validar en la routine list cuando lo pido desde la API y no aca asi puedo elegir no crear la routine card.
-    newRoutineCard(titulo, description, estrellas, color) {
-      this.titulo = titulo;
-      this.description = description;
-      this.estrellas = estrellas;
-      this.color = color;
-    },
+    // //Decido validar en la routine list cuando lo pido desde la API y no aca asi puedo elegir no crear la routine card.
+    // newRoutineCard(titulo, description, estrellas, color) {
+    //   this.titulo = titulo;
+    //   this.description = description;
+    //   this.estrellas = estrellas;
+    //   this.color = color;
+    // },
     toView(){
       window.location.href = '/#/ViewRutine';
+    },
+    buscarRutina(){
+      console.log(this.routine.titulo)
+      let aux = this.store.findByName(this.routine.titulo)
+      console.log(aux)
+      if(aux != null)
+        this.storeCreate.cargarRutina(aux)
+      window.location.href = '/#/RoutineCreator'
     }
   },
   computed: {
