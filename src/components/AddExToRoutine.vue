@@ -5,7 +5,7 @@
         outlined
         rounded
         height="60px"
-        @click="store.activate()"
+        @click="store.activate(seccion)"
     ><v-icon
         color="#E46271"
     >mdi-plus-circle</v-icon></v-btn>
@@ -21,6 +21,9 @@ export default {
       store: CreateRoutineStore
     }
   },
+  props: {
+    seccion : String
+  }
 }
 </script>
 

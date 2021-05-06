@@ -54,9 +54,9 @@ export default {
   name: "CreateExerciseOverlay",
   data: () => ({
     store: ExerciseStore,
-    titulo: "Prueba",
-    description: "De boton",
-    repetitions: 1,
+    titulo: "",
+    description: "",
+    repetitions: null,
     duration: null
   }),
 

@@ -1,17 +1,38 @@
 <template>
-  <div style="margin-top: 7px">
+  <div  style="margin-top: 20px">
     <v-card width="600px" min-height="500px" style="color: #EBEBEB; padding-bottom: 20px">
-      <h3 style="color: black; padding-left: 5%; padding-top: 10px">EJERCICIOS</h3>
-      <div v-for="exercise in store.getAllExercises()" :key="exercise" style="padding: 2% 2% 0 2%">
-        <v-btn
-            block
-            outlined
+      <v-row style="padding-top: 10px; padding-bottom: 20px">
+      <h3 style="color: black;display: inline;margin-top: 20px ;padding-left: 5%">EJERCICIOS</h3>
+      <v-btn style="margin-top: 15px ;margin-left: 350px" color="warning" @click="storeR.deactivate()">Salir</v-btn>
+      </v-row>
+      <v-expansion-panels v-for="exercise in store.getAllExercises()" :key="exercise.id" style="padding: 2% 2% 0 2%">
+        <v-expansion-panel
             rounded
             color="#707070"
             height="60px"
-            @click="storeR.deactivate()"
-        >{{exercise.titulo}}</v-btn>
-      </div>
+        >
+          <v-expansion-panel-header>
+            <v-row no-gutters>
+              <v-col cols="4">
+                {{ exercise.titulo }}
+              </v-col>
+              <v-col
+                  cols="7"
+                  class="text--secondary"
+                  v-if="exercise.duration !== null">{{ exercise.duration }} segundos
+              </v-col>
+              <v-col v-else cols="7"
+                     class="text--secondary">{{ exercise.repetitions }} repeticiones
+              </v-col>
+
+
+            </v-row>
+            <v-btn max-width="100px" @click="storeR.addExercise(exercise)" color="#E46271" class="white--text">Agregar</v-btn>
+          </v-expansion-panel-header>
+
+          <v-expansion-panel-content>{{ exercise.description }}</v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-card>
   </div>
 </template>
@@ -19,9 +40,10 @@
 <script>
 import ExerciseStore from "../store/ExerciseStore";
 import CreateRoutineStore from "../store/CreateRoutineStore";
+
 export default {
   name: "AddExCard",
-  data(){
+  data() {
     return {
       store: ExerciseStore,
       storeR: CreateRoutineStore
