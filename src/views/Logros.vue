@@ -18,14 +18,6 @@
           <EstadisticasCard></EstadisticasCard>
         </div>
       </v-col>
-      <v-col class="estadisticas">
-            <v-btn
-                style="color: black !important; font-size: 1.5rem; font-family: Roboto,sans-serif; font-weight: 600; margin-left: -5%"
-                text
-                disabled
-                x-large>TUS LOGROS</v-btn>
-            <LogrosCard></LogrosCard>
-      </v-col>
     </v-row>
 
   </div>
@@ -34,10 +26,9 @@
 
 <script>
 import EstadisticasCard from "../components/EstadisticasCard";
-import LogrosCard from "../components/LogrosCard";
 
 export default {
-  components: {EstadisticasCard, LogrosCard},
+  components: {EstadisticasCard},
   data() {
     return {
       show1: false,

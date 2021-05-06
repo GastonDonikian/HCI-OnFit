@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="300px" min-height="300px" color="#EBEBEB">
+  <v-card max-width="300px" min-height="250px" color="#EBEBEB">
     <div align="left" style="color: #E46271">
       <h3>CONFIGURACIÓN</h3>
     </div>
@@ -31,17 +31,6 @@
     >
       <v-icon>mdi-logout</v-icon>
       Cerrar sesión
-    </v-btn>
-    <v-btn
-        class="settingsButton"
-        rounded
-        large
-        dark
-        text
-        min-width="240px"
-    >
-      <v-icon>mdi-delete</v-icon>
-      Eliminar cuenta
     </v-btn>
   </v-card>
 </template>
