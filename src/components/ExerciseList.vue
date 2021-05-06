@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-carousel hide-delimiters height="200px">
-      <v-carousel-item v-for="(exercises) in exercisesArray" :key="exercises">
+      <v-carousel-item v-for="(exercises) in exercisesArray" :key="exercises.id">
         <v-row>
           <v-col v-for="exercise in exercises" :key="exercise.id">
             <ExCard style="margin-bottom: 10px"
