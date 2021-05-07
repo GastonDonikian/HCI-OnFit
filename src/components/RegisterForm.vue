@@ -77,7 +77,7 @@ export default {
         password:"",
         lastName:"",
         email:"",
-        gender: "male",
+        gender: "other",
         birthdate: 0,
         phone: "",
         avatarUrl: "",
