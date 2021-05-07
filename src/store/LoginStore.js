@@ -20,7 +20,6 @@ const LoginStore = {
         this.userPassword = userPassword;
     },
     register(user) {
-        console.log(user)
         LoginApi.create(user, null);
     }
     ,
