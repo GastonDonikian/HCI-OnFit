@@ -20,6 +20,14 @@ class LoginApi {
         Api.token = undefined;
     }
 
+    static async validateEmail(validate,controller) {
+        return await Api.post(`${LoginApi.url}/verify_email`,false,validate,controller);
+    }
+
+    static async resendEmail(email,controller) {
+        return await Api.post(`${LoginApi.url}/resend_verification`,false,email,controller);
+    }
+
     static async create(user, controller) {
         return await Api.post(`${LoginApi.url}`, true, user, controller);
     }

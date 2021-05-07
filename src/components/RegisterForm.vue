@@ -76,6 +76,7 @@ export default {
   methods: {
     register() {
       this.store.register(this.user);
+      window.location.href = '/#/validarEmail'
     }
   }
 }

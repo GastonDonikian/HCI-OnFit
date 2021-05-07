@@ -1,16 +1,16 @@
 import {LoginApi} from "../api/LoginApi";
 
 const LoginStore = {
-    loginAttempt: [{user: null,password: null}],
+    loginAttempt: [{user: null, password: null}],
     userName: null,
     userPassword: "placeholder",
     loggedIn: false,
 
-    isLogged(){
+    isLogged() {
         // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
     },
-    closeSession(){
+    closeSession() {
         this.loggedIn = false;
         localStorage.clear();
     },
@@ -21,13 +21,24 @@ const LoginStore = {
         this.userPassword = userPassword;
     },
     register(user) {
-        LoginApi.create(user,null);
+        LoginApi.create(user, null);
     }
     ,
     startSession() {
-        LoginApi.login({username: "johndoe",password: "1234567890"},null).then(() => {
+        LoginApi.login({username: "johndoe", password: "1234567890"}, null).then(() => {
             this.loggedIn = true;
         });
+    },
+    validateEmail(email, code) {
+        return (LoginApi.validateEmail({email: email, code: code}, null).then(() => {
+            return true;
+        }).catch(() => {
+            return false;
+        }));
+
+    },
+    resendEmail(email) {
+      LoginApi.resendEmail({email : email},null);
     },
     load() {
         let data = localStorage.getItem('item');

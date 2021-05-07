@@ -7,6 +7,7 @@ import Profile from "../views/Profile";
 import Logros from "../views/Logros";
 import Explore from "../views/Explore";
 import RoutineCreator from "../views/RoutineCreator";
+import ValidarEmail from "../views/ValidarEmail";
 Vue.use(VueRouter)
 
 const routes = [
@@ -49,6 +50,11 @@ const routes = [
     path: '/Logros',
     name: 'Logros',
     component: Logros
+  },
+  {
+    path: '/validarEmail',
+    name: 'ValidarEmail',
+    component: ValidarEmail
   }
 ]
 
