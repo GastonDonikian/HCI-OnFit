@@ -67,7 +67,7 @@ export default {
     //   this.color = color;
     // },
     toView(){
-      window.location.href = '/#/ViewRutine';
+      window.location.href = '/#/ViewRoutine';
     },
     buscarRutina(){
       console.log(this.routine.titulo)

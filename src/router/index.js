@@ -8,6 +8,7 @@ import Logros from "../views/Logros";
 import Explore from "../views/Explore";
 import RoutineCreator from "../views/RoutineCreator";
 import ValidarEmail from "../views/ValidarEmail";
+import ViewRoutine from "../views/ViewRoutine";
 Vue.use(VueRouter)
 
 const routes = [
@@ -55,6 +56,11 @@ const routes = [
     path: '/validarEmail',
     name: 'ValidarEmail',
     component: ValidarEmail
+  },
+  {
+    path: '/ViewRoutine',
+    name:'ViewRoutine',
+    component: ViewRoutine
   }
 ]
 
