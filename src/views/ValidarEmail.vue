@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div align="center" style="margin-left: 2%; margin-top: 5%">
     <ValidateEmail/>
   </div>
 </template>
