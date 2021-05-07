@@ -52,9 +52,7 @@ export default {
         //  pero me parece redundante ya que puedo usar directamente las variables de LoginStore
         this.store.save() ;
       }
-      this.userName.print();
-      this.userPassword.print();
-      //this.store.startSession(this.userName,this.userPassword);
+      this.store.startSession(this.userName,this.userPassword);
       window.location.href = '/#/Rutinas';
     }
   }
