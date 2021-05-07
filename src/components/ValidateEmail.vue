@@ -24,13 +24,14 @@
 
 <script>
 import LoginStore from "../store/LoginStore";
+import RegisterForm from "./RegisterForm";
 
 export default {
   name: "ValidateEmail",
   data: () => ({
-    email: 'gastondonikian@gmail.com',
+    store: LoginStore,
+    email: RegisterForm.data().email,
     code: '',
-    store: LoginStore
   }),
   methods: {
     submit() {
@@ -38,6 +39,7 @@ export default {
         console.log('validaste correctamente tus datos');
         //ME TIENE QUE MANDAR A EXPLORAR
         window.location.href = '/#/Rutinas'
+
       } else {
         alert('Something went wrong...');
         window.location.href = '/#/validarEmail'

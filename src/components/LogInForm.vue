@@ -33,8 +33,8 @@ import LoginStore from "../store/LoginStore";
 export default {
   data: () => ({
     name: "LogInForm",
-    userName: null,
-    userPassword: null,
+    userName: "",
+    userPassword: "",
     store: LoginStore,
     remindMe: false,
     show1: false
@@ -42,7 +42,7 @@ export default {
   methods: {
     arrancaElBaile() {
       //Es lo mismo que hacer :to rutinas solo que desde javascript
-      if (this.userName == null || this.userPassword == null) {
+      if (this.userName === "0" || this.userPassword === "0") {
         // Tambien habria que checkear que no use el caracter '|' que se rompe toda la pagina
         return null;
       }
@@ -52,7 +52,9 @@ export default {
         //  pero me parece redundante ya que puedo usar directamente las variables de LoginStore
         this.store.save() ;
       }
-      this.store.startSession(this.userName,this.userPassword);
+      this.userName.print();
+      this.userPassword.print();
+      //this.store.startSession(this.userName,this.userPassword);
       window.location.href = '/#/Rutinas';
     }
   }

@@ -8,6 +8,7 @@
             outlined
             background-color="#FFFFFF"
             placeholder="Maria Luisa"
+            v-model="firstName"
         ></v-text-field>
       </v-flex>
       <v-flex xs12 sm6 class="pa-1">
@@ -16,13 +17,14 @@
             chips
             placeholder="Campos"
             outlined
+            v-model="lastName"
             background-color="#FFFFFF"
             multiple
         >
         </v-text-field>
       </v-flex>
     </v-layout>
-    <v-text-field outlined background-color="#FFFFFF" label="Mail" placeholder="usuario@ejemplo.com"></v-text-field>
+    <v-text-field outlined background-color="#FFFFFF" label="Mail" v-model="email" placeholder="usuario@ejemplo.com"></v-text-field>
     <v-text-field
         background-color="#FFFFFF"
         outlined
@@ -37,13 +39,13 @@
         label="Confirmar contraseña"
         background-color="#FFFFFF"
         outlined
-        v-model="password"
+        v-model="checkPassword"
         :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show2 ? 'text' : 'password'"
         name="input-10-1"
         @click:append="show2 = !show2">
     </v-text-field>
-    <v-btn color="#E77381" class="white--text" @click="this.register" rounded large>Ingresar</v-btn>
+    <v-btn color="#E77381" class="white--text" @click="this.register" rounded large>Registrarse</v-btn>
 
   </v-card>
 </template>
@@ -58,25 +60,48 @@ export default {
       store: LoginStore,
       show1: false,
       show2: false,
-      user: {
-        username: "gaston",
-        password: "1234",
-        firstName: "Gaston",
-        lastName: "Donikian",
+      checkPassword:"",
+      password: "",
+      firstName: "",
+      lastName: "",
+      gender: "",
+      birthdate: 0,
+      email: "",
+      username: "null",
+      phone: "",
+      avatarUrl: "",
+      metadata: "null",
+      user:{
+        firstName:"",
+        username:"",
+        password:"",
+        lastName:"",
+        email:"",
         gender: "male",
-        birthdate: 284007600000,
-        email: "gastondonikian@gmail.com",
-        phone: "98295822",
-        avatarUrl: "https://flic.kr/p/3ntH2u",
+        birthdate: 0,
+        phone: "",
+        avatarUrl: "",
         metadata: null
-      }
-      //OKAY TODO LO QUE ESTA EN NULL NO HACE FALTA CARGAR, LO OTRO HAY QUE SACARLO
+      },
     }
+
   },
   methods: {
     register() {
+      this.setUserName();
+      this.setUser();
       this.store.register(this.user);
       window.location.href = '/#/validarEmail'
+    },
+    setUserName() {
+      this.username = this.email
+    },
+    setUser(){
+      this.user.firstName=this.firstName;
+      this.user.username=this.username;
+      this.user.password=this.password;
+      this.user.lastName=this.lastName;
+      this.user.email=this.email;
     }
   }
 }

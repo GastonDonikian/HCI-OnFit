@@ -1,9 +1,8 @@
 import {LoginApi} from "../api/LoginApi";
 
 const LoginStore = {
-    loginAttempt: [{user: null, password: null}],
-    userName: null,
-    userPassword: "placeholder",
+    loginAttempt: [{user: "", password: ""}],
+    user:"",
     loggedIn: false,
 
     isLogged() {
@@ -21,6 +20,7 @@ const LoginStore = {
         this.userPassword = userPassword;
     },
     register(user) {
+        console.log(user)
         LoginApi.create(user, null);
     }
     ,
@@ -48,7 +48,6 @@ const LoginStore = {
     save() {
         localStorage.setItem('item', this.userName + "|" + this.userPassword);
     }
-
 }
 
 export default LoginStore;

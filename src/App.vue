@@ -35,8 +35,7 @@ export default {
     if (localStorage.getItem('item') === null) {
       window.location.href = '/#/Home';
     }
-    console.log("paso algo?");
-    this.store.startSession();
+    //this.store.startSession();
   }
 };
 </script>
