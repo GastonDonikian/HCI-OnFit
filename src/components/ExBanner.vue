@@ -9,7 +9,6 @@
       <v-row style="align-items: baseline">
         <v-col
             cols="8"
-            sm="1"
             lg="7"
             style="margin-left: 5px"
         >{{nombreejercicio}}
