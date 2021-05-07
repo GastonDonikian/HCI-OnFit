@@ -46,15 +46,13 @@ export default {
         // Tambien habria que checkear que no use el caracter '|' que se rompe toda la pagina
         return null;
       }
-      this.store.setUserName(this.userName);
-      this.store.setUserPassword(this.userPassword);
       if (this.remindMe) {
         //  Aca tendria que guardarse la informacion para proximas sesiones
         //  Podria hacer que si no hace el save en local storage lo haga en session storage,
         //  pero me parece redundante ya que puedo usar directamente las variables de LoginStore
         this.store.save() ;
       }
-      this.store.startSession();
+      this.store.startSession(this.userName,this.userPassword);
       window.location.href = '/#/Rutinas';
     }
   }

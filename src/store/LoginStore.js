@@ -1,3 +1,5 @@
+import {LoginApi} from "../api/LoginApi";
+
 const LoginStore = {
     loginAttempt: [{user: null,password: null}],
     userName: null,
@@ -5,6 +7,7 @@ const LoginStore = {
     loggedIn: false,
 
     isLogged(){
+        // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
     },
     closeSession(){
@@ -17,10 +20,14 @@ const LoginStore = {
     setUserPassword(userPassword) {
         this.userPassword = userPassword;
     },
+    register(user) {
+        LoginApi.create(user,null);
+    }
+    ,
     startSession() {
-        //ACA HARIA UN GET DE LA API (creo) o algo para conseguir exmapleUser y examplePassword
-        this.loggedIn = true;
-        //this.loggedIn = (user === this.exampleUser && password === this.examplePassword);
+        LoginApi.login({username: "johndoe",password: "1234567890"},null).then(() => {
+            this.loggedIn = true;
+        });
     },
     load() {
         let data = localStorage.getItem('item');
@@ -29,16 +36,7 @@ const LoginStore = {
     },
     save() {
         localStorage.setItem('item', this.userName + "|" + this.userPassword);
-    },
-
-
-    created() {
-
-    },
-    updated() {
-        this.loginStore
     }
-
 
 }
 

@@ -2,7 +2,7 @@
   <v-card class="principal" max-width="450px" style="border-radius: 25px;">
     <h3>REGISTRARSE</h3>
     <v-layout wrap>
-      <v-flex xs12 sm6  class="pa-1">
+      <v-flex xs12 sm6 class="pa-1">
         <v-text-field
             label="Nombre"
             outlined
@@ -10,7 +10,7 @@
             placeholder="Maria Luisa"
         ></v-text-field>
       </v-flex>
-      <v-flex xs12 sm6  class="pa-1">
+      <v-flex xs12 sm6 class="pa-1">
         <v-text-field
             label="Apellido"
             chips
@@ -22,7 +22,7 @@
         </v-text-field>
       </v-flex>
     </v-layout>
-    <v-text-field outlined background-color="#FFFFFF" label = "Mail" placeholder="usuario@ejemplo.com"></v-text-field>
+    <v-text-field outlined background-color="#FFFFFF" label="Mail" placeholder="usuario@ejemplo.com"></v-text-field>
     <v-text-field
         background-color="#FFFFFF"
         outlined
@@ -43,18 +43,39 @@
         name="input-10-1"
         @click:append="show2 = !show2">
     </v-text-field>
-    <v-btn color="#E77381" class="white--text" rounded large>Ingresar</v-btn>
+    <v-btn color="#E77381" class="white--text" @click="this.register" rounded large>Ingresar</v-btn>
 
   </v-card>
 </template>
 
 <script>
+import LoginStore from "../store/LoginStore";
+
 export default {
   name: "RegisterForm",
-  data () {
+  data() {
     return {
+      store: LoginStore,
       show1: false,
-      show2:false
+      show2: false,
+      user: {
+        username: "gaston",
+        password: "1234",
+        firstName: "Gaston",
+        lastName: "Donikian",
+        gender: "male",
+        birthdate: 284007600000,
+        email: "gastondonikian@gmail.com",
+        phone: "98295822",
+        avatarUrl: "https://flic.kr/p/3ntH2u",
+        metadata: null
+      }
+      //OKAY TODO LO QUE ESTA EN NULL NO HACE FALTA CARGAR, LO OTRO HAY QUE SACARLO
+    }
+  },
+  methods: {
+    register() {
+      this.store.register(this.user);
     }
   }
 }

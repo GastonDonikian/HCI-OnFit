@@ -42,8 +42,9 @@ export default {
     getListSize() {
       if (innerWidth <= 750)
         return 1;
-      if (innerWidth <= 1050)
-        return 2;
+      if (innerWidth <= 1050
+    )
+      return 2;
       if (innerWidth <= 1400)
         return 3;
       return 4;
@@ -60,7 +61,7 @@ export default {
   },
   mounted() {
     window.addEventListener('resize', this.onResize);
-    bus.$on('exercisechange',this.onChange);
+    bus.$on('exercisechange', this.onChange);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);
