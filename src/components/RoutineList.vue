@@ -3,7 +3,7 @@
     <v-carousel hide-delimiters height="200px">
       <v-carousel-item v-for="routines in routineArray" :key="routines.id">
         <v-row>
-          <v-col v-for="(routine) in routines" :key="routine.id">
+          <v-col v-for="(routine) in routines" :key="routine">
             <RoutineCard style="margin-bottom: 10px"
                          v-bind:routine="routine"/>
           </v-col>
@@ -32,10 +32,10 @@ export default {
     }
   },
   methods: {
-    getDisplayRoutine() {
+    async getDisplayRoutine() {
       let i;
       let routineArray = [];
-      let routines = RoutineStore.getAllByCategory(this.category);
+      let routines = RoutineStore.getAllByCategory();
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));
