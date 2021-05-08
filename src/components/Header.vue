@@ -62,9 +62,6 @@ export default {
       window.location.href = '/#/Home';
       return LoginStore.closeSession();
     },
-    update() {
-      this.$router.reload();
-    },
     iniciarSesion() {
       window.location.href = '/#/LogIn';
     }
