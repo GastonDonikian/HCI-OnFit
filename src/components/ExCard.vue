@@ -33,6 +33,7 @@
                 small
                 text
                 color="#E46271"
+
             >
               Editar ejercicio
             </v-btn>

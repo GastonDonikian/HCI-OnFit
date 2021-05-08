@@ -1,9 +1,9 @@
 <template>
-  <div style="width: 600px">
   <v-col>
+  <v-card style="background-color: #EBEBEB; width: 600px" align="center">
     <h2>Por favor confirme su cuenta</h2>
-  <v-card style="background-color: #EBEBEB" align="center">
     <form align = "center">
+        <v-row wrap>
       <v-text-field
           class="principal"
           v-model="email"
@@ -12,6 +12,8 @@
           label ="Mail"
           placeholder="usuario@ejemplo.com"
       ></v-text-field>
+        </v-row>
+        <v-row>
       <v-text-field
           class="principal"
           v-model="code"
@@ -19,25 +21,25 @@
           background-color="#FFFFFF"
           label ="Código"
       ></v-text-field>
+        </v-row>
       <v-row >
-        <v-col>
+          <v-flex xs12 sm6 class="pa-1">
         <v-btn
           @click="this.submit"
           class="white--text" rounded large color="#E77381">Confirmar
         </v-btn>
-        </v-col>
-        <v-col>
+          </v-flex>
+            <v-flex xs12 sm6 class="pa-1">
         <v-btn
           class="white--text"
           rounded large color="#E77381"
           @click="this.resend">Reenviar código
         </v-btn>
-        </v-col>
+        </v-flex>
       </v-row>
     </form>
   </v-card>
     </v-col>
-  </div>
 </template>
 
 <script>
