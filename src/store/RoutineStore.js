@@ -2,16 +2,7 @@ import {RoutineApi} from "../api/RoutineApi";
 
 const RoutineStore = {
     routines: [{
-        // titulo: "Rutina 1",
-        // description: "Rutina de entrenamiento partido",
-        // estrellas: 4,
-        // disciplina: RutinasEnum.Pesas,
-        // repeticionesEntradaEnCalor: null,
-        // repeticionesPrincipal: null,
-        // repeticionesElongacion: null,
-        // entradaEnCalor: [],
-        // principal: [],
-        // elongacion: []
+
         name: "Rutina 1",
         detail: "Rutina de entrenamiento partido",
         averageRating: 4,
@@ -30,15 +21,15 @@ const RoutineStore = {
         metadata: null,
     }],
 
-    getAllByCategory() {
-        this.routines.concat((RoutineApi.getRoutines(null)).content);
-        return this.routines;
+    async getAllByCategory() {
+        return (await RoutineApi.getRoutines(null));
+
     },
     add(routine) {
         let array = JSON.parse(JSON.stringify(this.routines));
         array.push(routine);
         this.routines = JSON.parse(JSON.stringify(array));
-        console.log(this.routines)
+        console.log(this.routines);
     },
     remove(routine) {
         let index = this.routines.findIndex(i => (i === routine));

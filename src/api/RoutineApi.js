@@ -8,7 +8,7 @@ class RoutineApi {
     }
 
     static async getRoutines(controller) {
-        return await (Api.get(`${RoutineApi.url}`, true, controller)).content;
+        return (await Api.get(`${RoutineApi.url}`, true, controller)).content;
     }
 
     //HACER QUERIES PARA FILTRAR LAS RUTINAS ES UNA REVERENDA PELOTUDEZ, AVISENME SI NECESITAN AYUDA

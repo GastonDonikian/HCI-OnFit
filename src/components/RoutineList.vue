@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-carousel hide-delimiters height="200px">
-      <v-carousel-item v-for="routines in routineArray" :key="routines.id">
+      <v-carousel-item v-for="routines in this.routineArray" :key="routines.id">
         <v-row>
-          <v-col v-for="(routine) in routines" :key="routine">
+          <v-col v-for="routine in routines" :key="routine.id">
             <RoutineCard style="margin-bottom: 10px"
                          v-bind:routine="routine"/>
           </v-col>
@@ -28,19 +28,25 @@ export default {
   data: function () {
     return {
       store: RoutineStore,
-      routineArray: this.getDisplayRoutine(),
+      routineArray: [],
     }
+  },
+  async created() {
+    this.routineArray = await this.getDisplayRoutine();
   },
   methods: {
     async getDisplayRoutine() {
       let i;
       let routineArray = [];
-      let routines = RoutineStore.getAllByCategory();
+      let routines = (await RoutineStore.getAllByCategory());
+      console.log(routines);
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));
       }
       routineArray.push(routines.slice(i));
+
+      console.log(routineArray);
       return routineArray;
     },
     getListSize() {
@@ -52,11 +58,9 @@ export default {
         return 3;
       return 4;
     },
-    onResize() {
-      this.routineArray = this.getDisplayRoutine();
+    async onResize() {
+      this.routineArray = await this.getDisplayRoutine();
     },
-
-
   },
   mounted() {
     window.addEventListener('resize', this.onResize);
