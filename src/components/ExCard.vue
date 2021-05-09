@@ -9,19 +9,19 @@
       <v-list-item three-line>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">
-            {{ exercise.titulo }}
-            <v-btn @click="deleteExercise.deleteExercise(exercise.titulo)" depressed style="margin-left: 10px" color="red"
+            {{ exercise.nombre }}
+            <v-btn @click="deleteExercise.deleteExercise(exercise.nombre)" depressed style="margin-left: 10px" color="red"
                    fab x-small>
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
           </v-list-item-title>
-          <v-list-item-subtitle class="black--text">{{ exercise.description }}</v-list-item-subtitle>
+          <v-list-item-subtitle class="black--text">{{ exercise.metadata.repetitions }}</v-list-item-subtitle>
           <br>
-          <v-list-item-subtitle v-if="exercise.repetitions !== null" class="black--text">Repeticiones:
-            x{{ exercise.repetitions }}
+          <v-list-item-subtitle v-if="exercise.metadata.repetitions !== null" class="black--text">Repeticiones:
+            x{{ exercise.metadata.repetitions }}
           </v-list-item-subtitle>
-          <v-list-item-subtitle v-if="exercise.duration !== null" class="black--text">Duracion: {{
-              exercise.duration
+          <v-list-item-subtitle v-if="exercise.metadata.duration !== null" class="black--text">Duracion: {{
+              exercise.metadata.duration
             }}
             s
           </v-list-item-subtitle>
@@ -56,7 +56,15 @@ export default {
     };
   },
   props: {
-    exercise: {title: String, description: String, repetitions: Number, duration: Number}
+    exercise: {
+      id: Number,
+      nombre: String,
+      detail: String,
+      type: String,
+      metadata: {
+        repetitions: Number, duration: Number
+      }
+    }
   },
   methods: {
 

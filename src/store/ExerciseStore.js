@@ -1,76 +1,86 @@
 import {bus} from "../main";
+import {ExerciseApi} from "../api/ExerciseApi";
 
 const ExerciseStore = {
 
     exercises: [
         {
-            titulo: "Burpees",
-            description: "Hacer Burpees",
+            name: "Burpees",
+            detail: "Hacer Burpees",
             repetitions: null,
             duration: 10
         },
         {
-            titulo: "Flexiones de Brazo",
-            description: "Flexiona los brazos",
+            name: "Flexiones de Brazo",
+            detail: "Flexiona los brazos",
             repetitions: 10,
             duration: null
         },
         {
-            titulo: "Sentadillas",
-            description: "Flexionar las rodillas hasta un angulo de 90 grados sin pasarse sobre los tobillos",
+            name: "Sentadillas",
+            detail: "Flexionar las rodillas hasta un angulo de 90 grados sin pasarse sobre los tobillos",
             repetitions: null,
             duration: 10
         },
         {
-            titulo: "Espinales",
-            description: "Tirate al piso y hace espinales",
+            name: "Espinales",
+            detail: "Tirate al piso y hace espinales",
             repetitions: null,
             duration: 10
         },
         {
-            titulo: "Estirar Gemelos",
-            description: "Estirar gemelos sin pasarse sobre los tobillos",
+            name: "Estirar Gemelos",
+            detail: "Estirar gemelos sin pasarse sobre los tobillos",
             repetitions: null,
             duration: 10
         },
         {
-            titulo: "Estirar Espalda",
-            description: "Hacete una bolita",
+            name: "Estirar Espalda",
+            detail: "Hacete una bolita",
             repetitions: null,
             duration: 10
         },
         {
-            titulo: "La pose del muerto",
-            description: "Tirate al piso y disfruta hacer nada",
+            name: "La pose del muerto",
+            detail: "Tirate al piso y disfruta hacer nada",
             repetitions: null,
             duration: 30
         },
         {
-            titulo: "Estirar Espalda",
-            description: "Hacete una bolita",
+            name: "Estirar Espalda",
+            detail: "Hacete una bolita",
             repetitions: null,
             duration: 10
         }],
-    addExercise(titulo, description, repetitions, duration) {
+
+    addExercise(name, detail, repetitions, duration) {
         if (repetitions !== null && duration !== null)
             return false;
         for (let i = 0; i < this.exercises.length; i++) {
-            if (this.exercises[i].titulo === titulo)
+            if (this.exercises[i].name === name)
                 return false;
         }
-
-        this.exercises.unshift({titulo, description, repetitions, duration});
-        bus.$emit('exercisechange');
+        let ex = {
+            name: name,
+            detail: detail,
+            type: "exercise",
+            date: Number,
+            metadata: {
+                repetitions: repetitions,
+                duration: duration,
+            }
+        };
+        ExerciseApi.createExercise(ex, null).then(r => console.log(r));
         return true;
     },
 
     getAllExercises() {
-        return this.exercises;
+        return ExerciseApi.getExercises(null);
     },
 
-    deleteExercise(titulo) {
+    deleteExercise(name) {
         for (let i = 0; i < this.exercises.length; i++) {
-            if (this.exercises[i].titulo === titulo) {
+            if (this.exercises[i].name === name) {
                 this.exercises.splice(i, 1);
                 bus.$emit('exercisechange');
                 return true;

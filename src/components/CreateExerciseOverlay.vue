@@ -6,14 +6,14 @@
     <v-row>
       <v-col>
         <v-text-field
-            label="Nombre del ejercicio" v-model="titulo"></v-text-field>
+            label="Nombre del ejercicio" v-model="name"></v-text-field>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col>
         <v-textarea
             label="Descripción"
-            v-model="description"
+            v-model="detail"
             counter></v-textarea>
       </v-col>
     </v-row>
@@ -39,7 +39,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn @click="addExercise.addExercise(titulo,description,repetitions,duration)" style="margin-left: 240px"
+        <v-btn @click="addExercise.addExercise(name,detail,repetitions,duration)" style="margin-left: 240px"
                color="success">Crear ejercicio
         </v-btn>
       </v-col>
@@ -54,8 +54,8 @@ export default {
   name: "CreateExerciseOverlay",
   data: () => ({
     store: ExerciseStore,
-    titulo: "",
-    description: "",
+    name: "",
+    detail: "",
     repetitions: null,
     duration: null
   }),

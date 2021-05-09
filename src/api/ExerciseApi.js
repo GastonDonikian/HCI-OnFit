@@ -22,7 +22,7 @@ class ExerciseApi {
         *   type: ""
         *   metadata: null
         * }*/
-        return await (Api.post(`${ExerciseApi.url}`, true,exercise, controller)).content;
+        return await (Api.post(`${ExerciseApi.url}`, true,exercise, controller));
     }
 
     static async modifyExercise(exercise,controller){
@@ -32,6 +32,4 @@ class ExerciseApi {
     static async deleteExercise(id,controller){
         return await (Api.delete(`${ExerciseApi.url}/${id}`),true,{},controller);
     }
-
-
 }

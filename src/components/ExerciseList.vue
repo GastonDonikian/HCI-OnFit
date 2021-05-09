@@ -32,6 +32,7 @@ export default {
       let i;
       let exercisesArray = [];
       let exercises = ExerciseStore.getAllExercises();
+      console.log(exercises);
       let listSize = this.getListSize();
       for (i = 0; i + listSize < exercises.length; i += listSize) {
         exercisesArray.push(exercises.slice(i, i + listSize));
@@ -39,6 +40,7 @@ export default {
       exercisesArray.push(exercises.slice(i));
       return exercisesArray;
     },
+
     getListSize() {
       if (innerWidth <= 750)
         return 1;
