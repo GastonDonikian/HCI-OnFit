@@ -1,6 +1,8 @@
 import {RoutineApi} from "../api/RoutineApi";
 
+
 const RoutineStore = {
+    currentRoutine: -1,
     routines: [{
 
         name: "Rutina 1",
@@ -38,6 +40,13 @@ const RoutineStore = {
 
         this.routines.splice(index, 1);
     },
+    findIx(name){
+        for (let i = 0; i < this.routines.length; i++) {
+            if(this.routines[i].titulo === name) {
+                this.currentRoutine = i;
+            }
+        }
+    },
     get(index) {
         if (index > this.routines.length || index < 0)
             return null;
@@ -48,7 +57,7 @@ const RoutineStore = {
     findByName(name) {
         console.log(name)
         for (const routine of this.routines) {
-            if (routine.name === name) {
+            if(routine.titulo === name) {
                 let aux = JSON.parse(JSON.stringify(routine));
                 this.remove(routine)
                 return aux;
