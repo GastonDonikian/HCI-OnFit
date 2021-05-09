@@ -10,6 +10,7 @@ const LoginStore = {
         return this.loggedIn;
     },
     closeSession() {
+        LoginApi.logout(null);
         this.loggedIn = false;
         localStorage.clear();
     },
@@ -23,8 +24,8 @@ const LoginStore = {
         LoginApi.create(user, null);
     }
     ,
-    startSession() {
-        LoginApi.login({username: "johndoe", password: "1234567890"}, null).then(() => {
+    startSession(username,password) {
+        LoginApi.login({username: username, password: password}, null).then(() => {
             this.loggedIn = true;
         });
     },
@@ -34,11 +35,21 @@ const LoginStore = {
         }).catch(() => {
             return false;
         }));
-
     },
     resendEmail(email) {
       LoginApi.resendEmail({email : email},null);
     },
+
+    isCurrentUserVerified() {
+        //TODO ver como se hace esto porque no se como sacar el valor de verified de lo que me devuelve, asi se hace
+        return LoginApi.currentUser(null).verified;
+    },
+
+    isUserLogged() {
+        return LoginApi.isUserLogged();
+    },
+
+
     load() {
         let data = localStorage.getItem('item');
         this.userName = data.split("|")[0];

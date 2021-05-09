@@ -4,7 +4,7 @@
     <v-card
         class="mx-auto"
         width="344"
-        v-bind:color= this.routine.disciplina
+        v-bind:color=this.getColor()
         @click="toView"
     ><!--color cambia con la API-->
       <v-list-item three-line>
@@ -16,11 +16,11 @@
         ></v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">
-            {{ routine.titulo }}
+            {{ routine.name }}
           </v-list-item-title>
-          <v-list-item-subtitle class="black--text">{{ routine.description }}</v-list-item-subtitle>
+          <v-list-item-subtitle class="black--text">{{ routine.detail }}</v-list-item-subtitle>
           <v-rating
-              v-model=this.routine.estrellas
+              v-model=this.routine.averageRating
               background-color="black"
               color="black"
               small
@@ -52,13 +52,16 @@ import CreateRoutineStore from "../store/CreateRoutineStore";
 export default {
   name: "RoutineCard",
   props: {
-    routine: {title: String,description: String,rating: Number,color: String}
+    routine: {name: String, detail: String, averageRating: Number, category: Object}
   },
   data: () => ({
     store: RoutineStore,
     storeCreate: CreateRoutineStore
   }),
   methods: {
+    getColor(){
+      return this.store.getColor(this.routine)
+    },
     // //Decido validar en la routine list cuando lo pido desde la API y no aca asi puedo elegir no crear la routine card.
     // newRoutineCard(titulo, description, estrellas, color) {
     //   this.titulo = titulo;
@@ -66,21 +69,21 @@ export default {
     //   this.estrellas = estrellas;
     //   this.color = color;
     // },
-    toView(){
+    toView() {
       window.location.href = '/#/ViewRoutine';
     },
-    buscarRutina(){
-      console.log(this.routine.titulo)
-      let aux = this.store.findByName(this.routine.titulo)
+    buscarRutina() {
+      console.log(this.routine.name)
+      let aux = this.store.findByName(this.routine.name)
       console.log(aux)
-      if(aux != null)
+      if (aux != null)
         this.storeCreate.cargarRutina(aux)
       window.location.href = '/#/RoutineCreator'
     }
   },
   computed: {
     isValidDescriptionName() {
-      return (this.description.length)
+      return (this.detail.length)
     },
   },
 }
