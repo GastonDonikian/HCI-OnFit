@@ -9,11 +9,7 @@ class ProfileApi {
     }
 
     static async getCurrentUser() {
-        return await Api.get(`${ProfileApi.url}/current`, true, null);
-    }
-
-    static async changePassword() {
-        //TODO como hacer para cambiar la contraseña? no existe metodo desde la api. Lo sacamos?
+        return await Api.get(`${ProfileApi.url}/current`, true);
     }
 
     static async deleteAccount() {
