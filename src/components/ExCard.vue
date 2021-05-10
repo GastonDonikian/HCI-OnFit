@@ -12,18 +12,18 @@
             {{ exercise.name }}
             <v-btn @click="deleteExercise(exercise.id)" depressed style="margin-left: 10px" color="red"
                    fab x-small>
-              <!--              TODO: ¿Porque me tira un unathorized cuando refresheo esta parte y no con Routine?-->
-              <!--              TODO ¿PREGUNTAR COMO HACER ESTO SIN EL PROPERTY NULL, ERROR QUE TIRA-->
-              <!--              TODO: Sacar errores de consola-->
+
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
           </v-list-item-title>
           <v-list-item-subtitle class="black--text">{{ exercise.detail }}</v-list-item-subtitle>
           <br>
-          <v-list-item-subtitle v-if="exercise.metadata !==null && exercise.metadata.repetitions !== null" class="black--text">Repeticiones:
+          <v-list-item-subtitle v-if="exercise.metadata !==null && exercise.metadata.repetitions !== null"
+                                class="black--text">Repeticiones:
             x{{ exercise.metadata.repetitions }}
           </v-list-item-subtitle>
-          <v-list-item-subtitle v-if="exercise.metadata !==null && exercise.metadata.duration !== null" class="black--text">Duracion: {{
+          <v-list-item-subtitle v-if="exercise.metadata !==null && exercise.metadata.duration !== null"
+                                class="black--text">Duracion: {{
               exercise.metadata.duration
             }}
             s
@@ -59,15 +59,8 @@ export default {
     };
   },
   props: {
-    exercise: {
-      id: Number,
-      name: String,
-      detail: String,
-      type: String,
-      metadata: {
-        repetitions: Number, duration: Number
-      }
-    }
+    exercise: {type: Object, required: true}
+    //buscar documentacion de props en vue
   },
   methods: {
     async deleteExercise(id) {

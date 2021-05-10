@@ -11,7 +11,6 @@
             color="#707070"
             height="60px"
         >
-<!--          TODO: como es mejor hacer esto todo de una o ir llamando calls a la api-->
           <v-expansion-panel-header v-if="exercise.metadata !== null">
             <v-row no-gutters>
               <v-col cols="4">

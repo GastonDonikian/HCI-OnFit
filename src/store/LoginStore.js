@@ -10,7 +10,11 @@ const LoginStore = {
         return this.loggedIn;
     },
     async closeSession() {
-        await LoginApi.logout(null);
+        try {
+            await LoginApi.logout(null);
+        } catch (error){
+            alert(error.code + ' error: ' + error.description);
+        }
         this.loggedIn = false;
         localStorage.clear();
     },
@@ -40,7 +44,6 @@ const LoginStore = {
     },
 
     isCurrentUserVerified() {
-        //TODO ver como se hace esto porque no se como sacar el valor de verified de lo que me devuelve, asi se hace
         return LoginApi.currentUser(null).verified;
     },
 
