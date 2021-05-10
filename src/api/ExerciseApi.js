@@ -30,6 +30,6 @@ class ExerciseApi {
     }
 
     static async deleteExercise(id,controller){
-        return await (Api.delete(`${ExerciseApi.url}/${id}`),true,{},controller);
+        return  (await Api.delete(`${ExerciseApi.url}/${id}`),true,{},controller);
     }
 }

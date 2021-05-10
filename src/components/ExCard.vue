@@ -10,22 +10,23 @@
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">
             {{ exercise.name }}
-            <v-btn @click="deleteExercise.deleteExercise(exercise.name)" depressed style="margin-left: 10px" color="red"
+            <v-btn @click="deleteExercise(exercise.id)" depressed style="margin-left: 10px" color="red"
                    fab x-small>
-<!--TODO ACA NO CONVIENE PASARLE EL ID QUE ES DIRECTGO DEL METODO? EN EL BOTON-->
+              <!--              TODO: ¿Porque me tira un unathorized cuando refresheo esta parte y no con Routine?-->
+              <!--              TODO ¿PREGUNTAR COMO HACER ESTO SIN EL PROPERTY NULL, ERROR QUE TIRA-->
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
           </v-list-item-title>
-<!--          <v-list-item-subtitle class="black&#45;&#45;text">{{ exercise.metadata.repetitions }}</v-list-item-subtitle>-->
-<!--          <br>-->
-<!--          <v-list-item-subtitle v-if="exercise.metadata.repetitions !== null" class="black&#45;&#45;text">Repeticiones:-->
-<!--            x{{ exercise.metadata.repetitions }}-->
-<!--          </v-list-item-subtitle>-->
-<!--          <v-list-item-subtitle v-if="exercise.metadata.duration !== null" class="black&#45;&#45;text">Duracion: {{-->
-<!--              exercise.metadata.duration-->
-<!--            }}-->
-<!--            s-->
-<!--          </v-list-item-subtitle>-->
+          <!--          <v-list-item-subtitle class="black&#45;&#45;text">{{ exercise.metadata.repetitions }}</v-list-item-subtitle>-->
+          <!--          <br>-->
+          <!--          <v-list-item-subtitle v-if="exercise.metadata.repetitions !== null" class="black&#45;&#45;text">Repeticiones:-->
+          <!--            x{{ exercise.metadata.repetitions }}-->
+          <!--          </v-list-item-subtitle>-->
+          <!--          <v-list-item-subtitle v-if="exercise.metadata.duration !== null" class="black&#45;&#45;text">Duracion: {{-->
+          <!--              exercise.metadata.duration-->
+          <!--            }}-->
+          <!--            s-->
+          <!--          </v-list-item-subtitle>-->
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
@@ -62,19 +63,16 @@ export default {
       name: String,
       detail: String,
       type: String,
-      metadata: {
-        repetitions: Number, duration: Number
-      }
+      date: Number,
+      metadata: null
     }
   },
   methods: {
-
-  },
-  computed : {
-    deleteExercise() {
-      return ExerciseStore;
+    async deleteExercise(id) {
+      console.log(this.exercise);
+      await this.store.deleteExercise(id);
     }
-  }
+  },
 }
 </script>
 export default {}
