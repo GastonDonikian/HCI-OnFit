@@ -45,7 +45,13 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-if="error" style="color: darkred">Por favor completar bien los campos</v-col>
+      <v-col v-if="error_nombre" style="color: darkred">Por favor completar el nombre</v-col>
+    </v-row>
+    <v-row>
+      <v-col v-if="error_repe_dur" style="color: darkred">Por favor completar repeticiones o duración</v-col>
+    </v-row>
+    <v-row>
+      <v-col v-if="error_repe_dur_2" style="color: darkred">Por favor completar solo duración o solo repeticiones</v-col>
     </v-row>
     <v-row>
       <v-col v-if="repe === 400" style="color: darkred">Ya existe un ejercicio con este mismo nombre</v-col>
@@ -60,7 +66,9 @@ export default {
   name: "CreateExerciseOverlay",
   data: () => ({
     store: ExerciseStore,
-    error:false,
+    error_nombre:false,
+    error_repe_dur: false,
+    error_repe_dur_2: false,
     repe: null,
     name: "",
     detail: "",
@@ -70,10 +78,23 @@ export default {
 
   methods: {
     addExercise() {
-      if(this.name === "" || (this.repetitions === null && this.duration === null))
-        this.error = true;
+      if(this.name === "")
+        this.error_nombre = true;
+      else if(this.duration === null && this.repetitions === null){
+        this.error_nombre = false;
+        this.error_repe_dur = true;
+      }
+      else if(this.duration !== null && this.repetitions !== null){
+        this.duration = null;
+        this.repetitions = null;
+        this.error_nombre = false;
+        this.error_repe_dur = false;
+        this.error_repe_dur_2 = true;
+      }
       else {
-        this.error = false;
+        this.error_nombre = false;
+        this.error_repe_dur_2 = false;
+        this.error_repe_dur = false;
         try {
           this.store.addExercise(this.name, this.detail, this.repetitions, this.duration);
         } catch (e){
