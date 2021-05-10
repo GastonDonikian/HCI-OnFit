@@ -23,6 +23,7 @@
             type="number"
             label="Repeticiones"
             prefix="#"
+            min="0"
             v-model="repetitions"
             dense
         ></v-text-field>
@@ -32,6 +33,7 @@
             type="number"
             label="Duración"
             suffix="s"
+            min="0"
             dense
             v-model="duration"
         ></v-text-field>
@@ -96,7 +98,7 @@ export default {
       } else {
         this.error_repe_dur = false;
       }
-      if (this.duration !== null && this.duration !== null) {
+      if (this.repetitions !== null && this.duration !== null) {
         this.error_repe_dur_2 = true;
         this.duration = null;
         this.repetitions = null;
@@ -113,26 +115,26 @@ export default {
       if (!this.validations()) {
         return;
       }
-      if(this.name === "")
-        this.error_nombre = true;
-      else if(this.name.length > 15)
-        this.error_nombre_largo = true;
-      else if(this.duration === null && this.repetitions === null){
-        this.error_nombre = false;
-        this.error_repe_dur = true;
-      }
-      else if(this.duration !== null && this.repetitions !== null){
-        this.duration = null;
-        this.repetitions = null;
-        this.error_nombre = false;
-        this.error_repe_dur = false;
-        this.error_repe_dur_2 = true;
-      }
-      else {
-        this.error_nombre = false;
-        this.error_repe_dur_2 = false;
-        this.error_repe_dur = false;
-        this.error_nombre_largo = false;
+      // if(this.name === "")
+      //   this.error_nombre = true;
+      // else if(this.name.length > 15)
+      //   this.error_nombre_largo = true;
+      // else if(this.duration === null && this.repetitions === null){
+      //   this.error_nombre = false;
+      //   this.error_repe_dur = true;
+      // }
+      // else if(this.duration !== null && this.repetitions !== null){
+      //   this.duration = null;
+      //   this.repetitions = null;
+      //   this.error_nombre = false;
+      //   this.error_repe_dur = false;
+      //   this.error_repe_dur_2 = true;
+      // }
+      // else {
+      //   this.error_nombre = false;
+      //   this.error_repe_dur_2 = false;
+      //   this.error_repe_dur = false;
+      //   this.error_nombre_largo = false;
         try {
           this.store.addExercise(this.name, this.detail, this.repetitions, this.duration);
         } catch (e){
@@ -143,7 +145,6 @@ export default {
       }
     }
   }
-}
 </script>
 
 <style scoped>
