@@ -40,7 +40,6 @@ export default {
         exercisesArray.push(exercises.slice(i, i + listSize));
       }
       exercisesArray.push(exercises.slice(i));
-      console.log(exercisesArray[0][0]);
       return exercisesArray;
     },
     getListSize() {
