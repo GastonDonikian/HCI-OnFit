@@ -63,8 +63,9 @@ export default {
       name: String,
       detail: String,
       type: String,
-      date: Number,
-      metadata: null
+      metadata: {
+        repetitions: Number, duration: Number
+      }
     }
   },
   methods: {

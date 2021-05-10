@@ -39,10 +39,16 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn @click="addExercise.addExercise(name,detail,repetitions,duration)" style="margin-left: 240px"
+        <v-btn @click="addExercise()" style="margin-left: 240px"
                color="success">Crear ejercicio
         </v-btn>
       </v-col>
+    </v-row>
+    <v-row>
+      <v-col v-if="error" style="color: darkred">Por favor completar bien los campos</v-col>
+    </v-row>
+    <v-row>
+      <v-col v-if="repe === 400" style="color: darkred">Ya existe un ejercicio con este mismo nombre</v-col>
     </v-row>
   </v-container>
 </template>
@@ -54,15 +60,28 @@ export default {
   name: "CreateExerciseOverlay",
   data: () => ({
     store: ExerciseStore,
+    error: false,
+    repe: null,
     name: "",
     detail: "",
     repetitions: null,
     duration: null
   }),
 
-  computed: {
+  methods: {
     addExercise() {
-      return ExerciseStore;
+      if(this.name === "" || (this.repetitions === null && this.duration === null))
+        this.error = true;
+      else {
+        this.error = false;
+        try {
+          this.store.addExercise(this.name, this.detail, this.repetitions, this.duration);
+        } catch (e){
+          console.log(this.repe)
+        }
+        if(this.repe !== 2)
+          ExerciseStore.overlayCreator = false;
+      }
     }
   }
 }

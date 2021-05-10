@@ -11,8 +11,6 @@ class ExerciseApi {
         return (await Api.get(`${ExerciseApi.url}?page=0&size=1000&orderBy=id&direction=asc`, true, controller)).content;
     }
 
-
-
     static async createExercise(exercise, controller) {
         /*TIENE QUE SER DE LA
         * FORMA

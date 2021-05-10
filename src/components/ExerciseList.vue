@@ -27,9 +27,10 @@ export default {
       exercisesArray: [],
     }
   },
-  async created() {
+  async created(){
     this.exercisesArray = await this.getDisplayExercises();
   },
+
   methods: {
     async getDisplayExercises() {
       let i;

@@ -20,12 +20,12 @@
         x-small
         style="margin-left: 10px; margin-top: -10px"
         color="#EBEBEB"
-        @click="overlayExercise = !overlayExercise"
+        @click="store.overlayCreator = !store.overlayCreator"
     >
       <v-icon color="#E46271" >mdi-plus </v-icon>
     </v-btn>
     <v-overlay
-        :z-index="zIndexExercise" :value="overlayExercise">
+        :z-index="zIndexExercise" :value="store.overlayCreator">
 
       <v-btn
           class="white--text"
@@ -46,6 +46,7 @@
 import RoutineList from "../components/RoutineList";
 import ExerciseList from "../components/ExerciseList";
 import CreateExerciseOverlay from "../components/CreateExerciseOverlay";
+import ExerciseStore from "../store/ExerciseStore";
 
 export default {
   name: "Rutinas.vue",
@@ -55,6 +56,7 @@ export default {
       routines: [],
       overlayExercise: false,
       zIndexExercise: 1,
+      store: ExerciseStore,
       exercise: {titulo: "Titulo", description: "Description", repetitions: 10, duration: null}
     }
   },
