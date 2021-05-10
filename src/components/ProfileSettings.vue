@@ -3,19 +3,29 @@
     <div align="left" style="color: #E46271">
       <h3>CONFIGURACIÓN</h3>
     </div>
-    <v-avatar @click="editAvatar" style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="50">
+    <v-avatar  style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="50">
       <v-img draggable="false"
              @load="viewImg">
       </v-img>
     </v-avatar>
 
-
-
-
-
-
     <s1 style="color: black">David Visbal</s1>
-    <v-icon style="color: black">mdi-account-edit</v-icon>
+    <v-icon style="color: black" @click="editAvatar">mdi-account-edit</v-icon>
+
+    <p v-if="editProfile">Nombre nuevo</p>
+    <v-text-field
+        color="blue"
+        background-color="#FFFFFF"
+        class="black--text"
+        filled
+        label ="Nuevo Nombre">
+    </v-text-field>
+    <v-text-field v-if="editProfile"></v-text-field>
+    <p v-if="editProfile">Apellido nuevo</p>
+    <v-text-field v-if="editProfile"></v-text-field>
+    <p v-if="editProfile" >Link a nueva foto de perfil</p>
+    <v-text-field v-if="editProfile"></v-text-field>
+
     <v-btn
       class="settingsButton"
       rounded
@@ -63,6 +73,7 @@ export default {
     return {
       profileStore: ProfileStore,
       loginStore: LoginStore,
+      editProfile: false,
     }
   },
   methods: {
@@ -75,11 +86,10 @@ export default {
       this.profileStore.deleteAccount();
     },
     editAvatar() {
+      this.editProfile = true;
+      console.log(this.editProfile);
       this.profileStore.getCurrentUser();
     },
-    getCurrentUser() {
-      this.profileStore.getCurrentUser();
-    }
   }
 }
 </script>
