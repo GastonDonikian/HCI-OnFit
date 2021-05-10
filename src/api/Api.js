@@ -12,6 +12,9 @@ class Api {
     }
 
     static async fetch(url, secure, init = {}, controller) {
+        if(!Api.token) {
+            Api.token = sessionStorage.getItem('token');
+        }
         if (secure && Api.token) {
             if (!init.headers)
                 init.headers = {};
@@ -68,7 +71,6 @@ class Api {
 
     static async delete(url, secure, controller) {
         return await Api.fetch(url, secure, {
-            //TODO DELETE NO FUNCIONA, TIRA UNATHORIZED
             method: 'DELETE',
         }, controller);
     }

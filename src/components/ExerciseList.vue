@@ -5,7 +5,7 @@
         <v-row>
           <v-col v-for="exercise in exercises" :key="exercise.id">
             <ExCard style="margin-bottom: 10px"
-                    v-bind:exercise="exercise"/>
+                    :exercise="exercise"/>
           </v-col>
         </v-row>
       </v-carousel-item>
