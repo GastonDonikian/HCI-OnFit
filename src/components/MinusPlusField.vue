@@ -12,8 +12,7 @@
       >mdi-minus
       </v-icon>
     </v-btn>
-    <v-text-field v-if="!store.edit" v-model="foo" label="Series" style="display: inline-block; width: 40px" align="center"></v-text-field>
-    <v-text-field v-if="store.edit" v-model="foo" label="Series" style="display: inline-block; width: 40px" align="center"></v-text-field>
+    <v-text-field  v-model="foo" label="Series" style="display: inline-block; width: 40px" align="center"></v-text-field>
     <v-btn
         icon
         color="#E46271"
@@ -53,8 +52,10 @@ export default {
       this.setSeriesRepetition(this.foo);
     },
     setSeriesRepetition(number) {
-      if (this.seccion === "entradaEnCalor")
+      if (this.seccion === "entradaEnCalor") {
         this.store.tempRoutine.repeticionesEntradaEnCalor = number;
+        console.log(this.store.tempRoutine.repeticionesEntradaEnCalor);
+      }
       else if (this.seccion === "principal")
         this.store.tempRoutine.repeticionesPrincipal = number;
       else

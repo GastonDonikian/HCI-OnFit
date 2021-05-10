@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <v-text-field
-              :v-model="this.titulo"
+              :v-model="store.tempRoutine.titulo"
               type="text"
               label="Nombre"
               style="padding-left: 5%; padding-right: 2%; display: inline-block"
@@ -25,6 +25,27 @@
           ></v-overflow-btn>
         </v-col>
       </v-row>
+      <v-row style="margin-top: -10%; margin-left: 0.5%">
+        <v-col>
+          <v-switch
+              v-model="store.tempRoutine.isPublic"
+              inset
+          >
+            <template #prepend>
+              <v-label>Público:</v-label>
+            </template>
+          </v-switch>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-col>
+          <v-textarea
+              label="Descripción"
+              v-model="store.tempRoutine.detail"
+              counter>
+          </v-textarea>
+        </v-col>
+      </v-row>
       <v-row align="center">
         <v-col style="padding-left: 5%">
           <p class="black--text">Entrada en calor</p>
@@ -34,7 +55,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.entradaEnCalor" :key="exercise.id"
-                :nombreejercicio="exercise.titulo"></ExBanner>
+                :nombreejercicio="exercise.name"></ExBanner>
       <AddExToRoutine seccion="entradaEnCalor"></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -45,7 +66,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.principal" :key="exercise.id"
-                :nombreejercicio="exercise.titulo"></ExBanner>
+                :nombreejercicio="exercise.name"></ExBanner>
       <AddExToRoutine seccion="principal"></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -56,9 +77,9 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.elongacion" :key="exercise.id"
-                :nombreejercicio="exercise.titulo"></ExBanner>
+                :nombreejercicio="exercise.name"></ExBanner>
       <AddExToRoutine seccion="elongacion"></AddExToRoutine>
-      <v-btn right color="success" @click="this.finalizeRoutine"></v-btn>
+      <v-btn right color="success" @click="this.finalizeRoutine" style="margin-top: 5%; margin-left: 2.5%">Aceptar</v-btn>
     </v-card>
   </div>
 </template>
@@ -85,13 +106,15 @@ export default {
       {text: 'En casa', callback: () => this.changeCategory("En casa")},
     ]
   }),
+  created() {
+    this.store.vaciarTemp()
+  },
   methods: {
     finalizeRoutine() {
-      this.store.setName(this.titulo);
-      this.store.setDisciplina(this.category);
+      this.changeCategory(this.category);
       this.store.addRoutine();
     },
-    changeCategory(category){
+    changeCategory(category) {
       this.category = category;
     }
   },

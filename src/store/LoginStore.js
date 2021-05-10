@@ -1,4 +1,5 @@
 import {LoginApi} from "../api/LoginApi";
+import {CategoryApi} from "../api/CategoryApi";
 
 const LoginStore = {
     loginAttempt: [{user: "", password: ""}],
@@ -34,6 +35,21 @@ const LoginStore = {
     },
     async validateEmail(email, code) {
         return (await LoginApi.validateEmail({email: email, code: code}, null).then(() => {
+            let enCasa = {
+                name: "En Casa",
+                detail: "en casa",
+            }
+            CategoryApi.addCategory(enCasa, null);
+            let pesas = {
+                name: "Pesas",
+                detail: "pesas",
+            }
+            CategoryApi.addCategory(pesas, null);
+            let runninng = {
+                name: "Running",
+                detail: "running",
+            }
+            CategoryApi.addCategory(runninng, null);
             return true;
         }).catch(() => {
             return false;

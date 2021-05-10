@@ -6,23 +6,17 @@ const CreateRoutineStore = {
     currentSeccion: "",
     tempRoutine: {
         titulo: "",
-        description: "",
+        detail: "",
         estrellas: null,
         disciplina: null,
-        repeticionesEntradaEnCalor: null,
-        repeticionesPrincipal: null,
-        repeticionesElongacion: null,
+        repeticionesEntradaEnCalor: 1,
+        repeticionesPrincipal: 1,
+        repeticionesElongacion: 1,
+        isPublic: false,
+        category: 2,
         entradaEnCalor: [],
         principal: [],
         elongacion: []
-    },
-
-    setName(titulo) {
-        this.tempRoutine.titulo = titulo;
-    },
-
-    setDescription(description) {
-        this.tempRoutine.description = description;
     },
 
     setDisciplina(disciplina) {
@@ -35,7 +29,6 @@ const CreateRoutineStore = {
     },
 
     addRoutine() {
-        console.log("llegue")
         RoutineStore.add(this.tempRoutine);
     },
 
@@ -48,6 +41,20 @@ const CreateRoutineStore = {
             this.tempRoutine.elongacion.push(exercise);
     },
 
+    vaciarTemp(){
+        this.tempRoutine.titulo = "";
+        this.tempRoutine.detail= "";
+        this.tempRoutine.estrellas= null;
+        this.tempRoutine.disciplina= null;
+        this.tempRoutine.repeticionesEntradaEnCalor= null;
+        this.tempRoutine.repeticionesPrincipal= null;
+        this.tempRoutine.repeticionesElongacion= null;
+        this.tempRoutine.isPublic= false;
+        this.tempRoutine.category= 0;
+        this.tempRoutine.entradaEnCalor= [];
+        this.tempRoutine.principal= [];
+        this.tempRoutine.elongacion= [];
+    },
 
     activate(seccion) {
         this.currentSeccion = seccion;
