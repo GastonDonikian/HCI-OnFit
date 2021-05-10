@@ -14,19 +14,20 @@
                    fab x-small>
               <!--              TODO: ¿Porque me tira un unathorized cuando refresheo esta parte y no con Routine?-->
               <!--              TODO ¿PREGUNTAR COMO HACER ESTO SIN EL PROPERTY NULL, ERROR QUE TIRA-->
+              <!--              TODO: Sacar errores de consola-->
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
           </v-list-item-title>
-          <!--          <v-list-item-subtitle class="black&#45;&#45;text">{{ exercise.metadata.repetitions }}</v-list-item-subtitle>-->
-          <!--          <br>-->
-          <!--          <v-list-item-subtitle v-if="exercise.metadata.repetitions !== null" class="black&#45;&#45;text">Repeticiones:-->
-          <!--            x{{ exercise.metadata.repetitions }}-->
-          <!--          </v-list-item-subtitle>-->
-          <!--          <v-list-item-subtitle v-if="exercise.metadata.duration !== null" class="black&#45;&#45;text">Duracion: {{-->
-          <!--              exercise.metadata.duration-->
-          <!--            }}-->
-          <!--            s-->
-          <!--          </v-list-item-subtitle>-->
+          <v-list-item-subtitle class="black--text">{{ exercise.detail }}</v-list-item-subtitle>
+          <br>
+          <v-list-item-subtitle v-if="exercise.metadata !==null && exercise.metadata.repetitions !== null" class="black--text">Repeticiones:
+            x{{ exercise.metadata.repetitions }}
+          </v-list-item-subtitle>
+          <v-list-item-subtitle v-if="exercise.metadata !==null && exercise.metadata.duration !== null" class="black--text">Duracion: {{
+              exercise.metadata.duration
+            }}
+            s
+          </v-list-item-subtitle>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn

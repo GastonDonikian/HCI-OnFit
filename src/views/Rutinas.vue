@@ -55,7 +55,6 @@ export default {
       routines: [],
       overlayExercise: false,
       zIndexExercise: 1,
-      exercise: {titulo: "Titulo", description: "Description", repetitions: 10, duration: null}
     }
   },
   methods: {},

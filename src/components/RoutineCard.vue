@@ -81,11 +81,6 @@ export default {
       window.location.href = '/#/RoutineCreator'
     }
   },
-  computed: {
-    isValidDescriptionName() {
-      return (this.detail.length)
-    },
-  },
 }
 </script>
 export default {}

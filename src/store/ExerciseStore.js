@@ -3,7 +3,7 @@ import {ExerciseApi} from "../api/ExerciseApi";
 
 const ExerciseStore = {
     async addExercise(name, detail, repetitions, duration) {
-        //TODO: PREGUNTAR SI EL API YA VALIDA Y ES NECESARIO ESTO
+        //TODO: PREGUNTAR SI EL API YA VALIDA Y ES NECESARIO VALIDAR ACA
         let exercises = (await this.getAllExercises());
         if (repetitions !== null && duration !== null)
             return false;
@@ -15,7 +15,7 @@ const ExerciseStore = {
             name: name,
             detail: detail,
             type: "exercise",
-            date: Number,
+            date: 0,
             metadata: {
                 repetitions: repetitions,
                 duration: duration,
