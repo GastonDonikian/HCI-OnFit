@@ -1,4 +1,5 @@
 import {RoutineApi} from "../api/RoutineApi";
+import {CycleApi} from "../api/CycleApi";
 
 
 const RoutineStore = {
@@ -27,12 +28,53 @@ const RoutineStore = {
         return (await RoutineApi.getRoutines(null));
 
     },
-    add(routine) {
-        let array = JSON.parse(JSON.stringify(this.routines));
-        array.push(routine);
-        this.routines = JSON.parse(JSON.stringify(array));
-        console.log(this.routines);
+    async add(tempRoutine) {
+        let routine = {
+            name: tempRoutine.titulo,
+            detail: tempRoutine.detail,
+            isPublic: tempRoutine.isPublic,
+            difficulty: "rookie",
+            category: {
+                id: tempRoutine.category,
+            },
+            metadata: null
+        }
+        await RoutineApi.createRoutine(routine, null).then(r => this.addInfo(r, tempRoutine));
     },
+
+    addInfo(routine, tempRoutine){
+        console.log("estoy agregando la info");
+        console.log(routine);
+        let entrada = {
+            name: "entrada en calor",
+            detail: "",
+            type: "warmup",
+            order: 1,
+            repetitions: tempRoutine.repeticionesEntradaEnCalor,
+            metadata: null,
+        }
+        RoutineApi.createCycle(routine.id, entrada, null).then(r => CycleApi.addEx(r.id, tempRoutine.entradaEnCalor, null));
+        let principal = {
+            name: "principal",
+            detail: "",
+            type: "exercise",
+            order: 2,
+            repetitions: tempRoutine.repeticionesPrincipal,
+            metadata: null,
+        }
+        RoutineApi.createCycle(routine.id, principal, null).then(r => CycleApi.addEx(r.id, tempRoutine.principal, null));
+        console.log(tempRoutine.repeticionesPrincipal)
+        let elongacion = {
+            name: "elongación",
+            detail: "",
+            type: "cooldown",
+            order: 3,
+            repetitions: tempRoutine.repeticionesElongacion,
+            metadata: null,
+        }
+        RoutineApi.createCycle(routine.id, elongacion, null).then(r => CycleApi.addEx(r.id, tempRoutine.elongacion, null));
+    },
+
     remove(routine) {
         let index = this.routines.findIndex(i => (i === routine));
         if (index === -1)
