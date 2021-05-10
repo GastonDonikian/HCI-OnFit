@@ -4,19 +4,11 @@
       <v-row>
         <v-col>
           <v-text-field
-              v-if="!store.edit"
-              v-model = "titulo"
+              :v-model="this.titulo"
               type="text"
               label="Nombre"
               style="padding-left: 5%; padding-right: 2%; display: inline-block"
-          ></v-text-field>
-          <v-text-field
-              v-if="store.edit"
-              v-model="store.tempRoutine.titulo"
-              type="text"
-              label="Nombre"
-              disabled
-              style="padding-left: 5%; padding-right: 2%; display: inline-block"></v-text-field>
+              ></v-text-field>
           <v-icon
               style="color: #E46271"
           >mdi-square-edit-outline
@@ -24,23 +16,10 @@
         </v-col>
         <v-col id="dropdown-example-2">
           <v-overflow-btn
-              v-if="!store.edit"
-              v-model="category"
               class="my-2"
               :items="dropdown_icon"
               label="Categorias"
               segmented
-              target="#dropdown-example-2"
-              style="padding-right: 5%"
-          ></v-overflow-btn>
-          <v-overflow-btn
-              v-if="store.edit"
-              v-model="store.tempRoutine.disciplina"
-              class="my-2"
-              :items="dropdown_icon"
-              label="NI IDEA LOCO"
-              segmented
-              disabled
               target="#dropdown-example-2"
               style="padding-right: 5%"
           ></v-overflow-btn>
@@ -55,7 +34,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.entradaEnCalor" :key="exercise.id"
-                :nombreejercicio="exercise.titulo" :category="'entradaEnCalor'"></ExBanner>
+                :nombreejercicio="exercise.titulo"></ExBanner>
       <AddExToRoutine seccion="entradaEnCalor"></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -66,7 +45,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.principal" :key="exercise.id"
-                :nombreejercicio="exercise.titulo" :category="'principal'"></ExBanner>
+                :nombreejercicio="exercise.titulo"></ExBanner>
       <AddExToRoutine seccion="principal"></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -77,9 +56,9 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.elongacion" :key="exercise.id"
-                :nombreejercicio="exercise.titulo" :category="'elongacion'"></ExBanner>
+                :nombreejercicio="exercise.titulo"></ExBanner>
       <AddExToRoutine seccion="elongacion"></AddExToRoutine>
-      <v-btn right color="#E46271" @click="this.finalizeRoutine" class="white--text">Aceptar</v-btn>
+      <v-btn right color="success" @click="this.finalizeRoutine"></v-btn>
     </v-card>
   </div>
 </template>
@@ -90,37 +69,30 @@ import AddExToRoutine from "./AddExToRoutine";
 import ExBanner from "./ExBanner";
 import CreateRoutineStore from "../store/CreateRoutineStore";
 
-
 export default {
   name: "CreateRoutineCard",
   components: {ExBanner, AddExToRoutine, MinusPlusField},
-  data(){
-    return{
-      store: CreateRoutineStore,
-      titulo: "",
-      category: "",
-      repeticionesEntradaEnCalor: null,
-      repeticionesPrincipal: null,
-      repeticionesElongacion: null,
-      dropdown_icon: [
-        {text: 'Pesas', callback: () => null},
-        {text: 'Running', callback: () => null},
-        {text: 'En casa', callback: () => null},
-      ]
-    }
-  },
+  data: () => ({
+    store: CreateRoutineStore,
+    titulo: "",
+    category: "",
+    repeticionesEntradaEnCalor: null,
+    repeticionesPrincipal: null,
+    repeticionesElongacion: null,
+    dropdown_icon: [
+      {text: 'Pesas', callback: () => this.changeCategory("Pesas")},
+      {text: 'Running', callback: () => this.changeCategory("Running")},
+      {text: 'En casa', callback: () => this.changeCategory("En casa")},
+    ]
+  }),
   methods: {
     finalizeRoutine() {
-      if(!this.store.edit) {
-        this.store.setName(this.titulo);
-        this.store.setDisciplina(this.category);
-      }
+      this.store.setName(this.titulo);
+      this.store.setDisciplina(this.category);
       this.store.addRoutine();
-      this.store.vaciarTemp();
-      window.location.href = '/#/Rutinas'
     },
-    setCreatedtitle(){
-
+    changeCategory(category){
+      this.category = category;
     }
   },
 }
