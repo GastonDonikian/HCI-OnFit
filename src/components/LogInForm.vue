@@ -42,7 +42,7 @@ export default {
   methods: {
     arrancaElBaile() {
       //Es lo mismo que hacer :to rutinas solo que desde javascript
-      if (this.userName === "0" || this.userPassword === "0") {
+      if (this.userName === "" || this.userPassword === "") {
         // Tambien habria que checkear que no use el caracter '|' que se rompe toda la pagina
         return null;
       }

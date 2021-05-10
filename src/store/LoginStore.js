@@ -26,9 +26,10 @@ const LoginStore = {
     }
     ,
     startSession(username,password) {
-        LoginApi.login({username: username, password: password}, null).then(() => {
+        let valor = LoginApi.login({username: username, password: password}, null).then(() => {
             this.loggedIn = true;
         });
+        console.log(valor);
     },
     validateEmail(email, code) {
         return (LoginApi.validateEmail({email: email, code: code}, null).then(() => {

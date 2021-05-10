@@ -69,6 +69,7 @@
 <script>
 
 import ProfileSettings from "../components/ProfileSettings";
+
 export default {
   name: "InfoCard.vue",
   components: {ProfileSettings},
