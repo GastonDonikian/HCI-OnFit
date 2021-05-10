@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-carousel hide-delimiters height="200px">
-      <v-carousel-item v-for="(exercises) in exercisesArray" :key="exercises.id">
+      <v-carousel-item v-for="exercises in this.exercisesArray" :key="exercises.id">
         <v-row>
           <v-col v-for="exercise in exercises" :key="exercise.id">
             <ExCard style="margin-bottom: 10px"
@@ -24,15 +24,17 @@ export default {
   data: function () {
     return {
       store: ExerciseStore,
-      exercisesArray: this.getDisplayExercises()
+      exercisesArray: [],
     }
   },
+  async created() {
+    this.exercisesArray = await this.getDisplayExercises();
+  },
   methods: {
-    getDisplayExercises() {
+    async getDisplayExercises() {
       let i;
       let exercisesArray = [];
-      let exercises = ExerciseStore.getAllExercises();
-      console.log(exercises);
+      let exercises = (await ExerciseStore.getAllExercises());
       let listSize = this.getListSize();
       for (i = 0; i + listSize < exercises.length; i += listSize) {
         exercisesArray.push(exercises.slice(i, i + listSize));
@@ -40,7 +42,6 @@ export default {
       exercisesArray.push(exercises.slice(i));
       return exercisesArray;
     },
-
     getListSize() {
       if (innerWidth <= 750)
         return 1;
@@ -51,12 +52,12 @@ export default {
         return 3;
       return 4;
     },
-    onResize() {
-      this.exercisesArray = this.getDisplayExercises();
+    async onResize() {
+      this.exercisesArray = await this.getDisplayExercises();
     },
 
-    onChange() {
-      this.exercisesArray = this.getDisplayExercises();
+    async onChange() {
+      this.exercisesArray = await this.getDisplayExercises();
     }
 
 

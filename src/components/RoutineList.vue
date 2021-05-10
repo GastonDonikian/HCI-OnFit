@@ -39,14 +39,11 @@ export default {
       let i;
       let routineArray = [];
       let routines = (await RoutineStore.getAllByCategory());
-      console.log(routines);
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));
       }
       routineArray.push(routines.slice(i));
-
-      console.log(routineArray);
       return routineArray;
     },
     getListSize() {

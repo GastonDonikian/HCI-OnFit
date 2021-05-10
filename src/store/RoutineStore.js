@@ -25,7 +25,6 @@ const RoutineStore = {
 
     async getAllByCategory() {
         return (await RoutineApi.getRoutines(null));
-
     },
     add(routine) {
         let array = JSON.parse(JSON.stringify(this.routines));
@@ -40,9 +39,9 @@ const RoutineStore = {
 
         this.routines.splice(index, 1);
     },
-    findIx(name){
+    findIx(name) {
         for (let i = 0; i < this.routines.length; i++) {
-            if(this.routines[i].titulo === name) {
+            if (this.routines[i].titulo === name) {
                 this.currentRoutine = i;
             }
         }
@@ -57,7 +56,7 @@ const RoutineStore = {
     findByName(name) {
         console.log(name)
         for (const routine of this.routines) {
-            if(routine.titulo === name) {
+            if (routine.titulo === name) {
                 let aux = JSON.parse(JSON.stringify(routine));
                 this.remove(routine)
                 return aux;

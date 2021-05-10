@@ -8,7 +8,7 @@ class ExerciseApi {
     }
 
     static async getExercises(controller) {
-        return await (Api.get(`${ExerciseApi.url}`, true, controller)).content;
+        return (await Api.get(`${ExerciseApi.url}`, true, controller)).content;
     }
 
 

@@ -74,8 +74,8 @@ const ExerciseStore = {
         return true;
     },
 
-    getAllExercises() {
-        return ExerciseApi.getExercises(null);
+    async getAllExercises() {
+        return (await ExerciseApi.getExercises(null));
     },
 
     deleteExercise(name) {
