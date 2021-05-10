@@ -60,7 +60,7 @@ export default {
   name: "CreateExerciseOverlay",
   data: () => ({
     store: ExerciseStore,
-    error: false,
+    error:false,
     repe: null,
     name: "",
     detail: "",
