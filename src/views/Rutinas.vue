@@ -31,7 +31,7 @@
           class="white--text"
           color="#E46271"
           style="margin-bottom:10px"
-          @click="overlayExercise = false"
+          @click="store.overlayCreator = false"
       >
         Salir
       </v-btn>
@@ -46,6 +46,7 @@
 import RoutineList from "../components/RoutineList";
 import ExerciseList from "../components/ExerciseList";
 import CreateExerciseOverlay from "../components/CreateExerciseOverlay";
+import ExerciseStore from "../store/ExerciseStore";
 
 export default {
   name: "Rutinas.vue",
@@ -55,6 +56,7 @@ export default {
       routines: [],
       overlayExercise: false,
       zIndexExercise: 1,
+      store: ExerciseStore,
       exercise: {titulo: "Titulo", description: "Description", repetitions: 10, duration: null}
     }
   },
