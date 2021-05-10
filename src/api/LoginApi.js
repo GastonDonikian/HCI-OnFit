@@ -8,9 +8,10 @@ class LoginApi {
     }
 
     static async login(user, controller) {
-        const result = Api.post(`${LoginApi.url}/login`, false, user, controller,);
+        const result = await Api.post(`${LoginApi.url}/login`, false, user, controller,);
         sessionStorage.setItem('token', result.token);
         Api.token = result.token;
+        return result;
     }
 
     static async logout(user, controller) {

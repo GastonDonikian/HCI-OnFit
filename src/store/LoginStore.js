@@ -2,15 +2,15 @@ import {LoginApi} from "../api/LoginApi";
 
 const LoginStore = {
     loginAttempt: [{user: "", password: ""}],
-    user:"",
+    user: "",
     loggedIn: false,
 
     isLogged() {
         // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
     },
-    closeSession() {
-        LoginApi.logout(null);
+    async closeSession() {
+        await LoginApi.logout(null);
         this.loggedIn = false;
         localStorage.clear();
     },
@@ -20,26 +20,23 @@ const LoginStore = {
     setUserPassword(userPassword) {
         this.userPassword = userPassword;
     },
-    register(user) {
-        console.log(user)
-        LoginApi.create(user, null);
+    async register(user) {
+        await LoginApi.create(user, null);
     }
     ,
-    startSession(username,password) {
-        let valor = LoginApi.login({username: username, password: password}, null).then(() => {
-            this.loggedIn = true;
-        });
-        console.log(valor);
+    async startSession(username, password) {
+        (await LoginApi.login({username: username, password: password}, null));
+        this.loggedIn = true;
     },
-    validateEmail(email, code) {
-        return (LoginApi.validateEmail({email: email, code: code}, null).then(() => {
+    async validateEmail(email, code) {
+        return (await LoginApi.validateEmail({email: email, code: code}, null).then(() => {
             return true;
         }).catch(() => {
             return false;
         }));
     },
-    resendEmail(email) {
-      LoginApi.resendEmail({email : email},null);
+    async resendEmail(email) {
+        await LoginApi.resendEmail({email: email}, null);
     },
 
     isCurrentUserVerified() {

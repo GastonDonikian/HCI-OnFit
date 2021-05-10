@@ -18,7 +18,7 @@ const ExerciseStore = {
             name: name,
             detail: detail,
             type: "exercise",
-            date: Number,
+            date: 0,
             metadata: {
                 repetitions: repetitions,
                 duration: duration,

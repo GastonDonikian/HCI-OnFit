@@ -68,6 +68,7 @@ class Api {
 
     static async delete(url, secure, controller) {
         return await Api.fetch(url, secure, {
+            //TODO DELETE NO FUNCIONA, TIRA UNATHORIZED
             method: 'DELETE',
         }, controller);
     }

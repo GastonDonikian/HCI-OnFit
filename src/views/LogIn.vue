@@ -19,7 +19,7 @@ export default {
       show1: false,
       password: '',
     }
-  },
+  }
 }
 </script>
 
