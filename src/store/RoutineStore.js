@@ -41,11 +41,10 @@ const RoutineStore = {
             metadata: null
         }
         await RoutineApi.createRoutine(routine, null).then(r => this.addInfo(r, tempRoutine));
+        bus.$emit('routinechange');
     },
 
     addInfo(routine, tempRoutine){
-        console.log("estoy agregando la info");
-        console.log(routine);
         let entrada = {
             name: "entrada en calor",
             detail: "",

@@ -17,6 +17,7 @@
 
 import RoutineCard from "./RoutineCard";
 import RoutineStore from "../store/RoutineStore";
+import {bus} from "../main";
 
 
 export default {
@@ -58,9 +59,13 @@ export default {
     async onResize() {
       this.routineArray = await this.getDisplayRoutine();
     },
+    async onChange() {
+      this.routineArray = await this.getDisplayRoutine();
+    }
   },
   mounted() {
     window.addEventListener('resize', this.onResize);
+    bus.$on('routinechange', this.onChange);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);
