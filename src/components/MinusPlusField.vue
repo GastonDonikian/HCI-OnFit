@@ -52,10 +52,8 @@ export default {
       this.setSeriesRepetition(this.foo);
     },
     setSeriesRepetition(number) {
-      if (this.seccion === "entradaEnCalor") {
+      if (this.seccion === "entradaEnCalor")
         this.store.tempRoutine.repeticionesEntradaEnCalor = number;
-        console.log(this.store.tempRoutine.repeticionesEntradaEnCalor);
-      }
       else if (this.seccion === "principal")
         this.store.tempRoutine.repeticionesPrincipal = number;
       else

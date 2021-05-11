@@ -2,6 +2,8 @@ import {bus} from "../main";
 import {ExerciseApi} from "../api/ExerciseApi";
 
 const ExerciseStore = {
+    overlayCreator: false,
+
     async addExercise(name, detail, repetitions, duration) {
         let exercises = (await this.getAllExercises());
         if (repetitions !== null && duration !== null)
@@ -21,6 +23,7 @@ const ExerciseStore = {
             }
         };
         await ExerciseApi.createExercise(ex, null).then(r => console.log(r));
+        bus.$emit('exercisechange');
         return true;
     },
 

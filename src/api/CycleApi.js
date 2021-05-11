@@ -8,13 +8,15 @@ class CycleApi {
     }
 
     static async addEx(id, exercises, controller){
-        for (const exercise of exercises) {
+        for (let i = 0; i < exercises.length; i++) {
+            let dur = parseInt(exercises[i].metadata.duration, 10) || 0;
+            let rep = parseInt(exercises[i].metadata.repetitions, 10) || 0;
             let exCycle = {
-                order: "1",
-                duration: exercise.metadata.duration,
-                repetitions: exercise.metadata.repetitions,
+                order: i + 1,
+                duration: dur,
+                repetitions: rep,
             }
-            await (Api.post(`${CycleApi.url}/${id}/exercise/${exercise.id}`, true, exCycle, controller))
+            await (Api.post(`${CycleApi.url}/${id}/exercises/${exercises[i].id}`, true, exCycle, controller))
         }
 
     }

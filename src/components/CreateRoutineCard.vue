@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <v-text-field
-              :v-model="store.tempRoutine.titulo"
+              v-model="store.tempRoutine.titulo"
               type="text"
               label="Nombre"
               style="padding-left: 5%; padding-right: 2%; display: inline-block"
@@ -97,9 +97,10 @@ export default {
     store: CreateRoutineStore,
     titulo: "",
     category: "",
-    repeticionesEntradaEnCalor: null,
-    repeticionesPrincipal: null,
-    repeticionesElongacion: null,
+    isPublic: "",
+    repeticionesEntradaEnCalor: 1,
+    repeticionesPrincipal: 1,
+    repeticionesElongacion: 1,
     dropdown_icon: [
       {text: 'Pesas', callback: () => this.changeCategory("Pesas")},
       {text: 'Running', callback: () => this.changeCategory("Running")},
@@ -107,16 +108,24 @@ export default {
     ]
   }),
   created() {
-    this.store.vaciarTemp()
+    if(!this.store.edit)
+      this.store.vaciarTemp();
   },
   methods: {
     finalizeRoutine() {
       this.changeCategory(this.category);
+      // this.setInfo();
       this.store.addRoutine();
+      window.location.href = '/#/Rutinas'
     },
     changeCategory(category) {
       this.category = category;
-    }
+    },
+    // setInfo(){
+    //   this.store.tempRoutine.titulo = this.titulo;
+    //   this.store.tempRoutine.isPublic = this.isPublic;
+    //   this.store.tempRoutine.
+    // }
   },
 }
 </script>

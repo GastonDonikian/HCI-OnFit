@@ -27,6 +27,10 @@ class RoutineApi {
         return await (Api.post(`${RoutineApi.url}`, true,routine, controller))
     }
 
+    static async deleteRoutine(id,controller){
+        return  (await Api.delete(`${RoutineApi.url}/${id}`,true,controller));
+    }
+
     static async createCycle(id, cycle, controller){
         /*TIENE QUE SER DE LA
         * FORMA
@@ -38,7 +42,7 @@ class RoutineApi {
         *   repetitions: "",
         *   metadata: null
         * }*/
-        return await (Api.post(`${RoutineApi.url}/${id}/cycles`, true,cycle, controller))
+        return (await Api.post(`${RoutineApi.url}/${id}/cycles`, true, cycle, controller));
     }
 
     //HACER QUERIES PARA FILTRAR LAS RUTINAS ES UNA REVERENDA PELOTUDEZ, AVISENME SI NECESITAN AYUDA

@@ -72,8 +72,8 @@ export default {
     repe: null,
     name: "",
     detail: "",
-    repetitions: null,
-    duration: null
+    repetitions: Number,
+    duration: Number
   }),
 
   methods: {

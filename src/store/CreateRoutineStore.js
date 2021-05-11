@@ -4,6 +4,7 @@ import RutinasEnum from "./RutinasEnum";
 const CreateRoutineStore = {
     popup: false,
     currentSeccion: "",
+    edit: false,
     tempRoutine: {
         titulo: "",
         detail: "",
@@ -29,6 +30,7 @@ const CreateRoutineStore = {
     },
 
     addRoutine() {
+        console.log(this.tempRoutine.titulo);
         RoutineStore.add(this.tempRoutine);
     },
 
@@ -46,11 +48,27 @@ const CreateRoutineStore = {
         this.tempRoutine.detail= "";
         this.tempRoutine.estrellas= null;
         this.tempRoutine.disciplina= null;
-        this.tempRoutine.repeticionesEntradaEnCalor= null;
-        this.tempRoutine.repeticionesPrincipal= null;
-        this.tempRoutine.repeticionesElongacion= null;
+        this.tempRoutine.repeticionesEntradaEnCalor= 1;
+        this.tempRoutine.repeticionesPrincipal= 1;
+        this.tempRoutine.repeticionesElongacion= 1;
         this.tempRoutine.isPublic= false;
         this.tempRoutine.category= 0;
+        this.tempRoutine.entradaEnCalor= [];
+        this.tempRoutine.principal= [];
+        this.tempRoutine.elongacion= [];
+    },
+
+    cargarTemp(routine){
+        this.tempRoutine.titulo = routine.name;
+        this.tempRoutine.detail= routine.detail;
+        this.tempRoutine.estrellas= null;
+        this.tempRoutine.disciplina= null;
+
+        this.tempRoutine.repeticionesEntradaEnCalor= 1;
+        this.tempRoutine.repeticionesPrincipal= 1;
+        this.tempRoutine.repeticionesElongacion= 1;
+        this.tempRoutine.isPublic= routine.isPublic;
+        this.tempRoutine.category= routine.category.id;
         this.tempRoutine.entradaEnCalor= [];
         this.tempRoutine.principal= [];
         this.tempRoutine.elongacion= [];

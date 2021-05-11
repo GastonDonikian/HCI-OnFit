@@ -1,5 +1,6 @@
 import {RoutineApi} from "../api/RoutineApi";
 import {CycleApi} from "../api/CycleApi";
+import {bus} from "../main";
 
 
 const RoutineStore = {
@@ -35,7 +36,7 @@ const RoutineStore = {
             isPublic: tempRoutine.isPublic,
             difficulty: "rookie",
             category: {
-                id: tempRoutine.category,
+                id: 2,
             },
             metadata: null
         }
@@ -75,12 +76,9 @@ const RoutineStore = {
         RoutineApi.createCycle(routine.id, elongacion, null).then(r => CycleApi.addEx(r.id, tempRoutine.elongacion, null));
     },
 
-    remove(routine) {
-        let index = this.routines.findIndex(i => (i === routine));
-        if (index === -1)
-            return false;
-
-        this.routines.splice(index, 1);
+    async deleteRoutine(id) {
+        await RoutineApi.deleteRoutine(id, null);
+        bus.$emit('routinechange');
     },
     findIx(name){
         for (let i = 0; i < this.routines.length; i++) {
