@@ -3,7 +3,6 @@ import {ExerciseApi} from "../api/ExerciseApi";
 
 const ExerciseStore = {
     overlayCreator: false,
-
     async addExercise(name, detail, repetitions, duration) {
         let exercises = (await this.getAllExercises());
         if (repetitions !== null && duration !== null)
