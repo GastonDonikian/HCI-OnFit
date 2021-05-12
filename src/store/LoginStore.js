@@ -5,6 +5,8 @@ import ProfileStore from "./ProfileStore";
 const LoginStore = {
     loginAttempt: [{user: "", password: ""}],
     user: "",
+    username: "",
+    password: "",
     loggedIn: false,
     profileStore: ProfileStore,
     authorized:true,
@@ -38,6 +40,10 @@ const LoginStore = {
     async startSession(username, password) {
         this.correctData = true;
         this.authorized = true;
+        this.username = username;
+        this.password = password;
+        console.log("store" + this.username);
+        console.log("local " + username);
         try {
             (await LoginApi.login({username: username, password: password}, null));
         } catch (Error) {
