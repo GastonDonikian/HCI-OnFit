@@ -9,6 +9,9 @@ const LoginStore = {
     profileStore: ProfileStore,
     authorized:true,
     correctData:true,
+    correctCode:true,
+    connect:false,
+    found:true,
     isLogged() {
         // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
@@ -37,21 +40,37 @@ const LoginStore = {
         this.authorized = true;
         try {
             (await LoginApi.login({username: username, password: password}, null));
-        } catch (Unauthorized) {
-            if (Unauthorized.code == 4) {
+        } catch (Error) {
+            if (Error.code == 4) {
                 this.correctData = false;
             }
-            if(Unauthorized.code == 8){
+            if(Error.code == 8){
                 this.authorized=false;
             }
         }
+
         if(this.correctData && this.authorized){
         await this.profileStore.readUserInfo();
         this.loggedIn = true;
         }
     },
     async validateEmail(email, code) {
-        return (await LoginApi.validateEmail({email: email, code: code}, null).then(() => {
+        this.correctCode = true;
+        this.found = true;
+        try{
+            await LoginApi.validateEmail({email: email, code: code}, null)
+        }catch(Error){
+            if(Error.code == 8){
+                console.log("VALIDACION CODIGO");
+                this.correctCode = false;
+                console.log(this.correctCode);
+            }
+            if(Error.code == 3){
+                console.log("VALIDACION MAIL");
+                this.found = false;
+            }
+        }
+        if(this.found && this.correctCode) {
             let enCasa = {
                 name: "En Casa",
                 detail: "en casa",
@@ -67,12 +86,8 @@ const LoginStore = {
                 detail: "running",
             }
             CategoryApi.addCategory(runninng, null);
-            this.authorized=true;
-            return true;
-        }).catch(() => {
-            this.authorized=false;
-            return false;
-        }));
+            this.connect = true;
+        }
     },
     async resendEmail(email) {
         await LoginApi.resendEmail({email: email}, null);

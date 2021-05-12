@@ -18,6 +18,7 @@
         name="input-10-1"
         @click:append="show1 = !show1">
     </v-text-field>
+    <p style="color: red" v-if="wrongData">Mail y/o contraseña incorrecta</p>
     <v-checkbox
         v-model="remindMe"
         :label="`Recuerdame`"
@@ -35,6 +36,7 @@ export default {
     name: "LogInForm",
     userName: "",
     userPassword: "",
+    wrongData: false,
     store: LoginStore,
     remindMe: false,
     show1: false
@@ -53,7 +55,6 @@ export default {
         this.store.save() ;
       }
       await this.store.startSession(this.userName, this.userPassword);
-        console.log(this.store.correctData);
         if(this.store.correctData && !this.store.authorized) {
           window.location.href = '/#/ValidarEmail';
         }
@@ -62,7 +63,7 @@ export default {
         window.location.href = '/#/Rutinas';
       }
       if(!this.store.correctData){
-        alert('Datos incorrectos');
+        this.wrongData = true;
       }
     }
   }
