@@ -7,6 +7,7 @@
               v-model="store.tempRoutine.titulo"
               type="text"
               label="Nombre"
+              color="#E46271"
               style="padding-left: 5%; padding-right: 2%; display: inline-block"
               ></v-text-field>
           <v-icon
@@ -30,6 +31,7 @@
           <v-switch
               v-model="store.tempRoutine.isPublic"
               inset
+              color="#E46271"
           >
             <template #prepend>
               <v-label>Público:</v-label>
@@ -37,12 +39,14 @@
           </v-switch>
         </v-col>
       </v-row>
-      <v-row justify="center">
+      <v-row justify="center" style="margin: 0 5px 0 5px" >
         <v-col>
           <v-textarea
               label="Descripción"
               v-model="store.tempRoutine.detail"
-              counter>
+              counter
+              color="#E46271"
+          >
           </v-textarea>
         </v-col>
       </v-row>
@@ -55,7 +59,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.entradaEnCalor" :key="exercise.id"
-                :nombreejercicio="exercise.name"></ExBanner>
+                :ejercicio="exercise" :category="'entrada'"></ExBanner>
       <AddExToRoutine seccion="entradaEnCalor"></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -66,7 +70,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.principal" :key="exercise.id"
-                :nombreejercicio="exercise.name"></ExBanner>
+                :ejercicio="exercise" :category="'principal'"></ExBanner>
       <AddExToRoutine seccion="principal"></AddExToRoutine>
       <v-row align="center">
         <v-col style="padding-left: 5%">
@@ -77,7 +81,7 @@
         </v-col>
       </v-row>
       <ExBanner v-for="exercise in store.tempRoutine.elongacion" :key="exercise.id"
-                :nombreejercicio="exercise.name"></ExBanner>
+                :ejercicio="exercise" :category="'elongación'"></ExBanner>
       <AddExToRoutine seccion="elongacion"></AddExToRoutine>
       <v-btn right color="success" @click="this.finalizeRoutine" style="margin-top: 5%; margin-left: 2.5%">Aceptar</v-btn>
     </v-card>
@@ -108,24 +112,18 @@ export default {
     ]
   }),
   created() {
-    if(!this.store.edit)
-      this.store.vaciarTemp();
+    this.store.vaciarTemp();
   },
+
   methods: {
     finalizeRoutine() {
       this.changeCategory(this.category);
-      // this.setInfo();
       this.store.addRoutine();
       window.location.href = '/#/Rutinas'
     },
     changeCategory(category) {
       this.category = category;
     },
-    // setInfo(){
-    //   this.store.tempRoutine.titulo = this.titulo;
-    //   this.store.tempRoutine.isPublic = this.isPublic;
-    //   this.store.tempRoutine.
-    // }
   },
 }
 </script>

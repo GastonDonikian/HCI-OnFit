@@ -45,6 +45,11 @@ class RoutineApi {
         return (await Api.post(`${RoutineApi.url}/${id}/cycles`, true, cycle, controller));
     }
 
+    static async retriveCycles(id){
+        return (await Api.get(`${RoutineApi.url}/${id}/cycles`, true));
+
+    }
+
     //HACER QUERIES PARA FILTRAR LAS RUTINAS ES UNA REVERENDA PELOTUDEZ, AVISENME SI NECESITAN AYUDA
 
 

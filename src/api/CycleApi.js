@@ -1,4 +1,5 @@
 import {Api} from "./Api";
+import {RoutineApi} from "./RoutineApi";
 
 export {CycleApi};
 
@@ -16,8 +17,21 @@ class CycleApi {
                 duration: dur,
                 repetitions: rep,
             }
+            console.log(CycleApi.url);
+            console.log(exercises.id);
+            console.log(id)
             await (Api.post(`${CycleApi.url}/${id}/exercises/${exercises[i].id}`, true, exCycle, controller))
         }
-
     }
+
+    static async deleteCycles(id){
+        for (const cycle of await RoutineApi.retriveCycles(id).content) {
+            console.log("elimino rutina");
+            return  (await Api.delete(`${RoutineApi.url}/${id}/cycles/${cycle.id}`,true));
+        }
+    }
+
+    // static async retirveCycle(RoutineId, CycleId){
+    //     await (Api.get(`${CycleApi.url}/${}/exercises/${exercises[i].id}`))
+    // }
 }

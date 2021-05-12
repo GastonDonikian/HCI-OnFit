@@ -8,10 +8,16 @@
     >
       <v-row style="align-items: baseline">
         <v-col
-            cols="8"
+            cols="6"
             lg="7"
             style="margin-left: 5px"
-        >{{nombreejercicio}}
+        >{{ejercicio.name}}
+        </v-col>
+        <v-col v-if="ejercicio.metadata.repetitions !== null" class="text--secondary">
+          x{{ejercicio.metadata.repetitions}}
+        </v-col>
+        <v-col v-if="ejercicio.metadata.duration !== null" class="text--secondary">
+          {{ejercicio.metadata.duration}}s
         </v-col>
         <v-col
             align="right"
@@ -44,12 +50,12 @@ export default {
     }
   },
   props: {
-    nombreejercicio: String,
+    ejercicio: {type: Object, required: true},
     category: String,
   },
   methods:{
     deleteEx(){
-      this.store.remove(this.nombreejercicio, this.category)
+      this.store.remove(this.ejercicio.id, this.category)
     }
   }
 }

@@ -30,7 +30,6 @@ const CreateRoutineStore = {
     },
 
     addRoutine() {
-        console.log(this.tempRoutine.titulo);
         RoutineStore.add(this.tempRoutine);
     },
 
@@ -43,9 +42,43 @@ const CreateRoutineStore = {
             this.tempRoutine.elongacion.push(exercise);
     },
 
+    remove(id, category){
+        if(category === 'principal'){
+            this.removePrin(id);
+        }
+        else if( category === 'elongación'){
+            this.removeElon(id)
+        }
+        this.removeEntrada();
+    },
+
+
+    removePrin(id){
+        for(let i = 0; i < this.tempRoutine.principal.length; i++){
+            if ( this.tempRoutine.principal[i] === id) {
+                this.tempRoutine.principal.splice(i, 1);
+            }
+        }
+    },
+
+    removeElon(id){
+        function deleteId(num) {
+            return num !== id
+        }
+        this.tempRoutine.elongacion = this.tempRoutine.elongacion.filter(deleteId);
+    },
+
+    removeEntrada(id){
+        function deleteId(num) {
+            return num === id
+        }
+        this.tempRoutine.entradaEnCalor = this.tempRoutine.entradaEnCalor.filter(deleteId);
+    },
+
     vaciarTemp(){
         this.tempRoutine.titulo = "";
         this.tempRoutine.detail= "";
+        this.popup = false;
         this.tempRoutine.estrellas= null;
         this.tempRoutine.disciplina= null;
         this.tempRoutine.repeticionesEntradaEnCalor= 1;
@@ -56,6 +89,7 @@ const CreateRoutineStore = {
         this.tempRoutine.entradaEnCalor= [];
         this.tempRoutine.principal= [];
         this.tempRoutine.elongacion= [];
+        this.edit = false;
     },
 
     cargarTemp(routine){

@@ -25,13 +25,10 @@
                      class="text--secondary"
                      v-if="exercise.metadata.repetitions !== null">{{ exercise.metadata.repetitions }} repeticiones
               </v-col>
-
-
             </v-row>
-            <v-btn max-width="100px" @click="storeR.addExercise(exercise)" color="#E46271" class="white--text">Agregar
+            <v-btn max-width="100px" @click.stop="storeR.addExercise(exercise)" color="#E46271" class="white--text" style="margin-right: 5%">Agregar
             </v-btn>
           </v-expansion-panel-header>
-
           <v-expansion-panel-content>{{ exercise.detail }}</v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>

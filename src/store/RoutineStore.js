@@ -40,11 +40,13 @@ const RoutineStore = {
             },
             metadata: null
         }
-        await RoutineApi.createRoutine(routine, null).then(r => this.addInfo(r, tempRoutine));
+        let currentRoutine = await RoutineApi.createRoutine(routine, null);
+        await this.addInfo(currentRoutine, tempRoutine);
         bus.$emit('routinechange');
     },
 
-    addInfo(routine, tempRoutine){
+    async addInfo(routine, tempRoutine){
+        console.log("cargando la info");
         let entrada = {
             name: "entrada en calor",
             detail: "",
@@ -53,7 +55,7 @@ const RoutineStore = {
             repetitions: tempRoutine.repeticionesEntradaEnCalor,
             metadata: null,
         }
-        RoutineApi.createCycle(routine.id, entrada, null).then(r => CycleApi.addEx(r.id, tempRoutine.entradaEnCalor, null));
+        await RoutineApi.createCycle(routine.id, entrada, null).then((r) => CycleApi.addEx(r.id, tempRoutine.entradaEnCalor, null));
         let principal = {
             name: "principal",
             detail: "",
@@ -62,7 +64,7 @@ const RoutineStore = {
             repetitions: tempRoutine.repeticionesPrincipal,
             metadata: null,
         }
-        RoutineApi.createCycle(routine.id, principal, null).then(r => CycleApi.addEx(r.id, tempRoutine.principal, null));
+        await RoutineApi.createCycle(routine.id, principal, null).then(r => CycleApi.addEx(r.id, tempRoutine.principal, null));
         console.log(tempRoutine.repeticionesPrincipal)
         let elongacion = {
             name: "elongación",
@@ -72,10 +74,11 @@ const RoutineStore = {
             repetitions: tempRoutine.repeticionesElongacion,
             metadata: null,
         }
-        RoutineApi.createCycle(routine.id, elongacion, null).then(r => CycleApi.addEx(r.id, tempRoutine.elongacion, null));
+        await RoutineApi.createCycle(routine.id, elongacion, null).then(r => CycleApi.addEx(r.id, tempRoutine.elongacion, null));
     },
 
     async deleteRoutine(id) {
+        await CycleApi.deleteCycles(id);
         await RoutineApi.deleteRoutine(id, null);
         bus.$emit('routinechange');
     },
