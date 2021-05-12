@@ -64,7 +64,6 @@ export default {
         console.log('validaste correctamente tus datos');
         window.location.href = '/#/Rutinas'
         this.store.loggedIn=true;
-
         return;
       }
         window.location.href = '/#/validarEmail'

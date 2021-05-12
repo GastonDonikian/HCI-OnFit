@@ -12,6 +12,7 @@ const LoginStore = {
     correctCode:true,
     connect:false,
     found:true,
+    repeatedMail: false,
     isLogged() {
         // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
@@ -32,7 +33,13 @@ const LoginStore = {
         this.userPassword = userPassword;
     },
     async register(user) {
-        await LoginApi.create(user, null);
+        try {
+            await LoginApi.create(user, null);
+        }catch(Error){
+            if(Error.code == 2){ //mail repetido
+                this.repeatedMail = true;
+            }
+        }
     }
     ,
     async startSession(username, password) {
@@ -41,17 +48,16 @@ const LoginStore = {
         try {
             (await LoginApi.login({username: username, password: password}, null));
         } catch (Error) {
-            if (Error.code == 4) {
+            if (Error.code == 4) { //password y contrasenia mal
                 this.correctData = false;
             }
-            if(Error.code == 8){
+            if(Error.code == 8){ //no estas authorized
                 this.authorized=false;
             }
         }
-
         if(this.correctData && this.authorized){
-        await this.profileStore.readUserInfo();
-        this.loggedIn = true;
+            await this.profileStore.readUserInfo();
+            this.loggedIn = true;
         }
     },
     async validateEmail(email, code) {
@@ -60,13 +66,10 @@ const LoginStore = {
         try{
             await LoginApi.validateEmail({email: email, code: code}, null)
         }catch(Error){
-            if(Error.code == 8){
-                console.log("VALIDACION CODIGO");
+            if(Error.code == 8){ //codigo incorrecto
                 this.correctCode = false;
-                console.log(this.correctCode);
             }
-            if(Error.code == 3){
-                console.log("VALIDACION MAIL");
+            if(Error.code == 3){ //no esta el mail
                 this.found = false;
             }
         }
