@@ -7,6 +7,8 @@ const LoginStore = {
     user: "",
     loggedIn: false,
     profileStore: ProfileStore,
+    authorized:true,
+    correctData:true,
     isLogged() {
         // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
@@ -31,9 +33,22 @@ const LoginStore = {
     }
     ,
     async startSession(username, password) {
-        (await LoginApi.login({username: username, password: password}, null));
+        this.correctData = true;
+        this.authorized = true;
+        try {
+            (await LoginApi.login({username: username, password: password}, null));
+        } catch (Unauthorized) {
+            if (Unauthorized.code == 4) {
+                this.correctData = false;
+            }
+            if(Unauthorized.code == 8){
+                this.authorized=false;
+            }
+        }
+        if(this.correctData && this.authorized){
         await this.profileStore.readUserInfo();
         this.loggedIn = true;
+        }
     },
     async validateEmail(email, code) {
         return (await LoginApi.validateEmail({email: email, code: code}, null).then(() => {
@@ -52,8 +67,10 @@ const LoginStore = {
                 detail: "running",
             }
             CategoryApi.addCategory(runninng, null);
+            this.authorized=true;
             return true;
         }).catch(() => {
+            this.authorized=false;
             return false;
         }));
     },
