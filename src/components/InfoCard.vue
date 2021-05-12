@@ -29,7 +29,8 @@
         </v-img>
       </v-avatar>
     </v-row>
-    <v-list-item-title style="margin-top: 5%" class="headline mb-1">NOMBRE</v-list-item-title>
+    <v-list-item-title style="margin-top: 5%" class="headline mb-1">{{this.profileStore.userInfo.firstName.toUpperCase()}}
+       {{this.profileStore.userInfo.lastName.toUpperCase()}}</v-list-item-title>
     <v-btn
         disabled
         style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
@@ -69,6 +70,7 @@
 <script>
 
 import ProfileSettings from "../components/ProfileSettings";
+import ProfileStore from "../store/ProfileStore";
 
 export default {
   name: "InfoCard.vue",
@@ -76,6 +78,7 @@ export default {
   data(){
     return{
       overlaySettings:false,
+      profileStore: ProfileStore,
       zIndexSettings:1
     }
   }

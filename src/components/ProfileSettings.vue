@@ -3,30 +3,16 @@
     <div align="left" style="color: #E46271">
       <h3>CONFIGURACIÓN</h3>
     </div>
-    <v-avatar  style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="50">
+    <v-avatar  style="margin-top: 5%; border-style: solid; border-color:darkgrey;" size="50">
       <v-img draggable="false"
              @load="viewImg">
       </v-img>
     </v-avatar>
 
-    <s1 style="color: black">David Visbal</s1>
-    <v-icon style="color: black" @click="editAvatar">mdi-account-edit</v-icon>
+    <s1 style="color: black; margin-left: 10px">{{this.profileStore.userInfo.firstName.toUpperCase()}}
+       {{this.profileStore.userInfo.lastName.toUpperCase()}}</s1>
 
-    <p v-if="editProfile">Nombre nuevo</p>
-    <v-text-field
-        color="blue"
-        background-color="#FFFFFF"
-        class="black--text"
-        filled
-        label ="Nuevo Nombre">
-    </v-text-field>
-    <v-text-field v-if="editProfile"></v-text-field>
-    <p v-if="editProfile">Apellido nuevo</p>
-    <v-text-field v-if="editProfile"></v-text-field>
-    <p v-if="editProfile" >Link a nueva foto de perfil</p>
-    <v-text-field v-if="editProfile"></v-text-field>
-
-    <v-btn
+    <v-btn @click="editAvatar"
       class="settingsButton"
       rounded
       large
@@ -34,8 +20,8 @@
       text
       min-width="240px"
       >
-      <v-icon>mdi-key-variant</v-icon>
-      Cambiar Contraseña
+      <v-icon>mdi-account-edit</v-icon>
+      Editar Cuenta
     </v-btn>
     <v-btn @click="closeSession"
         class="settingsButton"
@@ -73,7 +59,6 @@ export default {
     return {
       profileStore: ProfileStore,
       loginStore: LoginStore,
-      editProfile: false,
     }
   },
   methods: {
@@ -86,9 +71,8 @@ export default {
       this.profileStore.deleteAccount();
     },
     editAvatar() {
-      this.editProfile = true;
-      console.log(this.editProfile);
-      this.profileStore.getCurrentUser();
+      console.log(this.profileStore.userInfo.firstName);
+      window.location.href='/#/EditAccount';
     },
   }
 }

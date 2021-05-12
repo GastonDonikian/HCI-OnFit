@@ -2,12 +2,14 @@ import {ProfileApi} from "../api/ProfileApi";
 
 const ProfileStore = {
 
+    userInfo: null,
+
     deleteAccount() {
-        ProfileApi.deleteAccount();
+        return ProfileApi.deleteAccount();
     },
 
-    getCurrentUser() {
-        ProfileApi.getCurrentUser();
+    async readUserInfo() {
+      this.userInfo = await ProfileApi.getCurrentUser()
     }
 }
 

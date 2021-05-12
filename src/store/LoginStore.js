@@ -1,11 +1,12 @@
 import {LoginApi} from "../api/LoginApi";
 import {CategoryApi} from "../api/CategoryApi";
+import ProfileStore from "./ProfileStore";
 
 const LoginStore = {
     loginAttempt: [{user: "", password: ""}],
     user: "",
     loggedIn: false,
-
+    profileStore: ProfileStore,
     isLogged() {
         // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
@@ -31,6 +32,7 @@ const LoginStore = {
     ,
     async startSession(username, password) {
         (await LoginApi.login({username: username, password: password}, null));
+        await this.profileStore.readUserInfo();
         this.loggedIn = true;
     },
     async validateEmail(email, code) {

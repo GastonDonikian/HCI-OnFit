@@ -9,6 +9,7 @@ import Explore from "../views/Explore";
 import RoutineCreator from "../views/RoutineCreator";
 import ValidarEmail from "../views/ValidarEmail";
 import ViewRoutine from "../views/ViewRoutine";
+import EditAccount from "../views/EditAccount";
 Vue.use(VueRouter)
 
 const routes = [
@@ -56,6 +57,11 @@ const routes = [
     path: '/validarEmail',
     name: 'ValidarEmail',
     component: ValidarEmail
+  },
+  {
+    path: '/EditAccount',
+    name: 'EditAccount',
+    component: EditAccount
   },
   {
     path: '/ViewRoutine',
