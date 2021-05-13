@@ -34,6 +34,7 @@
 <script>
 
 import LoginStore from "../store/LoginStore";
+import ProfileStore from "../store/ProfileStore";
 
 export default {
   data: () => ({
@@ -44,7 +45,8 @@ export default {
     error_first_name: false,
     error_last_name: false,
     error_avatar_image: false,
-    store: LoginStore,
+    loginStore: LoginStore,
+    profileStore: ProfileStore,
   }),
   methods: {
     exit() {
@@ -52,6 +54,20 @@ export default {
     },
     saveInfo() {
       this.validations();
+      const userInfo = {
+        firstName: this.firstName == "" ? this.profileStore.userInfo.firstName : this.firstName,
+        lastName: this.lastName == "" ? this.profileStore.userInfo.lastName : this.lastName,
+        gender: "male",
+        birthdate: 284007600000,
+        phone: "98295822",
+        avatarUrl: this.avatarUrl == "" ? this.profileStore.userInfo.avatarUrl : this.avatarUrl,
+        metadata: null
+      }
+      this.profileStore.modifyAccount(userInfo).then(x => this.setUserInfoValues(x));
+    },
+    setUserInfoValues(newUserInfo) {
+      this.profileStore.userInfo = newUserInfo
+      console.log(this.profileStore.userInfo);
     },
     validations() {
       if (this.firstName == null || this.firstName == "") {

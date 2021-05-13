@@ -40,7 +40,7 @@
         text
         min-width="240px"
     >
-      X rutinas completadas
+      X rutinas creadas
     </v-btn>
     <v-btn
         disabled

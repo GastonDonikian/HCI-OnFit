@@ -1,7 +1,6 @@
 import {Api} from "./Api";
 
 export {ProfileApi};
-// export default ProfileApi;
 
 class ProfileApi {
     static get url() {
@@ -22,5 +21,9 @@ class ProfileApi {
 
     static async getAllRoutines(){
         return (await Api.get(`${ProfileApi.url}/current/routines`));
+    }
+
+    static async modifyAccount(userInfo) {
+        return await Api.put(`${ProfileApi.url}/current`, true, userInfo, null);
     }
 }
