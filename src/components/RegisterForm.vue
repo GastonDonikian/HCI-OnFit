@@ -27,6 +27,7 @@
       </v-flex>
     </v-layout>
     <p style="color: red; margin-left: 2%"  v-if="checkMailFlag">Mail no valido</p>
+    <p style="color: red; margin-left: 2%"  v-if="checkRepeatedMailFlag">Mail ya registrado</p>
     <v-text-field outlined background-color="#FFFFFF" label="Mail" v-model="email" placeholder="usuario@ejemplo.com"></v-text-field>
     <v-text-field
         background-color="#FFFFFF"
@@ -70,6 +71,7 @@ export default {
       checkMailFlag: false,
       checkFirstNameFlag: false,
       checkLastNameFlag: false,
+      checkRepeatedMailFlag:false,
       password: "",
       firstName: "",
       lastName: "",
@@ -96,15 +98,21 @@ export default {
 
   },
   methods: {
-    register() {
+    async register() {
+      this.checkRepeatedMailFlag = false;
       if (!this.validations()) {
         return
       }
       this.setUserName();
       this.setUser();
-      this.store.register(this.user);
+      await this.store.register(this.user);
+      if(this.store.repeatedMail) {
+        this.checkRepeatedMailFlag = true;
+      }
       this.checkPasswordFlag = false;
-      window.location.href = '/#/validarEmail'
+      if(!this.checkRepeatedMailFlag){
+        window.location.href = '/#/validarEmail'
+      }
     },
     setUserName() {
       this.username = this.email

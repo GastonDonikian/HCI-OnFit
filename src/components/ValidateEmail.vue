@@ -22,19 +22,19 @@
           label ="Código"
       ></v-text-field>
         </v-row>
+      <p style="color: red" v-if="wrongCode">Código incorrecto</p>
+      <p style="color: red" v-if="wrongMail">Mail incorrecto</p>
       <v-row >
           <v-flex xs12 sm6 class="pa-1">
         <v-btn
           @click="this.submit"
-          class="white--text" rounded large color="#E77381">Confirmar
-        </v-btn>
+          class="white--text" rounded large color="#E77381">Confirmar</v-btn>
           </v-flex>
             <v-flex xs12 sm6 class="pa-1">
         <v-btn
           class="white--text"
           rounded large color="#E77381"
-          @click="this.resend">Reenviar código
-        </v-btn>
+          @click="this.resend">Reenviar código</v-btn>
         </v-flex>
       </v-row>
     </form>
@@ -52,18 +52,31 @@ export default {
     store: LoginStore,
     email: RegisterForm.data().email,
     code: '',
+    wrongCode:false,
+    wrongMail:false,
   }),
   methods: {
-    submit() {
-      if (this.store.validateEmail(this.email, this.code)) {
+    async submit() {
+      this.wrongCode=false;
+      this.wrongMail=false;
+      await this.store.validateEmail(this.email, this.code);
+      if(this.store.connect){
         console.log('validaste correctamente tus datos');
-        //ME TIENE QUE MANDAR A EXPLORAR
+        this.store.loggedIn=true;
+        console.log(this.store.username);
+        console.log(this.store.password);
+        await this.store.startSession(this.store.username, this.store.password);
         window.location.href = '/#/Rutinas'
-
-      } else {
-        alert('Something went wrong...');
-        window.location.href = '/#/validarEmail'
+        return;
       }
+        window.location.href = '/#/validarEmail'
+        this.store.authorized=false;
+        if(!this.store.correctCode){
+          this.wrongCode=true;
+        }
+        if(!this.store.found) {
+          this.wrongMail = true;
+        }
     },
     resend() {
       this.store.resendEmail(this.email);

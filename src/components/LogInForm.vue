@@ -18,6 +18,7 @@
         name="input-10-1"
         @click:append="show1 = !show1">
     </v-text-field>
+    <p style="color: red" v-if="wrongData">Mail y/o contraseña incorrecta</p>
     <v-checkbox
         v-model="remindMe"
         :label="`Recuerdame`"
@@ -35,6 +36,7 @@ export default {
     name: "LogInForm",
     userName: "",
     userPassword: "",
+    wrongData: false,
     store: LoginStore,
     remindMe: false,
     show1: false
@@ -52,9 +54,16 @@ export default {
         //  pero me parece redundante ya que puedo usar directamente las variables de LoginStore
         this.store.save() ;
       }
-      await this.store.startSession(this.userName,this.userPassword);
-      if (this.store.loggedIn) {
+      await this.store.startSession(this.userName, this.userPassword);
+        if(this.store.correctData && !this.store.authorized) {
+          window.location.href = '/#/ValidarEmail';
+        }
+
+      if (this.store.loggedIn && this.store.authorized && this.store.correctData) {
         window.location.href = '/#/Rutinas';
+      }
+      if(!this.store.correctData){
+        this.wrongData = true;
       }
     }
   }

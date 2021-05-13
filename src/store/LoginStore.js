@@ -5,8 +5,16 @@ import ProfileStore from "./ProfileStore";
 const LoginStore = {
     loginAttempt: [{user: "", password: ""}],
     user: "",
+    username: "",
+    password: "",
     loggedIn: false,
     profileStore: ProfileStore,
+    authorized:true,
+    correctData:true,
+    correctCode:true,
+    connect:false,
+    found:true,
+    repeatedMail: false,
     isLogged() {
         // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
@@ -27,16 +35,51 @@ const LoginStore = {
         this.userPassword = userPassword;
     },
     async register(user) {
-        await LoginApi.create(user, null);
+        try {
+            await LoginApi.create(user, null);
+        }catch(Error){
+            if(Error.code == 2){ //mail repetido
+                this.repeatedMail = true;
+            }
+        }
     }
     ,
     async startSession(username, password) {
-        (await LoginApi.login({username: username, password: password}, null));
-        await this.profileStore.readUserInfo();
-        this.loggedIn = true;
+        this.correctData = true;
+        this.authorized = true;
+        this.username = username;
+        this.password = password;
+        console.log("store" + this.username);
+        console.log("local " + username);
+        try {
+            (await LoginApi.login({username: username, password: password}, null));
+        } catch (Error) {
+            if (Error.code == 4) { //password y contrasenia mal
+                this.correctData = false;
+            }
+            if(Error.code == 8){ //no estas authorized
+                this.authorized=false;
+            }
+        }
+        if(this.correctData && this.authorized){
+            await this.profileStore.readUserInfo();
+            this.loggedIn = true;
+        }
     },
     async validateEmail(email, code) {
-        return (await LoginApi.validateEmail({email: email, code: code}, null).then(() => {
+        this.correctCode = true;
+        this.found = true;
+        try{
+            await LoginApi.validateEmail({email: email, code: code}, null)
+        }catch(Error){
+            if(Error.code == 8){ //codigo incorrecto
+                this.correctCode = false;
+            }
+            if(Error.code == 3){ //no esta el mail
+                this.found = false;
+            }
+        }
+        if(this.found && this.correctCode) {
             let enCasa = {
                 name: "En Casa",
                 detail: "en casa",
@@ -52,10 +95,8 @@ const LoginStore = {
                 detail: "running",
             }
             CategoryApi.addCategory(runninng, null);
-            return true;
-        }).catch(() => {
-            return false;
-        }));
+            this.connect = true;
+        }
     },
     async resendEmail(email) {
         await LoginApi.resendEmail({email: email}, null);
