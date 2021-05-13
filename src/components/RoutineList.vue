@@ -41,12 +41,13 @@ export default {
     async getDisplayRoutine() {
       let i;
       let routineArray = [];
-      // let routines = {type: Object};
-      // if(this.canEdit){
-      //   routines = (await RoutineStore.getAllRoutines())
-      // } else
+      let routines = {type: Object};
+      if(this.canEdit){
+        routines = (await RoutineStore.getAllRoutines());
+        console.log(routines);
+      } else
       //TODO: averiguar como acceder a las routinas privadas del current user
-        let routines = (await RoutineStore.getAllByCategory());
+        routines = (await RoutineStore.getAllByCategory());
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));

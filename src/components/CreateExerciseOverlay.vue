@@ -120,6 +120,7 @@ export default {
       else{
         this.repeatedExName = false;
       }
+      this.store.overlayCreator= false;
     }
   }
 }

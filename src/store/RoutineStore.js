@@ -2,6 +2,7 @@ import {RoutineApi} from "../api/RoutineApi";
 import {CycleApi} from "../api/CycleApi";
 import {bus} from "../main";
 import CreateRoutineStore from "./CreateRoutineStore";
+import {ProfileApi} from "../api/ProfileApi";
 
 
 const RoutineStore = {
@@ -30,9 +31,9 @@ const RoutineStore = {
         return (await RoutineApi.getPublicRoutines(null));
     },
 
-    // async getAllRoutines(){
-    //     return (await ProfileApi.getAllRoutines());
-    // },
+    async getAllRoutines(){
+        return (await ProfileApi.getAllRoutines());
+    },
 
     async add(tempRoutine) {
         console.log("creando rutina")

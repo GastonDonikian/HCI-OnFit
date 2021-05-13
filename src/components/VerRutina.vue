@@ -24,7 +24,7 @@
               class="text-left"
               width="475"
           >
-            <h4 style="padding: 5px" >Entrada en calor</h4>
+            <h4 style="padding: 5px" >Entrada en calor x{{this.store.tempRoutine.repeticionesEntradaEnCalor}}</h4>
             <v-banner v-for="ex in this.store.tempRoutine.entradaEnCalor" :key="ex.id">
               <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
                 <v-col cols="10">
@@ -48,7 +48,7 @@
               class="text-left"
               width="475"
           >
-            <h4 style="padding: 5px">Principal</h4>
+            <h4 style="padding: 5px">Principal x{{this.store.tempRoutine.repeticionesPrincipal}}</h4>
             <v-banner v-for="ex in this.store.tempRoutine.principal" :key="ex.id">
               <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
                 <v-col cols="10">
@@ -71,7 +71,7 @@
               class="text-left"
               width="475"
           >
-            <h4 style="padding: 5px">Elongación</h4>
+            <h4 style="padding: 5px">Elongación x{{this.store.tempRoutine.repeticionesElongacion}}</h4>
             <v-banner v-for="ex in this.store.tempRoutine.elongacion" :key="ex.id">
               <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
                 <v-col cols="10">
