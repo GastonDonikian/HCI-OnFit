@@ -99,6 +99,8 @@ export default {
   },
   methods: {
     async register() {
+      this.store.username = this.email;
+      this.store.password = this.password;
       this.checkRepeatedMailFlag = false;
       if (!this.validations()) {
         return

@@ -74,11 +74,33 @@ const LoginStore = {
         }catch(Error){
             if(Error.code == 8){ //codigo incorrecto
                 this.correctCode = false;
+                console.log("codigo incorrecto");
             }
             if(Error.code == 3){ //no esta el mail
+                console.log("no esta el mail");
                 this.found = false;
             }
         }
+        if(this.found && this.correctCode) {
+            this.connect = true;
+        //     let enCasa = {
+        //         name: "En Casa",
+        //         detail: "en casa",
+        //     }
+        //     CategoryApi.addCategory(enCasa, null);
+        //     let pesas = {
+        //         name: "Pesas",
+        //         detail: "pesas",
+        //     }
+        //     CategoryApi.addCategory(pesas, null);
+        //     let runninng = {
+        //         name: "Running",
+        //         detail: "running",
+        //     }
+        //     CategoryApi.addCategory(runninng, null);
+        }
+    },
+    createCategories() {
         if(this.found && this.correctCode) {
             let enCasa = {
                 name: "En Casa",

@@ -61,11 +61,9 @@ export default {
       this.wrongMail=false;
       await this.store.validateEmail(this.email, this.code);
       if(this.store.connect){
-        console.log('validaste correctamente tus datos');
         this.store.loggedIn=true;
-        console.log(this.store.username);
-        console.log(this.store.password);
         await this.store.startSession(this.store.username, this.store.password);
+        this.store.createCategories();
         window.location.href = '/#/Rutinas'
         return;
       }
