@@ -59,15 +59,7 @@ export default {
     };
   },
   props: {
-    exercise: {
-      id: Number,
-      name: String,
-      detail: String,
-      type: String,
-      metadata: {
-        repetitions: Number, duration: Number
-      }
-    }
+    exercise: {type: Object, required: true}
   },
   methods: {
     async deleteExercise(id) {

@@ -13,7 +13,7 @@
       >mdi-plus
       </v-icon>
     </v-btn>
-    <RoutineList style="margin-top: 30px"></RoutineList>
+    <RoutineList :can-edit="true" style="margin-top: 30px"></RoutineList>
     <h2 style="margin-bottom: 10px; margin-top: 10px; display: inline-block;">MIS EJERCICIOS</h2>
     <v-btn
         fab

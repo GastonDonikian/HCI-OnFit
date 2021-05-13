@@ -1,69 +1,124 @@
 <template>
-  <div align="center" @loadstart="loadRoutine">
+  <div>
     <v-card width="500px" color="#EBEBEB" class="principalRutina">
       <v-col style="padding-left: 5%; padding-top: 5%; padding-bottom: 5%">
         <v-row>
-          <h2>NOMBRE</h2>
+          <h2 style="font-weight: bold">{{ this.store.tempRoutine.titulo.toUpperCase() }}</h2>
         </v-row>
         <v-row>
-          <h3>Categoria</h3>
+          <h4 style="color: #E46271; font-weight: normal">Categoría: </h4>
+          <h4 style="width: 10px"></h4>
+          <h4 style="font-weight: normal">{{ findCategory(this.store.tempRoutine.category) }}</h4>
         </v-row>
         <v-row>
-          <h3>Descripcion</h3>
+          <h4 style="color: #E46271; font-weight: normal">Descripción: </h4>
+          <h4 style="width: 10px"></h4>
+          <h4 style="font-weight: normal"> {{ this.store.tempRoutine.detail }}</h4>
         </v-row>
         <v-row>
           <v-card
               elevation="0"
               color="#EBEBEB"
               outlined
-              style="border-color: #E46271"
+              style="border-color: #E46271; margin-bottom: 2%"
               class="text-left"
+              width="475"
           >
-            <h4>Entrada en calor</h4>
-            <v-banner v-for="ex in this.entrada" :key="ex.id">
-              <v-row style="padding: 5% 5% 5% 5%">
-                <v-col>
-                  <v-row class="text--black"><h4>{{ ex.titulo }}</h4></v-row>
-                  <v-row class="text--darken-4">{{ex.description}}</v-row>
+            <h4 style="padding: 5px" >Entrada en calor</h4>
+            <v-banner v-for="ex in this.store.tempRoutine.entradaEnCalor" :key="ex.id">
+              <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
+                <v-col cols="10">
+                  <v-row class="text--black">{{ ex.name }}</v-row>
+                  <v-row class="text--secondary" style="font-size: 10px">{{ex.detail}}</v-row>
+                  <v-row v-if="noDetail(ex.detail)" class="grey--text" style="font-size: 11px">sin descripción</v-row>
                 </v-col>
 
                 <v-spacer></v-spacer>
-                <v-col v-if="ex.repetitions != null">x{{ex.repetitions}}</v-col>
-                <v-col v-if="ex.duration != null">{{ex.duration}}s</v-col>
+                <v-col v-if="ex.metadata.repetitions != null">x{{ex.metadata.repetitions}}</v-col>
+                <v-col v-if="ex.metadata.duration != null">{{ex.metadata.duration}}s</v-col>
+
               </v-row>
             </v-banner>
-            <h4>Principal</h4>
-            <h4>Elongación</h4>
+          </v-card>
+          <v-card
+              elevation="0"
+              color="#EBEBEB"
+              outlined
+              style="border-color: #E46271; margin-bottom: 2%"
+              class="text-left"
+              width="475"
+          >
+            <h4 style="padding: 5px">Principal</h4>
+            <v-banner v-for="ex in this.store.tempRoutine.principal" :key="ex.id">
+              <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
+                <v-col cols="10">
+                  <v-row class="text--black">{{ ex.name }}</v-row>
+                  <v-row class="text--secondary" style="font-size: 10px">{{ex.detail}}</v-row>
+                  <v-row v-if="noDetail(ex.detail)" class="grey--text" style="font-size: 11px">sin descripción</v-row>
+                </v-col>
+
+                <v-spacer></v-spacer>
+                <v-col v-if="ex.metadata.repetitions != null">x{{ex.metadata.repetitions}}</v-col>
+                <v-col v-if="ex.metadata.duration != null">{{ex.metadata.duration}}s</v-col>
+              </v-row>
+            </v-banner>
+          </v-card>
+          <v-card
+              elevation="0"
+              color="#EBEBEB"
+              outlined
+              style="border-color: #E46271"
+              class="text-left"
+              width="475"
+          >
+            <h4 style="padding: 5px">Elongación</h4>
+            <v-banner v-for="ex in this.store.tempRoutine.elongacion" :key="ex.id">
+              <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
+                <v-col cols="10">
+                  <v-row class="text--black">{{ ex.name }}</v-row>
+                  <v-row class="text--secondary" style="font-size: 12px">{{ex.detail}}</v-row>
+                  <v-row v-if="noDetail(ex.detail)" class="grey--text" style="font-size: 11px">sin descripción</v-row>
+                </v-col>
+                <v-spacer></v-spacer>
+                <v-col v-if="ex.metadata.repetitions != null">x{{ex.metadata.repetitions}}</v-col>
+                <v-col v-if="ex.metadata.duration != null">{{ex.metadata.duration}}s</v-col>
+              </v-row>
+            </v-banner>
           </v-card>
         </v-row>
       </v-col>
+      <v-btn color="#E46271" :to="'../Rutinas'" style="color: #EBEBEB; margin-bottom: 2%; margin-left: 70%" >Salir</v-btn>
     </v-card>
   </div>
 </template>
 
 <script>
-import RoutineStore from "../store/RoutineStore";
+
+
+import CreateRoutineStore from "../store/CreateRoutineStore";
 
 export default {
   name: "VerRutina",
   data() {
     return{
-      store: RoutineStore,
-      elong: [],
-      entrada: [],
-      prin: []
+      store: CreateRoutineStore,
     }
   },
   methods: {
-    loadRoutine(){
-      let routine = this.store.get(this.store.currentRoutine)
-      this.entrada = routine.entradaEnCalor;
-      this.prin = routine.principal;
-      this.elong = routine.entradaEnCalor
+    noDetail(detail){
+      return detail === "";
+    },
+    findCategory(category){
+      if(category === 1){
+        return "En Casa";
+      }else if(category === 2){
+        return "Pesas";
+      }else
+        return "Running";
     }
   },
-  created(){
-    this.loadRoutine();
+  destroyed() {
+    this.store.vaciarTemp();
   }
 }
 </script>

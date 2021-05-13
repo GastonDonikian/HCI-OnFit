@@ -15,7 +15,7 @@
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">
             {{ routine.name }}
-            <v-btn @click="deleteRoutine(routine.id)" depressed style="margin-left: 10px" color="red"
+            <v-btn v-if="this.canEdit" @click="deleteRoutine(routine.id)" depressed style="margin-left: 10px" color="red"
                    fab x-small>
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
@@ -35,12 +35,13 @@
                 small
                 text
                 color="black"
-                @click="toView"
+                @click="toView(routine)"
             >
               Ver rutina
             </v-btn>
             <v-spacer></v-spacer>
             <v-btn
+                v-if="this.canEdit"
                 rounded
                 small
                 text
@@ -49,6 +50,12 @@
             >
               Editar rutina
             </v-btn>
+            <div
+                v-if="!this.canEdit"
+            >
+              <v-icon v-if="!isFav" @click="addToFavs()" color="black">mdi-heart-outline</v-icon>
+              <v-icon v-if="isFav" @click="removeFavs()" color="red">mdi-cards-heart</v-icon>
+            </div>
           </v-card-actions>
         </v-list-item-content>
       </v-list-item>
@@ -64,11 +71,13 @@ import CreateRoutineStore from "../store/CreateRoutineStore";
 export default {
   name: "RoutineCard",
   props: {
-    routine: {name: String, detail: String, averageRating: Number, category: Object}
+    routine: {type: Object},
+    canEdit: {type: Boolean},
   },
   data: () => ({
     store: RoutineStore,
-    storeCreate: CreateRoutineStore
+    storeCreate: CreateRoutineStore,
+    isFav: false,
   }),
   methods: {
     getColor(){
@@ -81,17 +90,23 @@ export default {
     //   this.estrellas = estrellas;
     //   this.color = color;
     // },
-    toView() {
+    toView(routine) {
+      this.storeCreate.cargarTemp(routine);
       window.location.href = '/#/ViewRoutine';
     },
     buscarRutina(routine) {
       this.storeCreate.edit = true;
-      console.log(routine);
       this.storeCreate.cargarTemp(routine);
       window.location.href = '/#/RoutineCreator'
     },
     async deleteRoutine(id) {
       await this.store.deleteRoutine(id);
+    },
+    addToFavs(){
+      this.isFav = true;
+    },
+    removeFavs(){
+      this.isFav = false;
     }
   },
 }

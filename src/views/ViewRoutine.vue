@@ -1,5 +1,5 @@
 <template>
-<div>
+<div align="center">
   <VerRutina></VerRutina>
 </div>
 </template>

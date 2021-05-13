@@ -23,7 +23,7 @@
         </div>
       </v-col>
     </v-row>
-    <RoutineList :key="currentCategory" :category="this.currentCategory" style="margin-top: 12%"></RoutineList>
+    <RoutineList :key="currentCategory" :category="this.currentCategory" :can-edit="false" style="margin-top: 12%"></RoutineList>
   </div>
 </template>
 
@@ -36,6 +36,7 @@ import RutinasEnum from "../store/RutinasEnum";
 
 
 export default {
+  //TODO: ver como acceder a todas las rutinas publicas de todos los usuarios
   name: "Explore.vue",
   components: {RoutineList},
   data: function () {

@@ -19,4 +19,8 @@ class ProfileApi {
     static async logOut() {
         return await Api.post(`${ProfileApi.url}/logout`, true, null, null);
     }
+
+    static async getAllRoutines(){
+        return (await Api.get(`${ProfileApi.url}/current/routines`));
+    }
 }

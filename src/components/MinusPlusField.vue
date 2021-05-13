@@ -51,6 +51,7 @@ export default {
       this.foo = parseInt(this.foo, 10) - 1;
       this.setSeriesRepetition(this.foo);
     },
+
     setSeriesRepetition(number) {
       if (this.seccion === "entradaEnCalor")
         this.store.tempRoutine.repeticionesEntradaEnCalor = number;
@@ -59,6 +60,16 @@ export default {
       else
         this.store.tempRoutine.repeticionesElongacion = number;
     },
+  },
+  created() {
+    if(this.store.edit){
+      if (this.seccion === "entradaEnCalor")
+        this.foo = this.store.tempRoutine.repeticionesEntradaEnCalor;
+      else if (this.seccion === "principal")
+        this.foo = this.store.tempRoutine.repeticionesPrincipal;
+      else
+        this.foo = this.store.tempRoutine.repeticionesElongacion;
+    }
   }
 }
 </script>

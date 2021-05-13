@@ -1,4 +1,5 @@
 import {Api} from "./Api";
+import {CycleApi} from "./CycleApi";
 
 export {RoutineApi};
 
@@ -7,9 +8,10 @@ class RoutineApi {
         return `${Api.baseUrl}/routines`;
     }
 
-    static async getRoutines(controller) {
+    static async getPublicRoutines(controller) {
         return (await Api.get(`${RoutineApi.url}`, true, controller)).content;
     }
+
 
     static async createRoutine(routine, controller){
         /*TIENE QUE SER DE LA
@@ -45,9 +47,17 @@ class RoutineApi {
         return (await Api.post(`${RoutineApi.url}/${id}/cycles`, true, cycle, controller));
     }
 
-    static async retriveCycles(id){
-        return (await Api.get(`${RoutineApi.url}/${id}/cycles`, true));
+    static async retriveCycles(id, deleteR){
+        if(deleteR){
+            await Api.get(`${RoutineApi.url}/${id}/cycles`, true, null).then((r) => CycleApi.deleteCycles(id, r.content));
+        }
+        else {
+            return (await Api.get(`${RoutineApi.url}/${id}/cycles`, true, null));
+        }
+    }
 
+    static async editRoutine(id, routine){
+        await Api.put(`${RoutineApi.url}/${id}`, true, routine)
     }
 
     //HACER QUERIES PARA FILTRAR LAS RUTINAS ES UNA REVERENDA PELOTUDEZ, AVISENME SI NECESITAN AYUDA

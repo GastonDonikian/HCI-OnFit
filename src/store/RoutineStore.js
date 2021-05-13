@@ -1,6 +1,7 @@
 import {RoutineApi} from "../api/RoutineApi";
 import {CycleApi} from "../api/CycleApi";
 import {bus} from "../main";
+import CreateRoutineStore from "./CreateRoutineStore";
 
 
 const RoutineStore = {
@@ -26,10 +27,15 @@ const RoutineStore = {
     }],
 
     async getAllByCategory() {
-        return (await RoutineApi.getRoutines(null));
-
+        return (await RoutineApi.getPublicRoutines(null));
     },
+
+    // async getAllRoutines(){
+    //     return (await ProfileApi.getAllRoutines());
+    // },
+
     async add(tempRoutine) {
+        console.log("creando rutina")
         let routine = {
             name: tempRoutine.titulo,
             detail: tempRoutine.detail,
@@ -46,7 +52,7 @@ const RoutineStore = {
     },
 
     async addInfo(routine, tempRoutine){
-        console.log("cargando la info");
+        console.log(tempRoutine);
         let entrada = {
             name: "entrada en calor",
             detail: "",
@@ -77,8 +83,27 @@ const RoutineStore = {
         await RoutineApi.createCycle(routine.id, elongacion, null).then(r => CycleApi.addEx(r.id, tempRoutine.elongacion, null));
     },
 
+    async edit(tempRoutine) {
+        let editRoutine = CreateRoutineStore.rutineAEditar;
+        await RoutineApi.retriveCycles(editRoutine.id, true).then(() => this.addInfo(editRoutine, tempRoutine));
+        let routine = {
+            name: tempRoutine.titulo,
+            detail: tempRoutine.detail,
+            isPublic: tempRoutine.isPublic,
+            difficulty: "rookie",
+            category: {
+                id: 2,
+            },
+            metadata: null
+        }
+        console.log(tempRoutine.detail);
+        console.log()
+        await RoutineApi.editRoutine(editRoutine.id, routine);
+        bus.$emit('routinechange');
+    },
+
     async deleteRoutine(id) {
-        await CycleApi.deleteCycles(id);
+        await RoutineApi.retriveCycles(id, true);
         await RoutineApi.deleteRoutine(id, null);
         bus.$emit('routinechange');
     },
@@ -107,11 +132,11 @@ const RoutineStore = {
         }
     },
     getColor(routine) {
-        if (routine.category.id === 1) //Pesas
+        if (routine.category.id === 2) //Pesas
             return "#7885FF";
-        if (routine.category.id === 2) //Running
+        if (routine.category.id === 3) //Running
             return "#F1B0B8";
-        if (routine.category.id === 3) //En Casa
+        if (routine.category.id === 1) //En Casa
             return "#B495C2";
     },
     // getAllByCategory(category) {

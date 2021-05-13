@@ -5,7 +5,8 @@
         <v-row>
           <v-col v-for="routine in routines" :key="routine.id">
             <RoutineCard style="margin-bottom: 10px"
-                         v-bind:routine="routine"/>
+                         v-bind:routine="routine"
+                          :can-edit="canEdit.valueOf()"/>
           </v-col>
         </v-row>
       </v-carousel-item>
@@ -24,7 +25,8 @@ export default {
   name: "RoutineList",
   components: {RoutineCard},
   props: {
-    category: null
+    category: null,
+    canEdit: null,
   },
   data: function () {
     return {
@@ -39,7 +41,12 @@ export default {
     async getDisplayRoutine() {
       let i;
       let routineArray = [];
-      let routines = (await RoutineStore.getAllByCategory());
+      // let routines = {type: Object};
+      // if(this.canEdit){
+      //   routines = (await RoutineStore.getAllRoutines())
+      // } else
+      //TODO: averiguar como acceder a las routinas privadas del current user
+        let routines = (await RoutineStore.getAllByCategory());
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));

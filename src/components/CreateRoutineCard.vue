@@ -97,6 +97,9 @@ import CreateRoutineStore from "../store/CreateRoutineStore";
 export default {
   name: "CreateRoutineCard",
   components: {ExBanner, AddExToRoutine, MinusPlusField},
+  props:{
+    rutina: {type: Object},
+  },
   data: () => ({
     store: CreateRoutineStore,
     titulo: "",
@@ -112,16 +115,25 @@ export default {
     ]
   }),
   created() {
-    this.store.vaciarTemp();
+    if(!this.store.edit)
+      this.store.vaciarTemp();
+  },
+  destroyed() {
+    this.store.edit = false;
   },
 
   methods: {
     finalizeRoutine() {
-      this.changeCategory(this.category);
-      this.store.addRoutine();
+      if(!this.store.edit){
+        this.store.addRoutine();
+      }
+      else
+        this.store.editRoutine();
       window.location.href = '/#/Rutinas'
     },
     changeCategory(category) {
+      console.log("entre con")
+      console.log(category)
       this.category = category;
     },
   },
