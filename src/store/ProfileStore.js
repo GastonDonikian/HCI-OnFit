@@ -4,6 +4,7 @@ const ProfileStore = {
 
     userInfo: null,
     extendedUserInfo: null,
+    availableAvatar: false,
 
     async deleteAccount() {
         return ProfileApi.deleteAccount();

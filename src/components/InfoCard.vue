@@ -25,11 +25,18 @@
     </v-row>
     <v-row justify="center">
       <v-avatar style="margin-top: 5%;border-style: solid; border-color:darkgrey;" size="130">
-        <v-img draggable="false">
+        <v-icon
+            v-if="!this.profileStore.availableAvatar"
+            size="90">mdi-account</v-icon>
+<!--        https://www.famousbirthdays.com/faces/miranda-lin-manuel-image.jpg-->
+        <v-img
+            v-if="this.profileStore.availableAvatar"
+            :src="this.profileStore.userInfo.avatarUrl"
+            draggable="false">
         </v-img>
       </v-avatar>
     </v-row>
-    <v-list-item-title style="margin-top: 5%" class="headline mb-1">{{this.profileStore.userInfo.firstName.toUpperCase()}}
+    <v-list-item-title style="margin-top: 10%" class="headline mb-1">{{this.profileStore.userInfo.firstName.toUpperCase()}}
        {{this.profileStore.userInfo.lastName.toUpperCase()}}</v-list-item-title>
     <v-btn
         disabled

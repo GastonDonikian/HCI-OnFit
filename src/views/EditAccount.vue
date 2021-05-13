@@ -17,7 +17,29 @@
                   placeholder="Spinetta">
     </v-text-field>
     <p v-if="this.error_last_name" class="errorText">Apellido invalido</p>
-    <h3 class="titleText">Cambiar foto de perfil</h3>
+
+    <v-row>
+      <v-col>
+        <h3 class="titleText">Cambiar foto de perfil</h3>
+      </v-col>
+      <v-col style="margin-right: 65%">
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon size="25"
+                v-bind="attrs"
+                v-on="on"
+                color="#E77381"
+            >
+              mdi-help-circle-outline
+            </v-icon>
+          </template>
+          <span>
+            La imagen debe ser cuadrada. De no insertar un link, se borrara la foto de perfil actual
+          </span>
+        </v-tooltip>
+      </v-col>
+    </v-row>
+
     <v-text-field class="inputField"
                   v-model="avatarImage"
                   outlined
@@ -53,22 +75,33 @@ export default {
       window.location.href = '/#/Profile'
     },
     saveInfo() {
-      this.validations();
+      // this.validations();
       const userInfo = {
         firstName: this.firstName == "" ? this.profileStore.userInfo.firstName : this.firstName,
         lastName: this.lastName == "" ? this.profileStore.userInfo.lastName : this.lastName,
         gender: "male",
         birthdate: 284007600000,
         phone: "98295822",
-        avatarUrl: this.avatarUrl == "" ? this.profileStore.userInfo.avatarUrl : this.avatarUrl,
+        // avatarUrl: this.avatarUrl == "" ? this.profileStore.userInfo.avatarUrl : this.avatarUrl,
+        avatarUrl: this.avatarImage,
         metadata: null
       }
       this.profileStore.modifyAccount(userInfo).then(x => this.setUserInfoValues(x));
+      if (this.avatarImage === undefined || this.avatarImage === "") {
+        console.log("no hay foto para mostrar");
+        this.profileStore.availableAvatar = false;
+      } else {
+        console.log("hay foto para mostrar");
+        this.profileStore.availableAvatar = true;
+      }
+      window.location.href = "/#/profile";
     },
     setUserInfoValues(newUserInfo) {
       this.profileStore.userInfo = newUserInfo
-      console.log(this.profileStore.userInfo);
+      console.log(this.profileStore.userInfo.avatarUrl);
     },
+
+    // Esta de mas la funcion validations pero como estuve tanto tiempo haciendola le agarre cariño y no la pienso borrar
     validations() {
       if (this.firstName == null || this.firstName == "") {
         this.error_first_name = true;
@@ -88,7 +121,6 @@ export default {
       return !this.error_first_name && !this.error_last_name
           && !this.error_avatar_image;
     },
-    // https://flic.kr/p/3ntH2u
     isValidAvatarUrl() {
       let flickrSubstring = this.avatarImage.substring(0,16);
       return flickrSubstring == "https://flic.kr/";
