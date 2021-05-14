@@ -26,7 +26,6 @@ const CreateRoutineStore = {
         principal: [],
         elongacion: []
     },
-    //TODO: como setear la category con el maldito overlow button
     setDisciplina(disciplina) {
         if (disciplina === "Pesas") {
             this.tempRoutine.category.id=2;

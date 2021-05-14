@@ -157,7 +157,6 @@ export default {
   },
 }
 
-//TODO: agregue v-model en overflow btn
 </script>
 
 <style scoped>

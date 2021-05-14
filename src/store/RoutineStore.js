@@ -41,7 +41,6 @@ const RoutineStore = {
             detail: tempRoutine.detail,
             isPublic: tempRoutine.isPublic,
             difficulty: "rookie",
-            //TODO:esto modifique
             category: tempRoutine.category,
             metadata: null
         }
