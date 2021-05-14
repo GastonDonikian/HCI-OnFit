@@ -8,9 +8,6 @@
                          v-bind:routine="routine"
                           :can-edit="canEdit.valueOf()"/>
           </v-col>
-          <v-col>
-            <PlusCard style="margin-bottom: 10px"></PlusCard>
-          </v-col>
         </v-row>
       </v-carousel-item>
     </v-carousel>
@@ -22,12 +19,12 @@
 import RoutineCard from "./RoutineCard";
 import RoutineStore from "../store/RoutineStore";
 import {bus} from "../main";
-import PlusCard from "./PlusCard";
 
 
 export default {
   name: "RoutineList",
-  components: {PlusCard, RoutineCard},
+  components: {RoutineCard},
+  showPlus:true,
   props: {
     category: null,
     canEdit: null,
@@ -42,6 +39,11 @@ export default {
     this.routineArray = await this.getDisplayRoutine();
   },
   methods: {
+    async getRutineSize(){
+      console.log((await this.store.getAllRoutines()).length === 0)
+      if((await this.store.getAllRoutines()).length === 0)
+        this.showPlus = false;
+    },
     async getDisplayRoutine() {
       let i;
       let routineArray = [];
@@ -80,7 +82,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);
-  }
+  },
 }
 </script>
 

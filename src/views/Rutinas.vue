@@ -13,7 +13,8 @@
       >mdi-plus
       </v-icon>
     </v-btn>
-    <RoutineList :can-edit="true" style="margin-top: 30px"></RoutineList>
+    <RoutineList :can-edit="true" style="margin-top: 30px" v-if="!this.boolHasRutines"></RoutineList>
+    <PlusCard v-if="this.boolHasRutines"></PlusCard>
     <h2 style="margin-bottom: 10px; margin-top: 10px; display: inline-block;">MIS EJERCICIOS</h2>
     <v-btn
         fab
@@ -37,7 +38,8 @@
       </v-btn>
       <CreateExerciseOverlay></CreateExerciseOverlay>
     </v-overlay>
-    <ExerciseList style="margin-top: 30px"></ExerciseList>
+    <ExerciseList style="margin-top: 30px" v-if="!this.booleanHasExc"></ExerciseList>
+    <PlusCardExcercise v-if="this.booleanHasExc"></PlusCardExcercise>
   </div>
 </template>
 
@@ -47,24 +49,41 @@ import RoutineList from "../components/RoutineList";
 import ExerciseList from "../components/ExerciseList";
 import CreateExerciseOverlay from "../components/CreateExerciseOverlay";
 import ExerciseStore from "../store/ExerciseStore";
+import RoutineStore from "../store/RoutineStore";
+import PlusCard from "../components/PlusCard";
+import PlusCardExcercise from "../components/PlusCardExcercise";
 
 export default {
   name: "Rutinas.vue",
-  components: {CreateExerciseOverlay, ExerciseList, RoutineList},
+  components: {PlusCardExcercise, PlusCard, CreateExerciseOverlay, ExerciseList, RoutineList},
   data() {
     return {
       routines: [],
       overlayExercise: false,
       zIndexExercise: 1,
+      boolHasRutines:false,
+      booleanHasExc:false,
       store: ExerciseStore,
       exercise: {titulo: "Titulo", description: "Description", repetitions: 10, duration: null}
     }
   },
-  methods: {},
+  methods: {
+    //TODO: recargar en evento. No actualiza si borras. Pasa lo mismo con hasExcercise
+    async hasRutines(){
+      this.boolHasRutines = (await RoutineStore.getAllRoutines()).length === 0
+    },
+    async hasExcercise(){
+      this.booleanHasExc = (await ExerciseStore.getAllExercises()).length === 0
+    }
+  },
   computed: {
     isValidDescriptionName() {
       return (this.description.length)
     }
+  },
+  created() {
+    this.hasRutines();
+    this.hasExcercise();
   }
 }
 </script>
