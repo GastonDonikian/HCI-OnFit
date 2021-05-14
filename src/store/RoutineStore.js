@@ -41,9 +41,8 @@ const RoutineStore = {
             detail: tempRoutine.detail,
             isPublic: tempRoutine.isPublic,
             difficulty: "rookie",
-            category: {
-                id: 2,
-            },
+            //TODO:esto modifique
+            category: tempRoutine.category,
             metadata: null
         }
         let currentRoutine = await RoutineApi.createRoutine(routine, null);

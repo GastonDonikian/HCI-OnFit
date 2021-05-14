@@ -18,12 +18,14 @@
         <v-col id="dropdown-example-2">
           <v-overflow-btn
               class="my-2"
+              v-model="store.tempRoutine.disciplina"
               :items="dropdown_icon"
               label="Categorias"
               segmented
               target="#dropdown-example-2"
               style="padding-right: 5%"
           ></v-overflow-btn>
+          <p v-if="this.error_category_empty" style="color: red !important;">No has seleccionado categoria</p>
         </v-col>
       </v-row>
 
@@ -110,13 +112,14 @@ export default {
     isPublic: "",
     error_name_too_long: false,
     error_name_empty: false,
+    error_category_empty:false,
     repeticionesEntradaEnCalor: 1,
     repeticionesPrincipal: 1,
     repeticionesElongacion: 1,
     dropdown_icon: [
-      {text: 'Pesas', callback: () => this.changeCategory("Pesas")},
-      {text: 'Running', callback: () => this.changeCategory("Running")},
-      {text: 'En casa', callback: () => this.changeCategory("En casa")},
+      {text: 'Pesas', callback: () => null},
+      {text: 'Running', callback: () => null},
+      {text: 'En casa', callback: () => null},
     ]
   }),
   created() {
@@ -130,7 +133,6 @@ export default {
   methods: {
     finalizeRoutine() {
       // Validaciones del input "nombre"
-      console.log(this.store.tempRoutine.titulo);
       if (this.store.tempRoutine.titulo.length > 15) {
         this.error_name_too_long = true;
         this.error_name_empty = false;
@@ -141,6 +143,10 @@ export default {
         this.error_name_too_long = false;
         return;
       }
+      if(this.store.tempRoutine.disciplina===0){
+        this.error_category_empty = true;
+        return;
+      }
       if(!this.store.edit){
         this.store.addRoutine();
       }
@@ -148,11 +154,10 @@ export default {
         this.store.editRoutine();
       window.location.href = '/#/Rutinas'
     },
-    changeCategory(category) {
-      this.category = category;
-    },
   },
 }
+
+//TODO: agregue v-model en overflow btn
 </script>
 
 <style scoped>

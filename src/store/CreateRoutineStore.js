@@ -12,27 +12,39 @@ const CreateRoutineStore = {
         titulo: "",
         detail: "",
         estrellas: null,
-        disciplina: null,
+        disciplina: "",
         repeticionesEntradaEnCalor: 1,
         repeticionesPrincipal: 1,
         repeticionesElongacion: 1,
         isPublic: false,
-        category: 2,
+        category: {
+            id: null,
+            name: "",
+            detail: null
+        },
         entradaEnCalor: [],
         principal: [],
         elongacion: []
     },
     //TODO: como setear la category con el maldito overlow button
     setDisciplina(disciplina) {
-        if (disciplina === "Pesas")
+        if (disciplina === "Pesas") {
+            this.tempRoutine.category.id=2;
             this.tempRoutine.disciplina = RutinasEnum.Pesas;
-        else if (disciplina === "Running")
+        }
+        else if (disciplina === "Running") {
+            this.tempRoutine.category.id = 3;
             this.tempRoutine.disciplina = RutinasEnum.Running;
-        else
+
+        }
+        else{
+            this.tempRoutine.category.id=1;
             this.tempRoutine.disciplina = RutinasEnum.EnCasa;
+        }
     },
 
     addRoutine() {
+        this.setDisciplina(this.tempRoutine.disciplina);
         RoutineStore.add(this.tempRoutine);
     },
 
@@ -93,7 +105,11 @@ const CreateRoutineStore = {
         this.tempRoutine.repeticionesPrincipal= 1;
         this.tempRoutine.repeticionesElongacion= 1;
         this.tempRoutine.isPublic= false;
-        this.tempRoutine.category= 0;
+        this.tempRoutine.category= {
+            id: null,
+            name: "",
+            detail: null,
+        };
         this.tempRoutine.entradaEnCalor= [];
         this.tempRoutine.principal= [];
         this.tempRoutine.elongacion= [];
@@ -137,7 +153,7 @@ const CreateRoutineStore = {
             }
         }
         this.tempRoutine.isPublic= routine.isPublic;
-        this.tempRoutine.category= routine.category.id;
+        this.tempRoutine.category= routine.category;
     },
 
     activate(seccion) {
