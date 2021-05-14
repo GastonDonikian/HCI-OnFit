@@ -11,6 +11,7 @@ const LoginStore = {
     profileStore: ProfileStore,
     authorized:true,
     correctData:true,
+    incompleteMail:true,
     correctCode:true,
     connect:false,
     found:true,
@@ -76,6 +77,11 @@ const LoginStore = {
             if(Error.code == 3){ //no esta el mail
                 this.found = false;
             }
+            if(Error.code == 1){
+                console.log("no esta ingresado el mail ni el codigo")
+                this.correctCode=false;
+                this.found=false;
+            }
         }
         if(this.found && this.correctCode) {
             this.connect = true;
@@ -117,7 +123,17 @@ const LoginStore = {
         }
     },
     async resendEmail(email) {
-        await LoginApi.resendEmail({email: email}, null);
+        this.incompleteMail = true;
+        this.found=true;
+        this.correctCode=true;
+        try {
+            await LoginApi.resendEmail({email: email}, null);
+        }catch(Error){
+            if(Error.code == 1){
+                console.log("entre")
+                this.incompleteMail = false;
+            }
+        }
     },
 
     isCurrentUserVerified() {

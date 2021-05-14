@@ -6,12 +6,26 @@
         v-bind:color=this.getColor()
     ><!--color cambia con la API-->
       <v-list-item three-line>
-        <v-list-item-avatar
+        <v-list-item-avatar class="imageCard"
             rounded
             height="150"
             width="80"
             color="grey"
-        ></v-list-item-avatar>
+        ><v-img
+            v-if="this.getColor() === '7885ff'"
+            src="../assets/Fotopesas.png">
+
+        </v-img>
+          <v-img
+              v-if="this.getColor() === 'f1b0b8'"
+              src="../assets/FotoRunning.png">
+          </v-img>
+          <v-img
+              v-if="this.getColor() === 'b495c2'"
+              src="../assets/FotoEnCasa.png">
+
+          </v-img>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">
             {{ routine.name }}
@@ -128,5 +142,9 @@ export default {
 </script>
 export default {}
 <style scoped>
-
+.imageCard {
+  /*padding-right: 20px;*/
+  /*margin-left: -16px;*/
+  /*position: absolute /!important;*/
+}
 </style>

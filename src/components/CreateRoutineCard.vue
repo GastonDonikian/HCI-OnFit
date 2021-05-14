@@ -26,8 +26,11 @@
           ></v-overflow-btn>
         </v-col>
       </v-row>
+
       <v-row style="margin-top: -10%; margin-left: 0.5%">
         <v-col>
+          <p v-if="this.error_name_too_long" style="color: red !important;">Nombre muy largo</p>
+          <p v-if="this.error_name_empty" style="color: red !important;">Nombre vacio</p>
           <v-switch
               v-model="store.tempRoutine.isPublic"
               inset
@@ -105,6 +108,8 @@ export default {
     titulo: "",
     category: "",
     isPublic: "",
+    error_name_too_long: false,
+    error_name_empty: false,
     repeticionesEntradaEnCalor: 1,
     repeticionesPrincipal: 1,
     repeticionesElongacion: 1,
@@ -124,6 +129,20 @@ export default {
 
   methods: {
     finalizeRoutine() {
+      // Validaciones del input "nombre"
+      console.log(this.store.tempRoutine.titulo);
+      if (this.store.tempRoutine.titulo.length > 15) {
+        this.error_name_too_long = true;
+        this.error_name_empty = false;
+        return;
+      }
+      if (this.store.tempRoutine.titulo.length === 0) {
+        this.error_name_empty = true;
+        this.error_name_too_long = false;
+        return;
+      }
+      console.log(this.dropdown_icon);
+      console.log("algo");
       if(!this.store.edit){
         this.store.addRoutine();
       }

@@ -22,8 +22,9 @@
           label ="Código"
       ></v-text-field>
         </v-row>
-      <p style="color: red" v-if="wrongCode">Código incorrecto</p>
-      <p style="color: red" v-if="wrongMail">Mail incorrecto</p>
+      <p style="color: darkred; align-self: center" v-if="wrongCode">Código incorrecto</p>
+      <p style="color: darkred" v-if="wrongMail">Mail incorrecto</p>
+      <p style="color: darkred" v-if="incompleteMail">Complete el mail</p>
       <v-row >
           <v-flex xs12 sm6 class="pa-1">
         <v-btn
@@ -50,6 +51,7 @@ export default {
   name: "ValidateEmail",
   data: () => ({
     store: LoginStore,
+    incompleteMail:false,
     email: RegisterForm.data().email,
     code: '',
     wrongCode:false,
@@ -59,11 +61,12 @@ export default {
     async submit() {
       this.wrongCode=false;
       this.wrongMail=false;
+      this.incompleteMail=false;
       await this.store.validateEmail(this.email, this.code);
       if(this.store.connect){
         this.store.loggedIn=true;
+        //await this.store.createCategories();
         await this.store.startSession(this.store.username, this.store.password);
-        this.store.createCategories();
         window.location.href = '/#/Rutinas'
         return;
       }
@@ -76,8 +79,16 @@ export default {
           this.wrongMail = true;
         }
     },
-    resend() {
-      this.store.resendEmail(this.email);
+    async resend() {
+      this.incompleteMail = false;
+      this.wrongMail = false;
+      this.wrongCode=false;
+      await this.store.resendEmail(this.email);
+      if(!this.store.incompleteMail){
+        console.log("RESEND")
+        this.incompleteMail = true;
+      }
+      console.log(this.incompleteMail);
       this.email = '';
       this.code = '';
     }

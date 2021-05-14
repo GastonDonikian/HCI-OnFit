@@ -7,6 +7,9 @@
             <ExCard style="margin-bottom: 10px"
                     :exercise="exercise"/>
           </v-col>
+          <v-col>
+            <PlusCard style="margin-bottom: 10px"></PlusCard>
+          </v-col>
         </v-row>
       </v-carousel-item>
     </v-carousel>
@@ -17,18 +20,22 @@
 import ExerciseStore from "../store/ExerciseStore";
 import ExCard from "./ExCard";
 import {bus} from "../main";
+import PlusCard from "./PlusCard";
 
 export default {
   name: "ExerciseList",
-  components: {ExCard},
+  components: {PlusCard, ExCard},
   data: function () {
     return {
       store: ExerciseStore,
       exercisesArray: [],
+      emptyExArray:true,
     }
   },
   async created(){
     this.exercisesArray = await this.getDisplayExercises();
+    if(this.exercisesArray.length > 1)
+      this.emptyExArray=false;
   },
 
   methods: {
