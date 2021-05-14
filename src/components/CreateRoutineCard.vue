@@ -141,8 +141,6 @@ export default {
         this.error_name_too_long = false;
         return;
       }
-      console.log(this.dropdown_icon);
-      console.log("algo");
       if(!this.store.edit){
         this.store.addRoutine();
       }

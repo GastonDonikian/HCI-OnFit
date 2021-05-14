@@ -24,6 +24,7 @@
               class="text-left"
               width="475"
           >
+            <div v-if="this.boolHasEntradaEnCalor">
             <h4 style="padding: 5px" >Entrada en calor x{{this.store.tempRoutine.repeticionesEntradaEnCalor}}</h4>
             <v-banner v-for="ex in this.store.tempRoutine.entradaEnCalor" :key="ex.id">
               <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
@@ -39,6 +40,7 @@
 
               </v-row>
             </v-banner>
+              </div>
           </v-card>
           <v-card
               elevation="0"
@@ -102,23 +104,35 @@ export default {
   data() {
     return{
       store: CreateRoutineStore,
+      boolHasEntradaEnCalor:true,
     }
   },
   methods: {
-    noDetail(detail){
+    noDetail(detail) {
       return detail === "";
     },
-    findCategory(category){
-      if(category === 1){
+    findCategory(category) {
+      if (category === 1) {
         return "En Casa";
-      }else if(category === 2){
+      } else if (category === 2) {
         return "Pesas";
-      }else
+      } else
         return "Running";
+    },
+    //TODO: no funciona lpm voy a llorar
+    async hasEntradaEnCalor() {
+      this.boolHasEntradaEnCalor = ((await this.store.tempRoutine.entradaEnCalor).length ===0);
+      console.log(this.store.tempRoutine.entradaEnCalor.length ===0)
+      console.log(this.boolHasEntradaEnCalor)
+      console.log(this.store.tempRoutine.entradaEnCalor.length)
+      console.log(this.store.tempRoutine.entradaEnCalor)
+    },
+    destroyed() {
+      this.store.vaciarTemp();
     }
   },
-  destroyed() {
-    this.store.vaciarTemp();
+  created() {
+    this.hasEntradaEnCalor();
   }
 }
 </script>
