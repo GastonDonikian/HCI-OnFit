@@ -26,7 +26,7 @@ const ExerciseStore = {
         try {
             await ExerciseApi.createExercise(ex, null).then((r) => console.log(r));
         }catch(Error){
-            if(Error.code === 2){ //nombre repetido
+            if(Error.code == 2){ //nombre repetido
                 this.repeatedName = true;
             }
         }

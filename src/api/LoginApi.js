@@ -15,7 +15,7 @@ class LoginApi {
     }
 
     static async logout(user, controller) {
-        console.log(LoginApi.url);
+
         await Api.post(`${LoginApi.url}/logout`, true, user, controller);
         sessionStorage.removeItem('token');
         Api.token = undefined;

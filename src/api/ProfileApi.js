@@ -20,7 +20,7 @@ class ProfileApi {
     }
 
     static async getAllRoutines(){
-        return (await Api.get(`${ProfileApi.url}/current/routines/`, true)).content;
+        return (await Api.get(`${ProfileApi.url}/current/routines/`, true));
     }
 
     static async modifyAccount(userInfo) {

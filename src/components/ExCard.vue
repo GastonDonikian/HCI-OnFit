@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     async deleteExercise(id) {
-      console.log(this.exercise);
       await this.store.deleteExercise(id);
     }
   },

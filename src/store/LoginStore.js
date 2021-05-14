@@ -72,10 +72,8 @@ const LoginStore = {
         }catch(Error){
             if(Error.code == 8){ //codigo incorrecto
                 this.correctCode = false;
-                console.log("codigo incorrecto");
             }
             if(Error.code == 3){ //no esta el mail
-                console.log("no esta el mail");
                 this.found = false;
             }
         }

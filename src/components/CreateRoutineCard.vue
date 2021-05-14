@@ -132,8 +132,6 @@ export default {
       window.location.href = '/#/Rutinas'
     },
     changeCategory(category) {
-      console.log("entre con")
-      console.log(category)
       this.category = category;
     },
   },

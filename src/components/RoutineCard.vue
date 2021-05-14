@@ -53,8 +53,8 @@
             <div
                 v-if="!this.canEdit"
             >
-              <v-icon v-if="!isFav" @click="addToFavs()" color="black">mdi-heart-outline</v-icon>
-              <v-icon v-if="isFav" @click="removeFavs()" color="red">mdi-cards-heart</v-icon>
+              <v-icon v-if="!isFav" @click="addToFavs(routine)" color="black">mdi-heart-outline</v-icon>
+              <v-icon v-if="isFav" @click="removeFavs(routine)" color="red">mdi-cards-heart</v-icon>
             </div>
           </v-card-actions>
         </v-list-item-content>
@@ -67,6 +67,7 @@
 
 import RoutineStore from "../store/RoutineStore";
 import CreateRoutineStore from "../store/CreateRoutineStore";
+
 
 export default {
   name: "RoutineCard",
@@ -102,11 +103,15 @@ export default {
     async deleteRoutine(id) {
       await this.store.deleteRoutine(id);
     },
-    addToFavs(){
+    addToFavs(routine){
       this.isFav = true;
+      //FavouritesApi.addFav(routine.id);
+      console.log(routine.id)
     },
-    removeFavs(){
+    removeFavs(routine){
       this.isFav = false;
+      //FavouritesApi.removeFav(routine.id);
+      console.log(routine.id);
     }
   },
 }
