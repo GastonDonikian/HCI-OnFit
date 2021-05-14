@@ -2,7 +2,7 @@
   <div >
     <v-row justify="center">
       <v-spacer></v-spacer>
-      <v-col>
+<!--      <v-col>-->
         <v-card
             v-if="this.fav_length=== 0"
             color="#EBEBEB"
@@ -51,7 +51,7 @@
               </v-col>
             </v-row>
           </v-card>
-      </v-col>
+<!--      </v-col>-->
       <v-spacer></v-spacer>
     </v-row>
   </div>
