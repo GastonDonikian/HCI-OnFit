@@ -7,9 +7,6 @@
             <ExCard style="margin-bottom: 10px"
                     :exercise="exercise"/>
           </v-col>
-          <v-col>
-            <PlusCard style="margin-bottom: 10px"></PlusCard>
-          </v-col>
         </v-row>
       </v-carousel-item>
     </v-carousel>
@@ -20,11 +17,10 @@
 import ExerciseStore from "../store/ExerciseStore";
 import ExCard from "./ExCard";
 import {bus} from "../main";
-import PlusCard from "./PlusCard";
 
 export default {
   name: "ExerciseList",
-  components: {PlusCard, ExCard},
+  components: {ExCard},
   data: function () {
     return {
       store: ExerciseStore,
