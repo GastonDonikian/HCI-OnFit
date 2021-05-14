@@ -10,7 +10,7 @@
               height="80"
               :color=category.color
               class="textStyle"
-              @click="currentCategory = category.name;"
+              @click="this.changeFilter(category)"
           >
             <v-icon
                 x-large
@@ -23,14 +23,18 @@
         </div>
       </v-col>
     </v-row>
-    <RoutineList :key="currentCategory" :category="this.currentCategory" :can-edit="false" style="margin-top: 12%"></RoutineList>
+    <div>
+      <v-row>
+        <RoutineCard v-for="routine in this.routinesFiltered" :key="routine.id" :routine="routine" :can-edit="false" style="margin-bottom: 5%; margin-left: 2%"></RoutineCard>
+      </v-row>
+    </div>
   </div>
 </template>
 
 
 <script>
 
-import RoutineList from "../components/RoutineList";
+import RoutineCard from "../components/RoutineCard";
 import RoutineStore from "../store/RoutineStore";
 import RutinasEnum from "../store/RutinasEnum";
 
@@ -38,11 +42,12 @@ import RutinasEnum from "../store/RutinasEnum";
 export default {
   //TODO: ver como acceder a todas las rutinas publicas de todos los usuarios
   name: "Explore.vue",
-  components: {RoutineList},
+  components: {RoutineCard},
   data: function () {
     return {
-      currentCategory: 'Pesas',
+      currentCategory: 'Destacados',
       routineStore: RoutineStore,
+      routinesFiltered: [],
       categoryArray: [{name: 'Destacados', icon: 'mdi-star-shooting-outline', color: RutinasEnum.Destacados}, {
         name: 'Pesas',
         icon: 'mdi-dumbbell', color: RutinasEnum.Pesas
@@ -53,8 +58,24 @@ export default {
       }]
     }
   },
-  methods: {},
-  computed: {}
+  methods: {
+    async changeFilter(category){
+      if(category === 'Pesas')
+        this.routinesFiltered = (await this.routineStore.getPesasRoutines());
+      else if(category === 'En Casa')
+        this.routinesFiltered = (await this.routineStore.getCasaRoutines());
+      else if(category === 'Running'){
+        this.routinesFiltered = (await this.routineStore.getRunningRoutines());
+      } else
+        this.routinesFiltered = (await this.routineStore.getAllPublicRoutines());
+    },
+  },
+  computed: {},
+  async created() {
+    console.log("hola")
+    this.routinesFiltered = (await this.routineStore.getAllPublicRoutines());
+    console.log(this.routinesFiltered)
+  }
 }
 </script>
 

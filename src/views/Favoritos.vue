@@ -33,23 +33,16 @@
             v-else
             width="1400"
             style="background-color: transparent; margin-top: 2%"
-
+            elevation="0"
         >
           <v-card-title
               class="justify-center"
           >FAVORITOS</v-card-title>
-
-            <v-row>
-              <v-col>
-                <RoutineCard v-for="fav in this.favs3" :key="fav.id" :routine="fav" :can-edit="false" style="margin-bottom: 5%; margin-left: 5%"></RoutineCard>
-              </v-col>
-              <v-col>
-                <RoutineCard v-for="fav in this.favs2" :key="fav.id" :routine="fav" :can-edit="false" style="margin-bottom: 5%; margin-right: 5%"></RoutineCard>
-              </v-col>
-              <v-col>
-                <RoutineCard v-for="fav in this.favs1" :key="fav.id" :routine="fav" :can-edit="false" style="margin-bottom: 5%; margin-right: 5%"></RoutineCard>
-              </v-col>
+            <div>
+            <v-row justify="center">
+              <RoutineCard v-for="fav in this.favs" :key="fav.id" :routine="fav" :can-edit="false" style="margin-bottom: 5%; margin-left: 2%"></RoutineCard>
             </v-row>
+            </div>
           </v-card>
       </v-col>
       <v-spacer></v-spacer>
@@ -68,17 +61,11 @@ export default {
   data: () => ({
     fav_length: null,
     favs: null,
-    favs1: null,
-    favs2: null,
-    favs3: null,
   }),
 
   async created() {
     this.favs = (await FavouritesApi.getRoutinesFav());
     this.fav_length = this.favs.length;
-    this.favs1 = this.favs.slice(0,this.fav_length/3);
-    this.favs2 = this.favs.slice(this.fav_length/3,2*this.fav_length/3);
-    this.favs3 = this.favs.slice(2*this.fav_length/3);
   }
 }
 
