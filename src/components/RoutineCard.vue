@@ -67,6 +67,7 @@
 
 import RoutineStore from "../store/RoutineStore";
 import CreateRoutineStore from "../store/CreateRoutineStore";
+import {FavouritesApi} from "../api/FavouritesApi";
 
 
 export default {
@@ -103,17 +104,26 @@ export default {
     async deleteRoutine(id) {
       await this.store.deleteRoutine(id);
     },
-    addToFavs(routine){
+    async addToFavs(routine) {
       this.isFav = true;
-      //FavouritesApi.addFav(routine.id);
-      console.log(routine.id)
+      await FavouritesApi.addFav(routine.id);
     },
-    removeFavs(routine){
+    async removeFavs(routine) {
       this.isFav = false;
-      //FavouritesApi.removeFav(routine.id);
-      console.log(routine.id);
+      await FavouritesApi.removeFav(routine.id);
+    },
+    async routineIsFav(routine) {
+      let favs = (await FavouritesApi.getRoutinesFav());
+      for (const fav of favs) {
+        if(fav.id === routine.id)
+          return true;
+      }
+      return false;
     }
   },
+  async mounted() {
+    this.isFav = await this.routineIsFav(this.routine);
+  }
 }
 </script>
 export default {}

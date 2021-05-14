@@ -8,7 +8,7 @@ class FavouritesApi {
     }
 
     static async getRoutinesFav(){
-        return await Api.get(`${FavouritesApi.url}`, true);
+        return (await Api.get(`${FavouritesApi.url}`, true)).content;
     }
 
     static async addFav(id){
