@@ -32,7 +32,7 @@ const RoutineStore = {
     },
 
     async getAllRoutines(){
-        return (await ProfileApi.getAllRoutines());
+        return (await ProfileApi.getAllRoutines()).content;
     },
 
     async add(tempRoutine) {

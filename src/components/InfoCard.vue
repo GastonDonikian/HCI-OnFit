@@ -39,6 +39,7 @@
     <v-list-item-title style="margin-top: 10%" class="headline mb-1">{{this.profileStore.userInfo.firstName.toUpperCase()}}
        {{this.profileStore.userInfo.lastName.toUpperCase()}}</v-list-item-title>
     <v-btn
+        v-if="this.routineCount !== 1"
         disabled
         style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
         rounded
@@ -47,9 +48,22 @@
         text
         min-width="240px"
     >
-      X rutinas creadas
+      {{routineCount}} rutinas creadas
     </v-btn>
     <v-btn
+        v-if="this.routineCount === 1"
+        disabled
+        style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
+        rounded
+        dark
+        large
+        text
+        min-width="240px"
+    >
+      {{routineCount}} rutina creada
+    </v-btn>
+    <v-btn
+        v-if="this.exerciseCount !== 1"
         disabled
         style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
         rounded
@@ -58,9 +72,22 @@
         text
         min-width="240px"
     ><!--si  pongo el style abajo no funciona bien-->
-      X trofeos ganados
+      {{this.exerciseCount}} ejercicios creados
     </v-btn>
     <v-btn
+        v-if="this.exerciseCount === 1"
+        disabled
+        style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
+        rounded
+        large
+        dark
+        text
+        min-width="240px"
+    ><!--si  pongo el style abajo no funciona bien-->
+      {{this.exerciseCount}} ejercicio creado
+    </v-btn>
+    <v-btn
+        v-if="this.date !== 1"
         disabled
         style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
         rounded
@@ -69,7 +96,19 @@
         text
         min-width="240px"
     >
-      X días entrenando
+      {{this.date}} días entrenando
+    </v-btn>
+    <v-btn
+        v-if="this.date === 1"
+        disabled
+        style="background-color:#E46271; margin-top: 5%; color: #EBEBEB !important;"
+        rounded
+        large
+        dark
+        text
+        min-width="240px"
+    >
+      {{this.date}} día entrenando
     </v-btn>
   </v-card>
 </template>
@@ -86,7 +125,35 @@ export default {
     return{
       overlaySettings:false,
       profileStore: ProfileStore,
-      zIndexSettings:1
+      zIndexSettings:1,
+      routineCount: null,
+      exerciseCount: null,
+      date: null,
+    }
+  },
+  created() {
+    this.profileStore.getRoutineCount().then((x) => this.funcioncitaMagica(x));
+    this.profileStore.getExerciseCount().then((x) => this.funcioncitaMagica2(x));
+    this.profileStore.readUserInfo().then((x) => this.funcioncitaMagica3(x));
+  },
+  methods : {
+    funcioncitaMagica(x) {
+      this.routineCount = x;
+    },
+    funcioncitaMagica2(x) {
+      this.exerciseCount = x;
+    },
+    funcioncitaMagica3(dateOG) {
+      let dateMilli = Date.now() - dateOG.date;
+      this.date = this.convertMiliseconds(dateMilli);
+    },
+    convertMiliseconds(miliseconds) {
+      var total_hours, total_minutes, total_seconds;
+
+      total_seconds = parseInt(Math.floor(miliseconds / 1000));
+      total_minutes = parseInt(Math.floor(total_seconds / 60));
+      total_hours = parseInt(Math.floor(total_minutes / 60));
+      return parseInt(Math.floor(total_hours / 24));
     }
   }
 }
