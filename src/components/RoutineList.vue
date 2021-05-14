@@ -51,7 +51,6 @@ export default {
       if(this.canEdit){
         routines = (await RoutineStore.getAllRoutines());
       } else
-      //TODO: averiguar como acceder a las routinas privadas del current user
         routines = (await RoutineStore.getAllByCategory());
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
@@ -60,6 +59,7 @@ export default {
       routineArray.push(routines.slice(i));
       return routineArray;
     },
+
     getListSize() {
       if (innerWidth <= 750)
         return 1;
