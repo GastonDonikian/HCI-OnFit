@@ -121,7 +121,7 @@ export default {
     },
     //TODO: no funciona lpm voy a llorar
     async hasEntradaEnCalor() {
-      this.boolHasEntradaEnCalor = ((await this.store.tempRoutine.entradaEnCalor).length ===0);
+      this.boolHasEntradaEnCalor = ((await this.store.tempRoutine.entradaEnCalor).length !==0);
       console.log(this.store.tempRoutine.entradaEnCalor.length ===0)
       console.log(this.boolHasEntradaEnCalor)
       console.log(this.store.tempRoutine.entradaEnCalor.length)

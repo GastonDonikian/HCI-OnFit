@@ -12,9 +12,6 @@
             {{ exercise.name }}
             <v-btn @click="deleteExercise(exercise.id)" depressed style="margin-left: 10px" color="red"
                    fab x-small>
-              <!--              TODO: ¿Porque me tira un unathorized cuando refresheo esta parte y no con Routine?-->
-              <!--              TODO ¿PREGUNTAR COMO HACER ESTO SIN EL PROPERTY NULL, ERROR QUE TIRA-->
-              <!--              TODO: Sacar errores de consola-->
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
           </v-list-item-title>

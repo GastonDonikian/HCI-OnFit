@@ -10,6 +10,7 @@ import ValidarEmail from "../views/ValidarEmail";
 import ViewRoutine from "../views/ViewRoutine";
 import EditAccount from "../views/EditAccount";
 import Favoritos from "../views/Favoritos";
+import InitApi from "../views/InitApi";
 Vue.use(VueRouter)
 
 const routes = [
@@ -57,6 +58,11 @@ const routes = [
     path: '/validarEmail',
     name: 'ValidarEmail',
     component: ValidarEmail
+  },
+  {
+    path: '/initialize',
+    name: 'initialize',
+    component: InitApi
   },
   {
     path: '/EditAccount',
