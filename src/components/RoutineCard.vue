@@ -12,16 +12,16 @@
             width="80"
             color="grey"
         ><v-img
-            v-if="this.getColor() === '7885ff'"
+            v-if="this.routine.category.id === 2"
             src="../assets/Fotopesas.png">
 
         </v-img>
           <v-img
-              v-if="this.getColor() === 'f1b0b8'"
+              v-if="this.routine.category.id === 3"
               src="../assets/FotoRunning.png">
           </v-img>
           <v-img
-              v-if="this.getColor() === 'b495c2'"
+              v-if="this.routine.category.id === 1"
               src="../assets/FotoEnCasa.png">
 
           </v-img>
@@ -136,6 +136,7 @@ export default {
     }
   },
   async mounted() {
+    console.log(this.getColor());
     this.isFav = await this.routineIsFav(this.routine);
   }
 }
