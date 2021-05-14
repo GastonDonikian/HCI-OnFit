@@ -36,7 +36,6 @@ const RoutineStore = {
     },
 
     async add(tempRoutine) {
-        console.log("creando rutina")
         let routine = {
             name: tempRoutine.titulo,
             detail: tempRoutine.detail,
@@ -53,7 +52,6 @@ const RoutineStore = {
     },
 
     async addInfo(routine, tempRoutine){
-        console.log(tempRoutine);
         let entrada = {
             name: "entrada en calor",
             detail: "",
@@ -72,7 +70,6 @@ const RoutineStore = {
             metadata: null,
         }
         await RoutineApi.createCycle(routine.id, principal, null).then(r => CycleApi.addEx(r.id, tempRoutine.principal, null));
-        console.log(tempRoutine.repeticionesPrincipal)
         let elongacion = {
             name: "elongación",
             detail: "",
@@ -97,8 +94,6 @@ const RoutineStore = {
             },
             metadata: null
         }
-        console.log(tempRoutine.detail);
-        console.log()
         await RoutineApi.editRoutine(editRoutine.id, routine);
         bus.$emit('routinechange');
     },
@@ -123,7 +118,7 @@ const RoutineStore = {
     },
 
     findByName(name) {
-        console.log(name)
+
         for (const routine of this.routines) {
             if(routine.titulo === name) {
                 let aux = JSON.parse(JSON.stringify(routine));

@@ -4,12 +4,12 @@ import Home from '../views/Home.vue'
 import LogIn from '../views/LogIn.vue'
 import Rutinas from '../views/Rutinas.vue'
 import Profile from "../views/Profile";
-import Logros from "../views/Logros";
 import Explore from "../views/Explore";
 import RoutineCreator from "../views/RoutineCreator";
 import ValidarEmail from "../views/ValidarEmail";
 import ViewRoutine from "../views/ViewRoutine";
 import EditAccount from "../views/EditAccount";
+import Favoritos from "../views/Favoritos";
 Vue.use(VueRouter)
 
 const routes = [
@@ -44,14 +44,14 @@ const routes = [
     component: Profile
   },
   {
+    path: '/Favoritos',
+    name: 'Favoritos',
+    component: Favoritos,
+  },
+  {
     path: '/RoutineCreator',
     name: 'RoutineCreator',
     component: RoutineCreator
-  },
-  {
-    path: '/Logros',
-    name: 'Logros',
-    component: Logros
   },
   {
     path: '/validarEmail',

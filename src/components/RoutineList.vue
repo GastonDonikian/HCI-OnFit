@@ -44,7 +44,6 @@ export default {
       let routines = {type: Object};
       if(this.canEdit){
         routines = (await RoutineStore.getAllRoutines());
-        console.log(routines);
       } else
       //TODO: averiguar como acceder a las routinas privadas del current user
         routines = (await RoutineStore.getAllByCategory());

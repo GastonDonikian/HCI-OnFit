@@ -68,7 +68,6 @@ export default {
       this.profileStore.deleteAccount();
     },
     editAvatar() {
-      console.log(this.profileStore.userInfo.firstName);
       window.location.href='/#/EditAccount';
     },
   }
