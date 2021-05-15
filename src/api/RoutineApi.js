@@ -9,7 +9,7 @@ class RoutineApi {
     }
 
     static async getAllPublicRoutines(controller) {
-        return (await Api.get(`${RoutineApi.url}`, true, controller)).content;
+        return (await Api.get(`${RoutineApi.url}?page=0&size=1000&orderBy=averageRating&direction=desc`, true, controller)).content;
     }
 
     static async getRoutine(id){
