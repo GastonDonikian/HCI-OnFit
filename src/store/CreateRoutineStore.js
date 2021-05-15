@@ -50,6 +50,7 @@ const CreateRoutineStore = {
     },
 
     editRoutine() {
+        this.setDisciplina(this.tempRoutine.disciplina);
         RoutineStore.edit(this.tempRoutine);
     },
 
@@ -167,7 +168,7 @@ const CreateRoutineStore = {
             }
         }
         this.tempRoutine.isPublic = routine.isPublic;
-        this.tempRoutine.category = routine.category;
+        this.tempRoutine.category.id = routine.category;
     },
 
     activate(seccion) {

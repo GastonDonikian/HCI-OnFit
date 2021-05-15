@@ -105,9 +105,7 @@ const RoutineStore = {
             detail: tempRoutine.detail,
             isPublic: tempRoutine.isPublic,
             difficulty: "rookie",
-            category: {
-                id: 2,
-            },
+            category: tempRoutine.category,
             metadata: null
         }
         await RoutineApi.editRoutine(editRoutine.id, routine);

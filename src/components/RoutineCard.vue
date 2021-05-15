@@ -102,9 +102,9 @@ export default {
       this.storeCreate.cargarTemp(routine);
       window.location.href = '/#/ViewRoutine';
     },
-    buscarRutina(routine) {
+    async buscarRutina(routine) {
       this.storeCreate.edit = true;
-      this.storeCreate.cargarTemp(routine);
+      await this.storeCreate.cargarTemp(routine);
       window.location.href = '/#/RoutineCreator'
     },
     getRutineRaiting(routine){
