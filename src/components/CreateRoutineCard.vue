@@ -91,6 +91,7 @@
                 :ejercicio="exercise" :category="'elongación'" :number="index"></ExBanner>
       <AddExToRoutine seccion="elongacion"></AddExToRoutine>
       <v-btn right color="success" @click="this.finalizeRoutine" style="margin-top: 5%; margin-left: 2.5%">Aceptar</v-btn>
+      <v-btn left color="red" text style="margin-top: 5%; margin-left: 2.5%" :to="'/Rutinas'">Cancelar</v-btn>
     </v-card>
   </div>
 </template>
