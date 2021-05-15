@@ -2,7 +2,6 @@ import {CategoryApi} from "../api/CategoryApi";
 
 const InitStore = {
     async createCategories() {
-        console.log('Cree las categories');
         let enCasa = {
             name: "En Casa",
             detail: "en casa",
