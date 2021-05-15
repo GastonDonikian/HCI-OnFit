@@ -121,6 +121,7 @@ export default {
       await this.store.addExercise(this.name, this.detail, this.repetitions, this.duration);
       if(this.store.repeatedName){
           this.repeatedExName = true;
+          return;
       }
       else{
         this.repeatedExName = false;
