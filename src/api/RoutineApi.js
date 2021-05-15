@@ -8,10 +8,21 @@ class RoutineApi {
         return `${Api.baseUrl}/routines`;
     }
 
-    static async getPublicRoutines(controller) {
+    static async getAllPublicRoutines(controller) {
         return (await Api.get(`${RoutineApi.url}`, true, controller)).content;
     }
 
+    static async getPesasRotines(){
+        return (await Api.get(`${RoutineApi.url}?categoryId=2`, true, null)).content;
+    }
+
+    static async getRunningRotines(){
+        return (await Api.get(`${RoutineApi.url}?categoryId=3`, true, null)).content;
+    }
+
+    static async getCasaRotines(){
+        return (await Api.get(`${RoutineApi.url}?categoryId=1`, true, null)).content;
+    }
 
     static async createRoutine(routine, controller){
         /*TIENE QUE SER DE LA

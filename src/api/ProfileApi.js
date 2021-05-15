@@ -19,11 +19,14 @@ class ProfileApi {
         return await Api.post(`${ProfileApi.url}/logout`, true, null, null);
     }
 
-    static async getAllRoutines(){
+    static async getUserRoutines(){
         return (await Api.get(`${ProfileApi.url}/current/routines/`, true));
     }
 
     static async modifyAccount(userInfo) {
         return await Api.put(`${ProfileApi.url}/current`, true, userInfo, null);
+    }
+    static async getAllRoutines(){
+        return (await Api.get(`${ProfileApi.url}/current/routines/`, true));
     }
 }
