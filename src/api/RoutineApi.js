@@ -9,28 +9,26 @@ class RoutineApi {
     }
 
     static async getAllPublicRoutines(controller) {
-        return (await Api.get(`${RoutineApi.url}?page=0&size=1000&orderBy=id&direction=asc`, true, controller)).content;
+        return (await Api.get(`${RoutineApi.url}`, true, controller)).content;
     }
 
-    static async getAllPublicRoutinesCount() {
-        let aux = await (await this.getAllPublicRoutines(null)).length;
-        console.log(aux);
-        return (await aux);
+    static async getRoutine(id){
+        return (await  Api.get(`${RoutineApi.url}/${id}`,true, null));
     }
 
-    static async getPesasRotines() {
+    static async getPesasRotines(){
         return (await Api.get(`${RoutineApi.url}?categoryId=2`, true, null)).content;
     }
 
-    static async getRunningRotines() {
+    static async getRunningRotines(){
         return (await Api.get(`${RoutineApi.url}?categoryId=3`, true, null)).content;
     }
 
-    static async getCasaRotines() {
+    static async getCasaRotines(){
         return (await Api.get(`${RoutineApi.url}?categoryId=1`, true, null)).content;
     }
 
-    static async createRoutine(routine, controller) {
+    static async createRoutine(routine, controller){
         /*TIENE QUE SER DE LA
         * FORMA
         * {
@@ -43,14 +41,14 @@ class RoutineApi {
         *   }
         *   metadata: null
         * }*/
-        return await (Api.post(`${RoutineApi.url}`, true, routine, controller))
+        return await (Api.post(`${RoutineApi.url}`, true,routine, controller))
     }
 
-    static async deleteRoutine(id, controller) {
-        return (await Api.delete(`${RoutineApi.url}/${id}`, true, controller));
+    static async deleteRoutine(id,controller){
+        return  (await Api.delete(`${RoutineApi.url}/${id}`,true,controller));
     }
 
-    static async createCycle(id, cycle, controller) {
+    static async createCycle(id, cycle, controller){
         /*TIENE QUE SER DE LA
         * FORMA
         * {
@@ -64,15 +62,16 @@ class RoutineApi {
         return (await Api.post(`${RoutineApi.url}/${id}/cycles`, true, cycle, controller));
     }
 
-    static async retriveCycles(id, deleteR) {
-        if (deleteR) {
+    static async retriveCycles(id, deleteR){
+        if(deleteR){
             await Api.get(`${RoutineApi.url}/${id}/cycles`, true, null).then((r) => CycleApi.deleteCycles(id, r.content));
-        } else {
+        }
+        else {
             return (await Api.get(`${RoutineApi.url}/${id}/cycles`, true, null));
         }
     }
 
-    static async editRoutine(id, routine) {
+    static async editRoutine(id, routine){
         await Api.put(`${RoutineApi.url}/${id}`, true, routine)
     }
 

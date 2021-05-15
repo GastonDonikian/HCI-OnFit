@@ -15,6 +15,7 @@ const LoginStore = {
     connect:false,
     found:true,
     repeatedMail: false,
+    rememberMe: false,
     isLogged() {
         // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
@@ -130,8 +131,8 @@ const LoginStore = {
         this.userName = data.split("|")[0];
         this.userPassword = data.split("|")[1];
     },
-    save() {
-        localStorage.setItem('item', this.userName + "|" + this.userPassword);
+    save(user, password) {
+        localStorage.setItem('user', user+' '+password);
     }
 }
 

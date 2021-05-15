@@ -2,8 +2,19 @@
   <div>
     <v-card width="500px" color="#EBEBEB" class="principalRutina">
       <v-col style="padding-left: 5%; padding-top: 5%; padding-bottom: 5%">
-        <v-row>
-          <h2 style="font-weight: bold">{{ this.store.tempRoutine.titulo.toUpperCase() }}</h2>
+        <v-row  style="margin-bottom: -5%">
+          <v-col>
+          <h2 style="font-weight: bold" align="left">{{ this.store.tempRoutine.titulo.toUpperCase() }}</h2>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col>
+            <v-rating
+            v-model="average"
+            background-color="black"
+            color="black"
+            small>
+            </v-rating>
+          </v-col>
         </v-row>
         <v-row>
           <h4 style="color: #E46271; font-weight: normal">Categoría: </h4>
@@ -115,8 +126,8 @@ export default {
   name: "VerRutina",
   data() {
     return{
+      average: 0,
       store: CreateRoutineStore,
-      boolHasEntradaEnCalor:true,
     }
   },
   methods: {
@@ -131,20 +142,12 @@ export default {
       } else
         return "Running";
     },
-    //TODO: no funciona lpm voy a llorar
-    async hasEntradaEnCalor() {
-      this.boolHasEntradaEnCalor = ((await this.store.tempRoutine.entradaEnCalor).length !==0);
-      console.log(this.store.tempRoutine.entradaEnCalor.length ===0)
-      console.log(this.boolHasEntradaEnCalor)
-      console.log(this.store.tempRoutine.entradaEnCalor.length)
-      console.log(this.store.tempRoutine.entradaEnCalor)
-    },
-    destroyed() {
-      this.store.vaciarTemp();
-    }
   },
-  created() {
-    this.hasEntradaEnCalor();
+  async destroyed() {
+    if(this.average!==0) {
+      await this.store.voteRaiting(this.store.rutineAEditar.id, this.average);
+    }
+    this.store.vaciarTemp();
   }
 }
 </script>

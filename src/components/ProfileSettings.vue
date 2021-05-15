@@ -65,6 +65,8 @@ export default {
     },
     deleteAccount() {
       window.location.href = '/#/Home';
+      localStorage.removeItem('user');
+      LoginStore.closeSession();
       this.profileStore.deleteAccount();
     },
     editAvatar() {
