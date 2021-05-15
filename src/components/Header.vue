@@ -4,7 +4,9 @@
       color="rgb(87, 71, 255)"
       max-height="128px"
       app fixed>
-    <v-img max-height="120px" max-width="120px" src="../assets/logoOnFit.png"/>
+    <v-btn @click="goToRoutine()" text max-height="120px" max-width="120px">
+    <v-img max-height="120px" max-width="120px" src="../assets/logoOnFit.png" />
+    </v-btn>
     <v-tabs class="white--text" v-if="!store.isLogged()">
       <v-tab class="white--text" v-for="tab in tabsLoggedOut" v-bind:key="tab.name" :to="tab.route">
         {{ tab.name }}
@@ -64,6 +66,9 @@ export default {
     },
     iniciarSesion() {
       window.location.href = '/#/LogIn';
+    },
+    goToRoutine(){
+      window.location.href = '/#/Rutinas';
     }
   },
 };

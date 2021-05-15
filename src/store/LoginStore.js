@@ -26,7 +26,6 @@ const LoginStore = {
             alert(error.code + ' error: ' + error.description);
         }
         this.loggedIn = false;
-        localStorage.clear();
     },
     setUserName(userName) {
         this.userName = userName;
@@ -52,7 +51,7 @@ const LoginStore = {
         try {
             (await LoginApi.login({username: username, password: password}, null));
         } catch (Error) {
-            if (Error.code === 4) { //password y contrasenia mal
+            if (Error.code === 4) { //password y contraseña mal
                 this.correctData = false;
             }
             if(Error.code === 8){ //no estas authorized

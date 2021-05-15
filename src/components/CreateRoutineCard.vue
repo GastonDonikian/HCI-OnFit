@@ -64,7 +64,7 @@
         </v-col>
         <p v-if="this.store.errorEntradaEnCalor" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en Entrada en calor</p>
       </v-row>
-      <ExBanner v-for="(exercise,index) in store.tempRoutine.entradaEnCalor" :key="(exercise.id,category.id,index)"
+      <ExBanner v-for="(exercise,index) in store.tempRoutine.entradaEnCalor" :key="(exercise.id,category.id)"
                 :ejercicio="exercise" :category="'entrada'" :number="index"></ExBanner>
       <AddExToRoutine seccion="entradaEnCalor"></AddExToRoutine>
       <v-row align="center">
@@ -76,7 +76,7 @@
         </v-col>
       </v-row>
       <p v-if="this.store.errorPrincipal" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en Principal</p>
-      <ExBanner v-for="(exercise,index) in store.tempRoutine.principal" :key="(exercise.id,category.id,index)"
+      <ExBanner v-for="(exercise,index) in store.tempRoutine.principal" :key="(exercise.id,category.id)"
                 :ejercicio="exercise" :category="'principal'" :number="index"></ExBanner>
       <AddExToRoutine seccion="principal"></AddExToRoutine>
       <v-row align="center">
@@ -87,7 +87,7 @@
           <MinusPlusField seccion="elongacion"></MinusPlusField>
         </v-col>
       </v-row> <p v-if="this.store.errorElongar" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en Elongación</p>
-      <ExBanner v-for="(exercise,index) in store.tempRoutine.elongacion" :key="(exercise.id,category.id,index)"
+      <ExBanner v-for="(exercise,index) in store.tempRoutine.elongacion" :key="(exercise.id,category.id)"
                 :ejercicio="exercise" :category="'elongación'" :number="index"></ExBanner>
       <AddExToRoutine seccion="elongacion"></AddExToRoutine>
       <v-btn right color="success" @click="this.finalizeRoutine" style="margin-top: 5%; margin-left: 2.5%">Aceptar</v-btn>
