@@ -9,7 +9,7 @@
               label="Nombre"
               color="#E46271"
               style="padding-left: 5%; padding-right: 2%; display: inline-block"
-              ></v-text-field>
+          ></v-text-field>
           <v-icon
               style="color: #E46271"
           >mdi-square-edit-outline
@@ -36,7 +36,7 @@
           <v-switch
               v-model="store.tempRoutine.isPublic"
               inset
-              color="#E46271"
+              color="#5767FF"
           >
             <template #prepend>
               <v-label>Público:</v-label>
@@ -44,7 +44,7 @@
           </v-switch>
         </v-col>
       </v-row>
-      <v-row justify="center" style="margin: 0 5px 0 5px" >
+      <v-row justify="center" style="margin: 0 5px 0 5px">
         <v-col>
           <v-textarea
               label="Descripción"
@@ -62,7 +62,8 @@
         <v-col align="center">
           <MinusPlusField seccion="entradaEnCalor"></MinusPlusField>
         </v-col>
-        <p v-if="this.store.errorEntradaEnCalor" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en Entrada en calor</p>
+        <p v-if="this.store.errorEntradaEnCalor" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en
+          Entrada en calor</p>
       </v-row>
       <ExBanner v-for="(exercise,index) in store.tempRoutine.entradaEnCalor" :key="(exercise.id,category.id)"
                 :ejercicio="exercise" :category="'entrada'" :number="index"></ExBanner>
@@ -75,7 +76,8 @@
           <MinusPlusField seccion="principal"></MinusPlusField>
         </v-col>
       </v-row>
-      <p v-if="this.store.errorPrincipal" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en Principal</p>
+      <p v-if="this.store.errorPrincipal" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en
+        Principal</p>
       <ExBanner v-for="(exercise,index) in store.tempRoutine.principal" :key="(exercise.id,category.id)"
                 :ejercicio="exercise" :category="'principal'" :number="index"></ExBanner>
       <AddExToRoutine seccion="principal"></AddExToRoutine>
@@ -86,11 +88,14 @@
         <v-col align="center">
           <MinusPlusField seccion="elongacion"></MinusPlusField>
         </v-col>
-      </v-row> <p v-if="this.store.errorElongar" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en Elongación</p>
+      </v-row>
+      <p v-if="this.store.errorElongar" style="color: red; padding-left: 5%">Este ejercicio ya se encuentra en
+        Elongación</p>
       <ExBanner v-for="(exercise,index) in store.tempRoutine.elongacion" :key="(exercise.id,category.id)"
                 :ejercicio="exercise" :category="'elongación'" :number="index"></ExBanner>
       <AddExToRoutine seccion="elongacion"></AddExToRoutine>
-      <v-btn right color="success" @click="this.finalizeRoutine" style="margin-top: 5%; margin-left: 2.5%">Aceptar</v-btn>
+      <v-btn right color="success" @click="this.finalizeRoutine" style="margin-top: 5%; margin-left: 2.5%">Aceptar
+      </v-btn>
       <v-btn left color="red" text style="margin-top: 5%; margin-left: 2.5%" :to="'/Rutinas'">Cancelar</v-btn>
     </v-card>
   </div>
@@ -105,7 +110,7 @@ import CreateRoutineStore from "../store/CreateRoutineStore";
 export default {
   name: "CreateRoutineCard",
   components: {ExBanner, AddExToRoutine, MinusPlusField},
-  props:{
+  props: {
     rutina: {type: Object},
   },
   data: () => ({
@@ -115,7 +120,7 @@ export default {
     isPublic: "",
     error_name_too_long: false,
     error_name_empty: false,
-    error_category_empty:false,
+    error_category_empty: false,
     repeticionesEntradaEnCalor: 1,
     repeticionesPrincipal: 1,
     repeticionesElongacion: 1,
@@ -126,7 +131,7 @@ export default {
     ]
   }),
   created() {
-    if(!this.store.edit)
+    if (!this.store.edit)
       this.store.vaciarTemp();
   },
   destroyed() {
@@ -135,9 +140,9 @@ export default {
 
   methods: {
     finalizeRoutine() {
-      this.error_name_too_long= false;
-      this.error_name_empty= false;
-      this.error_category_empty=false;
+      this.error_name_too_long = false;
+      this.error_name_empty = false;
+      this.error_category_empty = false;
       // Validaciones del input "nombre"
       if (this.store.tempRoutine.titulo.length > 15) {
         this.error_name_too_long = true;
@@ -149,14 +154,13 @@ export default {
         this.error_name_too_long = false;
         return;
       }
-      if(this.store.tempRoutine.disciplina===null){
+      if (this.store.tempRoutine.disciplina === null) {
         this.error_category_empty = true;
         return;
       }
-      if(!this.store.edit){
+      if (!this.store.edit) {
         this.store.addRoutine();
-      }
-      else
+      } else
         this.store.editRoutine();
       window.location.href = '/#/Rutinas'
     },

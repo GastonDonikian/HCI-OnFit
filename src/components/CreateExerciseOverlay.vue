@@ -88,21 +88,9 @@ export default {
   methods: {
 
     validations() {
-      if (this.name === "") {
-        this.error_nombre = true;
-      } else {
-        this.error_nombre = false;
-      }
-      if (this.name.length > 15) {
-        this.error_nombre_largo = true;
-      } else {
-        this.error_nombre_largo = false;
-      }
-      if (this.duration==="" && this.repetitions==="") {
-        this.error_repe_dur = true;
-      } else {
-        this.error_repe_dur = false;
-      }
+      this.error_nombre = this.name === "";
+      this.error_nombre_largo = this.name.length > 15;
+      this.error_repe_dur = this.duration === "" && this.repetitions === "";
       if (this.repetitions !=="" && this.duration !=="") {
         this.error_repe_dur_2 = true;
         this.duration = "";

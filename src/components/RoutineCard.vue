@@ -7,14 +7,15 @@
     >
       <v-list-item three-line>
         <v-list-item-avatar class="imageCard"
-            rounded
-            height="150"
-            width="80"
-            color="grey"
-        ><v-img
-            v-if="this.routine.category.id === 2"
-            src="../assets/Fotopesas.png">
-        </v-img>
+                            rounded
+                            height="150"
+                            width="80"
+                            color="grey"
+        >
+          <v-img
+              v-if="this.routine.category.id === 2"
+              src="../assets/Fotopesas.png">
+          </v-img>
           <v-img
               v-if="this.routine.category.id === 3"
               src="../assets/FotoRunning.png">
@@ -27,10 +28,20 @@
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">
             {{ routine.name }}
-            <v-btn v-if="this.canEdit" @click="deleteRoutine(routine.id)" depressed style="margin-left: 10px" color="red"
+            <v-btn v-if="this.canEdit"  @click="deleteRoutine(routine.id)" depressed style="margin-left: 10px"
+                   color="red"
                    fab x-small>
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
+            <v-avatar v-else style="margin-left: 100px;border-color: grey;"
+                      size="50">
+              <img v-if="routine.user.avatarUrl.length !== 0"
+                  :src="routine.user.avatarUrl"
+              />
+              <v-icon v-else color="white" size="50">
+                mdi-account-circle
+              </v-icon>
+            </v-avatar>
           </v-list-item-title>
           <v-list-item-subtitle class="black--text">{{ routine.detail }}</v-list-item-subtitle>
           <v-rating
@@ -94,7 +105,7 @@ export default {
     average: null,
   }),
   methods: {
-    getColor(){
+    getColor() {
       return this.store.getColor(this.routine)
     },
     toView(routine) {
@@ -107,7 +118,7 @@ export default {
       await this.storeCreate.cargarTemp(routine);
       window.location.href = '/#/RoutineCreator'
     },
-    getRutineRaiting(routine){
+    getRutineRaiting(routine) {
       return this.store.getRoutineAverageRating(routine);
     },
     async deleteRoutine(id) {
@@ -124,7 +135,7 @@ export default {
     async routineIsFav(routine) {
       let favs = (await FavouritesApi.getRoutinesFav());
       for (const fav of favs) {
-        if(fav.id === routine.id)
+        if (fav.id === routine.id)
           return true;
       }
       return false;
