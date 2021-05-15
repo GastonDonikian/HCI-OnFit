@@ -28,16 +28,14 @@ const CreateRoutineStore = {
     },
     setDisciplina(disciplina) {
         if (disciplina === "Pesas") {
-            this.tempRoutine.category.id=2;
+            this.tempRoutine.category.id = 2;
             this.tempRoutine.disciplina = RutinasEnum.Pesas;
-        }
-        else if (disciplina === "Running") {
+        } else if (disciplina === "Running") {
             this.tempRoutine.category.id = 3;
             this.tempRoutine.disciplina = RutinasEnum.Running;
 
-        }
-        else{
-            this.tempRoutine.category.id=1;
+        } else {
+            this.tempRoutine.category.id = 1;
             this.tempRoutine.disciplina = RutinasEnum.EnCasa;
         }
     },
@@ -61,88 +59,75 @@ const CreateRoutineStore = {
     },
 
     //TODO: ver como eliminar del temp los ejercicios cuando estoy creando la rutina
-    remove(id, category){
-        if(category === 'principal'){
-            this.removePrin(id);
-        }
-        else if( category === 'elongación'){
+    remove(id, category, number) {
+        if (category === 'principal') {
+            this.removePrin(id, number);
+        } else if (category === 'elongación') {
             this.removeElon(id)
-        }
-        this.removeEntrada();
+        } else
+            this.removeEntrada();
     },
 
 
-    removePrin(id){
-        for(let i = 0; i < this.tempRoutine.principal.length; i++){
-            if ( this.tempRoutine.principal[i] === id) {
-                this.tempRoutine.principal.splice(i, 1);
-            }
-        }
+    removePrin(id, number) {
+        this.tempRoutine.principal.splice(number, 1);
     },
 
-    removeElon(id){
-        function deleteId(num) {
-            return num !== id
-        }
-        this.tempRoutine.elongacion = this.tempRoutine.elongacion.filter(deleteId);
+    removeElon(id, number) {
+        this.tempRoutine.elongacion.splice(number, 1);
     },
 
-    removeEntrada(id){
-        function deleteId(num) {
-            return num === id
-        }
-        this.tempRoutine.entradaEnCalor = this.tempRoutine.entradaEnCalor.filter(deleteId);
+    removeEntrada(id, number) {
+        this.tempRoutine.entradaEnCalor.splice(number, 1);
     },
 
-    vaciarTemp(){
+    vaciarTemp() {
         this.tempRoutine.titulo = "";
-        this.tempRoutine.detail= "";
+        this.tempRoutine.detail = "";
         this.popup = false;
-        this.tempRoutine.estrellas= null;
-        this.tempRoutine.disciplina= null;
-        this.tempRoutine.repeticionesEntradaEnCalor= 1;
-        this.tempRoutine.repeticionesPrincipal= 1;
-        this.tempRoutine.repeticionesElongacion= 1;
-        this.tempRoutine.isPublic= false;
-        this.tempRoutine.category= {
+        this.tempRoutine.estrellas = null;
+        this.tempRoutine.disciplina = null;
+        this.tempRoutine.repeticionesEntradaEnCalor = 1;
+        this.tempRoutine.repeticionesPrincipal = 1;
+        this.tempRoutine.repeticionesElongacion = 1;
+        this.tempRoutine.isPublic = false;
+        this.tempRoutine.category = {
             id: null,
             name: "",
             detail: null,
         };
-        this.tempRoutine.entradaEnCalor= [];
-        this.tempRoutine.principal= [];
-        this.tempRoutine.elongacion= [];
+        this.tempRoutine.entradaEnCalor = [];
+        this.tempRoutine.principal = [];
+        this.tempRoutine.elongacion = [];
         this.edit = false;
     },
 
-    async cargarTemp(routine){
+    async cargarTemp(routine) {
         this.rutineAEditar = routine;
         this.tempRoutine.titulo = routine.name;
-        this.tempRoutine.detail= routine.detail;
-        this.tempRoutine.estrellas= null;
-        this.tempRoutine.disciplina= null;
-        this.tempRoutine.entradaEnCalor= [];
-        this.tempRoutine.principal= [];
-        this.tempRoutine.elongacion= [];
+        this.tempRoutine.detail = routine.detail;
+        this.tempRoutine.estrellas = null;
+        this.tempRoutine.disciplina = null;
+        this.tempRoutine.entradaEnCalor = [];
+        this.tempRoutine.principal = [];
+        this.tempRoutine.elongacion = [];
         let cycles = (await RoutineApi.retriveCycles(routine.id, false)).content;
         for (const cycle of cycles) {
-            if(cycle.type === "warmup"){
+            if (cycle.type === "warmup") {
                 this.tempRoutine.repeticionesEntradaEnCalor = cycle.repetitions;
                 let warmup = (await CycleApi.retrieveCycle(cycle.id)).content;
                 for (const warmupElement of warmup) {
                     this.currentSeccion = "entradaEnCalor";
                     this.addExercise(warmupElement.exercise);
                 }
-            }
-            else if(cycle.type === "exercise"){
+            } else if (cycle.type === "exercise") {
                 this.tempRoutine.repeticionesPrincipal = cycle.repetitions;
                 let principal = (await CycleApi.retrieveCycle(cycle.id)).content;
                 for (const prinElement of principal) {
                     this.currentSeccion = "principal";
                     this.addExercise(prinElement.exercise);
                 }
-            }
-            else {
+            } else {
                 this.tempRoutine.repeticionesElongacion = cycle.repetitions;
                 let cool = (await CycleApi.retrieveCycle(cycle.id)).content;
                 for (const coolElement of cool) {
@@ -151,8 +136,8 @@ const CreateRoutineStore = {
                 }
             }
         }
-        this.tempRoutine.isPublic= routine.isPublic;
-        this.tempRoutine.category= routine.category;
+        this.tempRoutine.isPublic = routine.isPublic;
+        this.tempRoutine.category = routine.category;
     },
 
     activate(seccion) {

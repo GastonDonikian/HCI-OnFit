@@ -65,7 +65,6 @@ export default {
       await this.store.validateEmail(this.email, this.code);
       if(this.store.connect){
         this.store.loggedIn=true;
-        //await this.store.createCategories();
         await this.store.startSession(this.store.username, this.store.password);
         window.location.href = '/#/Rutinas'
         return;
