@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top: 20px; margin-left: 60px">
-    <v-card width="600px" min-height="500px" style="color: #EBEBEB; padding-bottom: 20px">
+    <v-card width="600px" height="625px" style="color: #EBEBEB; padding-bottom: 20px; overflow-y: scroll; overflow-x: hidden; position: fixed">
       <v-row style="padding-top: 10px; padding-bottom: 20px">
         <h3 style="color: black;display: inline;margin-top: 20px ;padding-left: 5%">EJERCICIOS</h3>
         <v-btn style="margin-top: 15px ;margin-left: 350px" color="warning" @click="storeR.deactivate()">Salir</v-btn>

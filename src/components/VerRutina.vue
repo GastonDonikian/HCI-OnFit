@@ -4,7 +4,7 @@
       <v-col style="padding-left: 5%; padding-top: 5%; padding-bottom: 5%">
         <v-row  style="margin-bottom: -5%">
           <v-col>
-          <h2 style="font-weight: bold" align="left">{{this.store.tempRoutine.titulo.toUpperCase()}}</h2>
+          <h2 style="font-weight: bold; text-align: left" >{{this.store.tempRoutine.titulo.toUpperCase()}}</h2>
           </v-col>
           <v-spacer></v-spacer>
           <v-col>
@@ -24,7 +24,7 @@
         <v-row>
           <h4 style="color: #E46271; font-weight: normal">Descripción: </h4>
           <h4 style="width: 10px"></h4>
-          <h4 style="font-weight: normal"> {{ this.store.tempRoutine.detail }}</h4>
+          <h4 style="font-weight: normal; text-align: left"> {{ this.store.tempRoutine.detail }}</h4>
         </v-row>
         <v-row>
           <v-card
