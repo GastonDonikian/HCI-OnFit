@@ -6,7 +6,7 @@
           <v-col v-for="routine in routines" :key="routine.id">
             <RoutineCard style="margin-bottom: 10px"
                          v-bind:routine="routine"
-                          :can-edit="canEdit.valueOf()"/>
+                         :can-edit="canEdit.valueOf()"/>
           </v-col>
           <v-col>
             <PlusCard></PlusCard>
@@ -28,7 +28,7 @@ import PlusCard from "./PlusCard";
 export default {
   name: "RoutineList",
   components: {PlusCard, RoutineCard},
-  showPlus:true,
+  showPlus: true,
   props: {
     category: null,
     canEdit: null,
@@ -47,7 +47,7 @@ export default {
       let i;
       let routineArray = [];
       let routines = {type: Object};
-      if(this.canEdit){
+      if (this.canEdit) {
         routines = (await RoutineStore.getUserRoutines());
       } else
         routines = (await RoutineStore.getAllPublicRoutines());
@@ -66,7 +66,9 @@ export default {
         return 2;
       if (innerWidth <= 1400)
         return 3;
-      return 4;
+      if (innerWidth <= 1750)
+        return 4;
+      return 5;
     },
     async onResize() {
       this.routineArray = await this.getDisplayRoutine();
