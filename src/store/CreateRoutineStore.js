@@ -51,13 +51,32 @@ const CreateRoutineStore = {
         RoutineStore.edit(this.tempRoutine);
     },
 
+    //TODO: agrtegar para que muestre el error
     addExercise(exercise) {
-        if (this.currentSeccion === "entradaEnCalor")
+        if (this.currentSeccion === "entradaEnCalor") {
+            for (const ex of this.tempRoutine.entradaEnCalor) {
+                if(ex.id === exercise.id){
+                    return;
+                }
+            }
             this.tempRoutine.entradaEnCalor.push(exercise);
-        else if (this.currentSeccion === "principal")
+        }
+        else if (this.currentSeccion === "principal") {
+            for (const ex of this.tempRoutine.principal) {
+                if(ex.id === exercise.id){
+                    return;
+                }
+            }
             this.tempRoutine.principal.push(exercise);
-        else
+        }
+        else {
+            for (const ex of this.tempRoutine.elongacion) {
+                if(ex.id === exercise.id){
+                    return;
+                }
+            }
             this.tempRoutine.elongacion.push(exercise);
+        }
     },
 
     //TODO: ver como eliminar del temp los ejercicios cuando estoy creando la rutina
