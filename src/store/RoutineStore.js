@@ -7,29 +7,12 @@ import {ProfileApi} from "../api/ProfileApi";
 
 const RoutineStore = {
     currentRoutine: -1,
-    routines: [{
-
-        name: "Rutina 1",
-        detail: "Rutina de entrenamiento partido",
-        averageRating: 4,
-        user: {
-            username: "Gaston Donikian",
-            gender: "male",
-            avatarUrl: "https://flic.kr/p/3ntH2u",
-            date: "",
-            lastActivity: ""
-        },
-        category: {
-            id: 1,
-            name: "Pesas",
-            detail: null
-        },
-        metadata: null,
-    }],
-
     async getAllPublicRoutines() {
         return (await RoutineApi.getAllPublicRoutines(null));
     },
+
+
+
 
     async getPesasRoutines() {
         return (await RoutineApi.getPesasRotines());
@@ -43,7 +26,7 @@ const RoutineStore = {
         return (await RoutineApi.getRunningRotines());
     },
 
-    async getUserRoutines(){
+    async getUserRoutines() {
         return (await ProfileApi.getUserRoutines()).content;
     },
 
@@ -58,10 +41,11 @@ const RoutineStore = {
         }
         let currentRoutine = await RoutineApi.createRoutine(routine, null);
         await this.addInfo(currentRoutine, tempRoutine);
+        this.routineSize += 1;
         bus.$emit('routinechange');
     },
 
-    async addInfo(routine, tempRoutine){
+    async addInfo(routine, tempRoutine) {
         let entrada = {
             name: "entrada en calor",
             detail: "",
@@ -111,12 +95,13 @@ const RoutineStore = {
     async deleteRoutine(id) {
         await RoutineApi.retriveCycles(id, true);
         await RoutineApi.deleteRoutine(id, null);
+        this.routineSize -= 1;
         bus.$emit('routinechange');
     },
 
-    findIx(name){
+    findIx(name) {
         for (let i = 0; i < this.routines.length; i++) {
-            if(this.routines[i].titulo === name) {
+            if (this.routines[i].titulo === name) {
                 this.currentRoutine = i;
             }
         }
@@ -131,7 +116,7 @@ const RoutineStore = {
     findByName(name) {
 
         for (const routine of this.routines) {
-            if(routine.titulo === name) {
+            if (routine.titulo === name) {
                 let aux = JSON.parse(JSON.stringify(routine));
                 this.remove(routine)
                 return aux;
@@ -157,7 +142,7 @@ const RoutineStore = {
     //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.Destacados);
     //     return this.routines;
     // }
-    async getAllRoutines(){
+    async getAllRoutines() {
         return (await ProfileApi.getAllRoutines()).content;
     },
 }

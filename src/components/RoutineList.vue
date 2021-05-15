@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-carousel hide-delimiters height="200px">
+    <PlusCard v-if="this.showPlus"/>
+    <v-carousel v-else hide-delimiters height="200px">
       <v-carousel-item v-for="routines in this.routineArray" :key="routines.id">
         <v-row>
           <v-col v-for="routine in routines" :key="routine.id">
@@ -11,6 +12,7 @@
         </v-row>
       </v-carousel-item>
     </v-carousel>
+
   </div>
 </template>
 
@@ -19,18 +21,19 @@
 import RoutineCard from "./RoutineCard";
 import RoutineStore from "../store/RoutineStore";
 import {bus} from "../main";
+import PlusCard from "./PlusCard";
 
 
 export default {
   name: "RoutineList",
-  components: {RoutineCard},
-  showPlus:true,
+  components: {PlusCard, RoutineCard},
   props: {
     category: null,
     canEdit: null,
   },
   data: function () {
     return {
+      showPlus:true,
       store: RoutineStore,
       routineArray: [],
     }
@@ -39,11 +42,6 @@ export default {
     this.routineArray = await this.getDisplayRoutine();
   },
   methods: {
-    async getRutineSize(){
-      console.log((await this.store.getAllRoutines()).length === 0)
-      if((await this.store.getAllRoutines()).length === 0)
-        this.showPlus = false;
-    },
     async getDisplayRoutine() {
       let i;
       let routineArray = [];
@@ -71,9 +69,11 @@ export default {
     },
     async onResize() {
       this.routineArray = await this.getDisplayRoutine();
+      this.showPlus = (await this.store.getUserRoutinesCount()) < 1;
     },
     async onChange() {
       this.routineArray = await this.getDisplayRoutine();
+      this.showPlus = (await this.store.getUserRoutinesCount()) < 1;
     }
   },
   mounted() {
