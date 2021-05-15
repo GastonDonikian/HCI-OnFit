@@ -12,6 +12,10 @@ class RoutineApi {
         return (await Api.get(`${RoutineApi.url}`, true, controller)).content;
     }
 
+    static async getRoutine(id){
+        return (await  Api.get(`${RoutineApi.url}/${id}`,true, null));
+    }
+
     static async getPesasRotines(){
         return (await Api.get(`${RoutineApi.url}?categoryId=2`, true, null)).content;
     }

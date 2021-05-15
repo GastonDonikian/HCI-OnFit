@@ -3,8 +3,14 @@ import {ExerciseApi} from "../api/ExerciseApi";
 
 const ExerciseStore = {
     overlayCreator: false,
+    edit: false,
     repeatedName:false,
-    async addExercise(name, detail, repetitions, duration) {
+    name : "",
+    detail: "",
+    repetitions: "",
+    duration: "",
+    id: "",
+    async addExercise(name, detail, repetitions, duration, id) {
         this.repeatedName = false;
         if (repetitions !== "" && duration !== "")
             return false;
@@ -24,7 +30,12 @@ const ExerciseStore = {
             ex.metadata.duration = duration;
         }
         try {
-            await ExerciseApi.createExercise(ex, null).then((r) => console.log(r));
+            if(!this.edit) {
+                await ExerciseApi.createExercise(ex, null).then((r) => console.log(r));
+            } else {
+                this.edit = false;
+                await ExerciseApi.modifyExercise(id, ex, null);
+            }
         }catch(Error){
             if(Error.code == 2){ //nombre repetido
                 this.repeatedName = true;
@@ -36,6 +47,10 @@ const ExerciseStore = {
 
     async getAllExercises() {
         return (await ExerciseApi.getExercises(null));
+    },
+
+    async getExercise(id) {
+        return (await ExerciseApi.getExercise(id));
     },
 
     async deleteExercise(id) {

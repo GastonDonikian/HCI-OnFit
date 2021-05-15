@@ -32,7 +32,7 @@
           class="white--text"
           color="#E46271"
           style="margin-bottom:10px"
-          @click="store.overlayCreator = false"
+          @click="this.salir"
       >
         Salir
       </v-btn>
@@ -74,6 +74,11 @@ export default {
     },
     async hasExcercise(){
       this.booleanHasExc = (await ExerciseStore.getAllExercises()).length === 0
+    },
+    salir(){
+      this.store.overlayCreator = false;
+      if(this.store.edit)
+        this.store.edit = false;
     }
   },
   computed: {

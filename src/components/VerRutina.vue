@@ -2,8 +2,19 @@
   <div>
     <v-card width="500px" color="#EBEBEB" class="principalRutina">
       <v-col style="padding-left: 5%; padding-top: 5%; padding-bottom: 5%">
-        <v-row>
-          <h2 style="font-weight: bold">{{ this.store.tempRoutine.titulo.toUpperCase() }}</h2>
+        <v-row  style="margin-bottom: -5%">
+          <v-col>
+          <h2 style="font-weight: bold" align="left">{{ this.store.tempRoutine.titulo.toUpperCase() }}</h2>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col>
+            <v-rating
+            v-model="average"
+            background-color="black"
+            color="black"
+            small>
+            </v-rating>
+          </v-col>
         </v-row>
         <v-row>
           <h4 style="color: #E46271; font-weight: normal">Categoría: </h4>
@@ -24,8 +35,8 @@
               class="text-left"
               width="475"
           >
-            <div v-if="this.boolHasEntradaEnCalor">
             <h4 style="padding: 5px" >Entrada en calor x{{this.store.tempRoutine.repeticionesEntradaEnCalor}}</h4>
+            <div v-if="this.store.tempRoutine.entradaEnCalor.length !== 0">
             <v-banner v-for="ex in this.store.tempRoutine.entradaEnCalor" :key="ex.id">
               <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
                 <v-col cols="10">
@@ -40,7 +51,10 @@
 
               </v-row>
             </v-banner>
-              </div>
+            </div>
+            <div v-else>
+              <h5 style="margin-left: 2%; font-weight: normal" class="text--secondary">No hay ejercicios</h5>
+            </div>
           </v-card>
           <v-card
               elevation="0"
@@ -51,19 +65,23 @@
               width="475"
           >
             <h4 style="padding: 5px">Principal x{{this.store.tempRoutine.repeticionesPrincipal}}</h4>
-            <v-banner v-for="ex in this.store.tempRoutine.principal" :key="ex.id">
-              <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
-                <v-col cols="10">
-                  <v-row class="text--black">{{ ex.name }}</v-row>
-                  <v-row class="text--secondary" style="font-size: 10px">{{ex.detail}}</v-row>
-                  <v-row v-if="noDetail(ex.detail)" class="grey--text" style="font-size: 11px">sin descripción</v-row>
-                </v-col>
-
-                <v-spacer></v-spacer>
-                <v-col v-if="ex.metadata.repetitions != null">x{{ex.metadata.repetitions}}</v-col>
-                <v-col v-if="ex.metadata.duration != null">{{ex.metadata.duration}}s</v-col>
-              </v-row>
-            </v-banner>
+            <div v-if="this.store.tempRoutine.principal.length !== 0">
+              <v-banner v-for="ex in this.store.tempRoutine.principal" :key="ex.id">
+                <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
+                  <v-col cols="10">
+                    <v-row class="text--black">{{ ex.name }}</v-row>
+                    <v-row class="text--secondary" style="font-size: 10px">{{ex.detail}}</v-row>
+                    <v-row v-if="noDetail(ex.detail)" class="grey--text" style="font-size: 11px">sin descripción</v-row>
+                  </v-col>
+                  <v-spacer></v-spacer>
+                  <v-col v-if="ex.metadata.repetitions != null">x{{ex.metadata.repetitions}}</v-col>
+                  <v-col v-if="ex.metadata.duration != null">{{ex.metadata.duration}}s</v-col>
+                </v-row>
+              </v-banner>
+            </div>
+            <div v-else>
+              <h5 style="margin-left: 2%; font-weight: normal" class="text--secondary">No hay ejercicios</h5>
+            </div>
           </v-card>
           <v-card
               elevation="0"
@@ -74,6 +92,7 @@
               width="475"
           >
             <h4 style="padding: 5px">Elongación x{{this.store.tempRoutine.repeticionesElongacion}}</h4>
+            <div v-if="this.store.tempRoutine.elongacion.length !== 0">
             <v-banner v-for="ex in this.store.tempRoutine.elongacion" :key="ex.id">
               <v-row style="padding: 2.5% 0 0 5%; margin-bottom: 1%">
                 <v-col cols="10">
@@ -86,6 +105,10 @@
                 <v-col v-if="ex.metadata.duration != null">{{ex.metadata.duration}}s</v-col>
               </v-row>
             </v-banner>
+            </div>
+            <div v-else>
+              <h5 style="margin-left: 2%; font-weight: normal" class="text--secondary">No hay ejercicios</h5>
+            </div>
           </v-card>
         </v-row>
       </v-col>
@@ -103,8 +126,8 @@ export default {
   name: "VerRutina",
   data() {
     return{
+      average: 0,
       store: CreateRoutineStore,
-      boolHasEntradaEnCalor:true,
     }
   },
   methods: {
@@ -119,20 +142,12 @@ export default {
       } else
         return "Running";
     },
-    //TODO: no funciona lpm voy a llorar
-    async hasEntradaEnCalor() {
-      this.boolHasEntradaEnCalor = ((await this.store.tempRoutine.entradaEnCalor).length ===0);
-      console.log(this.store.tempRoutine.entradaEnCalor.length ===0)
-      console.log(this.boolHasEntradaEnCalor)
-      console.log(this.store.tempRoutine.entradaEnCalor.length)
-      console.log(this.store.tempRoutine.entradaEnCalor)
-    },
-    destroyed() {
-      this.store.vaciarTemp();
-    }
   },
-  created() {
-    this.hasEntradaEnCalor();
+  async destroyed() {
+    if(this.average!==0) {
+      await this.store.voteRaiting(this.store.rutineAEditar.id, this.average);
+    }
+    this.store.vaciarTemp();
   }
 }
 </script>

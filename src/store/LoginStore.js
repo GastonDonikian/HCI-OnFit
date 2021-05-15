@@ -1,5 +1,4 @@
 import {LoginApi} from "../api/LoginApi";
-import {CategoryApi} from "../api/CategoryApi";
 import ProfileStore from "./ProfileStore";
 
 const LoginStore = {
@@ -103,26 +102,7 @@ const LoginStore = {
         //     CategoryApi.addCategory(runninng, null);
         }
     },
-    createCategories() {
-        if(this.found && this.correctCode) {
-            let enCasa = {
-                name: "En Casa",
-                detail: "en casa",
-            }
-            CategoryApi.addCategory(enCasa, null);
-            let pesas = {
-                name: "Pesas",
-                detail: "pesas",
-            }
-            CategoryApi.addCategory(pesas, null);
-            let runninng = {
-                name: "Running",
-                detail: "running",
-            }
-            CategoryApi.addCategory(runninng, null);
-            this.connect = true;
-        }
-    },
+
     async resendEmail(email) {
         this.incompleteMail = true;
         this.found=true;

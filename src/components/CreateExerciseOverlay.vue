@@ -1,7 +1,8 @@
 <template>
   <v-container style="background-color: grey;opacity: 1; border-radius: 10px">
     <v-row class="justify-center">
-      <h1>Crear nuevo ejercicio</h1>
+      <h1 v-if="!this.store.edit">Crear nuevo ejercicio</h1>
+      <h1 v-else>Editar ejercicio</h1>
     </v-row>
     <v-row>
       <v-col>
@@ -41,8 +42,12 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn @click="addExercise()" style="margin-left: 240px"
+        <v-btn v-if="!this.store.edit" @click="addExercise()" style="margin-left: 240px"
                color="success">Crear ejercicio
+        </v-btn>
+        <v-btn v-else @click="addExercise()" style="margin-left: 240px"
+               color="success">
+          Editar ejercicio
         </v-btn>
       </v-col>
     </v-row>
@@ -118,14 +123,29 @@ export default {
       if (!this.validations()) {
         return;
       }
-      await this.store.addExercise(this.name, this.detail, this.repetitions, this.duration);
+      await this.store.addExercise(this.name, this.detail, this.repetitions, this.duration, this.store.id);
       if(this.store.repeatedName){
           this.repeatedExName = true;
+          return;
       }
       else{
         this.repeatedExName = false;
       }
+
       this.store.overlayCreator= false;
+    }
+  },
+  created() {
+    if(this.store.edit) {
+      this.name = this.store.name;
+      this.detail= this.store.detail;
+      this.repetitions= this.store.repetitions;
+      this.duration= this.store.duration;
+    } else {
+      this.name = "";
+      this.detail = "";
+      this.repetitions = "";
+      this.duration = "";
     }
   }
 }
