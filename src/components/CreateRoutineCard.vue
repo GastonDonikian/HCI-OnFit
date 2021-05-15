@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left: 20px; margin-top: 20px">
+  <div style="margin-left: 60px; margin-top: 20px">
     <v-card width="600px" min-height="500px" style="color: #EBEBEB; padding-bottom: 20px">
       <v-row>
         <v-col>

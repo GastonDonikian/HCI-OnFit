@@ -112,7 +112,7 @@
           </v-card>
         </v-row>
       </v-col>
-      <v-btn color="#E46271" :to="'../Rutinas'" style="color: #EBEBEB; margin-bottom: 2%; margin-left: 70%" >Salir</v-btn>
+      <v-btn color="#E46271" @click="goTo()" style="color: #EBEBEB; margin-bottom: 2%; margin-left: 70%" >Salir</v-btn>
     </v-card>
   </div>
 </template>
@@ -130,6 +130,9 @@ export default {
       store: CreateRoutineStore,
     }
   },
+  props: {
+    toExplore: {type: Boolean, required: true},
+  },
   methods: {
     noDetail(detail) {
       return detail === "";
@@ -142,6 +145,13 @@ export default {
       } else
         return "Running";
     },
+
+    goTo(){
+      if(this.toExplore)
+        window.location.href = '/#/Explore'
+      else
+        window.location.href = '/#/Rutinas'
+    }
   },
   async destroyed() {
     if(this.average!==0) {

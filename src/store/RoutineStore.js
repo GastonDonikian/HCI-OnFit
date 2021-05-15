@@ -7,6 +7,7 @@ import {ProfileApi} from "../api/ProfileApi";
 
 const RoutineStore = {
     currentRoutine: -1,
+    fromExplore: false,
     routines: [{
 
         name: "Rutina 1",

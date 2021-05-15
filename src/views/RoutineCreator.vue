@@ -2,10 +2,10 @@
   <div>
     <v-row>
       <v-col>
-        <CreateRoutineCard ></CreateRoutineCard>
+        <CreateRoutineCard></CreateRoutineCard>
       </v-col>
       <v-col>
-        <AddExCard v-if="store.popup"></AddExCard>
+          <AddExCard v-if="store.popup"></AddExCard>
       </v-col>
     </v-row>
   </div>
