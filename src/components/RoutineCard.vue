@@ -97,7 +97,6 @@ export default {
     getColor(){
       return this.store.getColor(this.routine)
     },
-
     toView(routine) {
       this.store.fromExplore = !this.canEdit;
       this.storeCreate.cargarTemp(routine);

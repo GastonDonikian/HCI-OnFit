@@ -46,7 +46,6 @@ class Api {
 
     static async get(url, secure, controller) {
         return await Api.fetch(url, secure, {}, controller)
-        //Cuando haces un get le pasas, el url, si es seguro, el init que va vacio porque es un get y el controller que se ignora por ahora
     }
 
     static async post(url, secure, data, controller) {

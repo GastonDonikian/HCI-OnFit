@@ -13,7 +13,7 @@ export default {
   data: () => ({
     key: 0,
     sideBarFlag: false,
-    loggedIn: true,//esto se cambia por lo que traiga el api
+    loggedIn: true,
     tabsLoggedOut: [
       {name: "Menú", icon: null, route: "/Home"}
     ],
@@ -40,7 +40,5 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  margin: auto;
-}
+
 </style>

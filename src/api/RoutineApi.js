@@ -29,18 +29,6 @@ class RoutineApi {
     }
 
     static async createRoutine(routine, controller){
-        /*TIENE QUE SER DE LA
-        * FORMA
-        * {
-        *   name: "",
-        *   detail: "",
-        *   isPublic: "",
-        *   difficulty: "",
-        *   category: {
-        *       id:
-        *   }
-        *   metadata: null
-        * }*/
         return await (Api.post(`${RoutineApi.url}`, true,routine, controller))
     }
 
@@ -49,16 +37,6 @@ class RoutineApi {
     }
 
     static async createCycle(id, cycle, controller){
-        /*TIENE QUE SER DE LA
-        * FORMA
-        * {
-        *   name: "",
-        *   detail: "",
-        *   type: "",
-        *   order: "",
-        *   repetitions: "",
-        *   metadata: null
-        * }*/
         return (await Api.post(`${RoutineApi.url}/${id}/cycles`, true, cycle, controller));
     }
 
@@ -74,8 +52,6 @@ class RoutineApi {
     static async editRoutine(id, routine){
         await Api.put(`${RoutineApi.url}/${id}`, true, routine)
     }
-
-    //HACER QUERIES PARA FILTRAR LAS RUTINAS ES UNA REVERENDA PELOTUDEZ, AVISENME SI NECESITAN AYUDA
 
 
 }
