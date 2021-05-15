@@ -132,6 +132,9 @@ export default {
 
   methods: {
     finalizeRoutine() {
+      this.error_name_too_long= false;
+      this.error_name_empty= false;
+      this.error_category_empty=false;
       // Validaciones del input "nombre"
       if (this.store.tempRoutine.titulo.length > 15) {
         this.error_name_too_long = true;
@@ -143,7 +146,7 @@ export default {
         this.error_name_too_long = false;
         return;
       }
-      if(this.store.tempRoutine.disciplina===0){
+      if(this.store.tempRoutine.disciplina===null){
         this.error_category_empty = true;
         return;
       }

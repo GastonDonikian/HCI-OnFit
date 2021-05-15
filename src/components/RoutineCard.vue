@@ -136,7 +136,6 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.getColor());
     this.isFav = await this.routineIsFav(this.routine);
   }
 }
