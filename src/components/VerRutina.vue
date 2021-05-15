@@ -4,7 +4,7 @@
       <v-col style="padding-left: 5%; padding-top: 5%; padding-bottom: 5%">
         <v-row  style="margin-bottom: -5%">
           <v-col>
-          <h2 style="font-weight: bold" align="left">{{ this.store.tempRoutine.titulo.toUpperCase() }}</h2>
+          <h2 style="font-weight: bold" align="left">{{this.store.tempRoutine.titulo.toUpperCase()}}</h2>
           </v-col>
           <v-spacer></v-spacer>
           <v-col>

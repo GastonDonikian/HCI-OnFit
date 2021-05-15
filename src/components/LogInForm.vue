@@ -30,7 +30,6 @@
 
 <script>
 import LoginStore from "../store/LoginStore";
-// import ProfileStore from "../store/ProfileStore";
 
 export default {
   data: () => ({
@@ -44,10 +43,7 @@ export default {
   }),
   methods: {
     async arrancaElBaile() {
-
-      //Es lo mismo que hacer :to rutinas solo que desde javascript
       if (this.userName === "" || this.userPassword === "") {
-        // Tambien habria que checkear que no use el caracter '|' que se rompe toda la pagina
         return null;
       }
 
@@ -57,9 +53,6 @@ export default {
         }
       this.store.rememberMe = false
       if (this.remindMe) {
-        //  Aca tendria que guardarse la informacion para proximas sesiones
-        //  Podria hacer que si no hace el save en local storage lo haga en session storage,
-        //  pero me parece redundante ya que puedo usar directamente las variables de LoginStore
         this.store.save(this.userName, this.userPassword) ;
       }
       if (this.store.loggedIn && this.store.authorized && this.store.correctData) {

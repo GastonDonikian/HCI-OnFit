@@ -54,7 +54,6 @@ export default {
   }
 }
 </script>
-<!--            aca estaria bueno tener una funcion que al hacer click, me acutualice la tarjerta de la creacion de ritina-->
 <style scoped>
 
 </style>

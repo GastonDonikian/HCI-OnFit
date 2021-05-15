@@ -97,13 +97,6 @@ export default {
     getColor(){
       return this.store.getColor(this.routine)
     },
-    // //Decido validar en la routine list cuando lo pido desde la API y no aca asi puedo elegir no crear la routine card.
-    // newRoutineCard(titulo, description, estrellas, color) {
-    //   this.titulo = titulo;
-    //   this.description = description;
-    //   this.estrellas = estrellas;
-    //   this.color = color;
-    // },
     toView(routine) {
       this.storeCreate.cargarTemp(routine);
       window.location.href = '/#/ViewRoutine';
