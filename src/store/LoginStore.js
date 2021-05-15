@@ -78,7 +78,6 @@ const LoginStore = {
                 this.found = false;
             }
             if(Error.code == 1){
-                console.log("no esta ingresado el mail ni el codigo")
                 this.correctCode=false;
                 this.found=false;
             }
@@ -111,7 +110,6 @@ const LoginStore = {
             await LoginApi.resendEmail({email: email}, null);
         }catch(Error){
             if(Error.code == 1){
-                console.log("entre")
                 this.incompleteMail = false;
             }
         }

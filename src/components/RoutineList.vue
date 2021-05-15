@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     async getRutineSize(){
-      console.log((await this.store.getAllRoutines()).length === 0)
       if((await this.store.getAllRoutines()).length === 0)
         this.showPlus = false;
     },

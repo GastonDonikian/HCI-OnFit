@@ -31,7 +31,7 @@ const ExerciseStore = {
         }
         try {
             if(!this.edit) {
-                await ExerciseApi.createExercise(ex, null).then((r) => console.log(r));
+                await ExerciseApi.createExercise(ex, null);
             } else {
                 this.edit = false;
                 await ExerciseApi.modifyExercise(id, ex, null);
