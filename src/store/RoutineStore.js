@@ -157,6 +157,9 @@ const RoutineStore = {
     //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.Destacados);
     //     return this.routines;
     // }
+    async getAllRoutines(){
+        return (await ProfileApi.getAllRoutines()).content;
+    },
 }
 
 export default RoutineStore;

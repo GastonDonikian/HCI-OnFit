@@ -93,7 +93,7 @@ export default {
       } else {
         this.error_nombre_largo = false;
       }
-      if ((this.duration > 0 && this.repetitions > 0) || (this.duration==="" && this.repetitions==="")) {
+      if (this.duration==="" && this.repetitions==="") {
         this.error_repe_dur = true;
       } else {
         this.error_repe_dur = false;
@@ -111,6 +111,10 @@ export default {
 
     async addExercise() {
       this.repeatedExName = false;
+      this.error_nombre= false;
+      this.error_nombre_largo= false;
+      this.error_repe_dur= false;
+      this.error_repe_dur_2= false;
       if (!this.validations()) {
         return;
       }
