@@ -1,14 +1,22 @@
 import {LoginApi} from "../api/LoginApi";
-import {CategoryApi} from "../api/CategoryApi";
 import ProfileStore from "./ProfileStore";
 
 const LoginStore = {
     loginAttempt: [{user: "", password: ""}],
     user: "",
+    username: "",
+    password: "",
     loggedIn: false,
     profileStore: ProfileStore,
+    authorized:true,
+    correctData:true,
+    incompleteMail:true,
+    correctCode:true,
+    connect:false,
+    found:true,
+    repeatedMail: false,
+    rememberMe: false,
     isLogged() {
-        // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
     },
     async closeSession() {
@@ -27,56 +35,76 @@ const LoginStore = {
         this.userPassword = userPassword;
     },
     async register(user) {
-        await LoginApi.create(user, null);
+        try {
+            await LoginApi.create(user, null);
+        }catch(Error){
+            if(Error.code === 2){ //mail repetido
+                this.repeatedMail = true;
+            }
+        }
     }
     ,
     async startSession(username, password) {
-        (await LoginApi.login({username: username, password: password}, null));
-        await this.profileStore.readUserInfo();
-        this.loggedIn = true;
+        this.correctData = true;
+        this.authorized = true;
+        this.username = username;
+        this.password = password;
+        try {
+            (await LoginApi.login({username: username, password: password}, null));
+        } catch (Error) {
+            if (Error.code === 4) { //password y contrasenia mal
+                this.correctData = false;
+            }
+            if(Error.code === 8){ //no estas authorized
+                this.authorized=false;
+            }
+        }
+        if(this.correctData && this.authorized){
+            await this.profileStore.readUserInfo();
+            this.loggedIn = true;
+        }
     },
     async validateEmail(email, code) {
-        return (await LoginApi.validateEmail({email: email, code: code}, null).then(() => {
-            let enCasa = {
-                name: "En Casa",
-                detail: "en casa",
+        this.correctCode = true;
+        this.found = true;
+        try{
+            await LoginApi.validateEmail({email: email, code: code}, null)
+        }catch(Error){
+            if(Error.code === 8){
+                this.correctCode = false;
             }
-            CategoryApi.addCategory(enCasa, null);
-            let pesas = {
-                name: "Pesas",
-                detail: "pesas",
+            if(Error.code === 3){
+                this.found = false;
             }
-            CategoryApi.addCategory(pesas, null);
-            let runninng = {
-                name: "Running",
-                detail: "running",
+            if(Error.code === 1){
+                this.correctCode=false;
+                this.found=false;
             }
-            CategoryApi.addCategory(runninng, null);
-            return true;
-        }).catch(() => {
-            return false;
-        }));
+        }
+        if(this.found && this.correctCode) {
+            this.connect = true;
+        }
     },
+
     async resendEmail(email) {
-        await LoginApi.resendEmail({email: email}, null);
+        this.incompleteMail = true;
+        this.found=true;
+        this.correctCode=true;
+        try {
+            await LoginApi.resendEmail({email: email}, null);
+        }catch(Error){
+            if(Error.code === 1){
+                this.incompleteMail = false;
+            }
+        }
     },
-
-    isCurrentUserVerified() {
-        return LoginApi.currentUser(null).verified;
-    },
-
-    isUserLogged() {
-        return LoginApi.isUserLogged();
-    },
-
-
     load() {
         let data = localStorage.getItem('item');
         this.userName = data.split("|")[0];
         this.userPassword = data.split("|")[1];
     },
-    save() {
-        localStorage.setItem('item', this.userName + "|" + this.userPassword);
+    save(user, password) {
+        localStorage.setItem('user', user+' '+password);
     }
 }
 

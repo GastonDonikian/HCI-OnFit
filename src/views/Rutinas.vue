@@ -13,7 +13,7 @@
       >mdi-plus
       </v-icon>
     </v-btn>
-    <RoutineList style="margin-top: 30px"></RoutineList>
+    <RoutineList :can-edit="true" style="margin-top: 30px"></RoutineList>
     <h2 style="margin-bottom: 10px; margin-top: 10px; display: inline-block;">MIS EJERCICIOS</h2>
     <v-btn
         fab
@@ -31,7 +31,7 @@
           class="white--text"
           color="#E46271"
           style="margin-bottom:10px"
-          @click="store.overlayCreator = false"
+          @click="this.salir"
       >
         Salir
       </v-btn>
@@ -60,12 +60,13 @@ export default {
       exercise: {titulo: "Titulo", description: "Description", repetitions: 10, duration: null}
     }
   },
-  methods: {},
-  computed: {
-    isValidDescriptionName() {
-      return (this.description.length)
+  methods: {
+    salir(){
+      this.store.overlayCreator = false;
+      if(this.store.edit)
+        this.store.edit = false;
     }
-  }
+  },
 }
 </script>
 export default {}

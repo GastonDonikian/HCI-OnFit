@@ -5,7 +5,11 @@
         <v-row>
           <v-col v-for="routine in routines" :key="routine.id">
             <RoutineCard style="margin-bottom: 10px"
-                         v-bind:routine="routine"/>
+                         v-bind:routine="routine"
+                          :can-edit="canEdit.valueOf()"/>
+          </v-col>
+          <v-col>
+            <PlusCard></PlusCard>
           </v-col>
         </v-row>
       </v-carousel-item>
@@ -18,13 +22,16 @@
 import RoutineCard from "./RoutineCard";
 import RoutineStore from "../store/RoutineStore";
 import {bus} from "../main";
+import PlusCard from "./PlusCard";
 
 
 export default {
   name: "RoutineList",
-  components: {RoutineCard},
+  components: {PlusCard, RoutineCard},
+  showPlus:true,
   props: {
-    category: null
+    category: null,
+    canEdit: null,
   },
   data: function () {
     return {
@@ -39,7 +46,11 @@ export default {
     async getDisplayRoutine() {
       let i;
       let routineArray = [];
-      let routines = (await RoutineStore.getAllByCategory());
+      let routines = {type: Object};
+      if(this.canEdit){
+        routines = (await RoutineStore.getUserRoutines());
+      } else
+        routines = (await RoutineStore.getAllPublicRoutines());
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));
@@ -47,6 +58,7 @@ export default {
       routineArray.push(routines.slice(i));
       return routineArray;
     },
+
     getListSize() {
       if (innerWidth <= 750)
         return 1;
@@ -69,7 +81,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);
-  }
+  },
 }
 </script>
 

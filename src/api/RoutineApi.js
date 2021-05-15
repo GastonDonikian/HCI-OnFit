@@ -1,4 +1,5 @@
 import {Api} from "./Api";
+import {CycleApi} from "./CycleApi";
 
 export {RoutineApi};
 
@@ -7,23 +8,27 @@ class RoutineApi {
         return `${Api.baseUrl}/routines`;
     }
 
-    static async getRoutines(controller) {
+    static async getAllPublicRoutines(controller) {
         return (await Api.get(`${RoutineApi.url}`, true, controller)).content;
     }
 
+    static async getRoutine(id){
+        return (await  Api.get(`${RoutineApi.url}/${id}`,true, null));
+    }
+
+    static async getPesasRotines(){
+        return (await Api.get(`${RoutineApi.url}?categoryId=2`, true, null)).content;
+    }
+
+    static async getRunningRotines(){
+        return (await Api.get(`${RoutineApi.url}?categoryId=3`, true, null)).content;
+    }
+
+    static async getCasaRotines(){
+        return (await Api.get(`${RoutineApi.url}?categoryId=1`, true, null)).content;
+    }
+
     static async createRoutine(routine, controller){
-        /*TIENE QUE SER DE LA
-        * FORMA
-        * {
-        *   name: "",
-        *   detail: "",
-        *   isPublic: "",
-        *   difficulty: "",
-        *   category: {
-        *       id:
-        *   }
-        *   metadata: null
-        * }*/
         return await (Api.post(`${RoutineApi.url}`, true,routine, controller))
     }
 
@@ -32,25 +37,21 @@ class RoutineApi {
     }
 
     static async createCycle(id, cycle, controller){
-        /*TIENE QUE SER DE LA
-        * FORMA
-        * {
-        *   name: "",
-        *   detail: "",
-        *   type: "",
-        *   order: "",
-        *   repetitions: "",
-        *   metadata: null
-        * }*/
         return (await Api.post(`${RoutineApi.url}/${id}/cycles`, true, cycle, controller));
     }
 
-    static async retriveCycles(id){
-        return (await Api.get(`${RoutineApi.url}/${id}/cycles`, true));
-
+    static async retriveCycles(id, deleteR){
+        if(deleteR){
+            await Api.get(`${RoutineApi.url}/${id}/cycles`, true, null).then((r) => CycleApi.deleteCycles(id, r.content));
+        }
+        else {
+            return (await Api.get(`${RoutineApi.url}/${id}/cycles`, true, null));
+        }
     }
 
-    //HACER QUERIES PARA FILTRAR LAS RUTINAS ES UNA REVERENDA PELOTUDEZ, AVISENME SI NECESITAN AYUDA
+    static async editRoutine(id, routine){
+        await Api.put(`${RoutineApi.url}/${id}`, true, routine)
+    }
 
 
 }

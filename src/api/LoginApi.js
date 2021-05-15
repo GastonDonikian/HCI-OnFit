@@ -1,4 +1,5 @@
 import {Api} from "./Api";
+import ProfileStore from "../store/ProfileStore";
 
 export {LoginApi};
 
@@ -11,11 +12,12 @@ class LoginApi {
         const result = await Api.post(`${LoginApi.url}/login`, false, user, controller,);
         sessionStorage.setItem('token', result.token);
         Api.token = result.token;
+        ProfileStore.token = result.token;
         return result;
     }
 
     static async logout(user, controller) {
-        console.log(LoginApi.url);
+
         await Api.post(`${LoginApi.url}/logout`, true, user, controller);
         sessionStorage.removeItem('token');
         Api.token = undefined;

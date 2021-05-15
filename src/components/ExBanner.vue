@@ -52,10 +52,11 @@ export default {
   props: {
     ejercicio: {type: Object, required: true},
     category: String,
+    number: Number
   },
   methods:{
     deleteEx(){
-      this.store.remove(this.ejercicio.id, this.category)
+      this.store.remove(this.ejercicio.id, this.category,this.number)
     }
   }
 }

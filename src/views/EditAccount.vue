@@ -17,7 +17,29 @@
                   placeholder="Spinetta">
     </v-text-field>
     <p v-if="this.error_last_name" class="errorText">Apellido invalido</p>
-    <h3 class="titleText">Cambiar foto de perfil</h3>
+
+    <v-row>
+      <v-col>
+        <h3 class="titleText">Cambiar foto de perfil</h3>
+      </v-col>
+      <v-col style="margin-right: 65%">
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon size="25"
+                v-bind="attrs"
+                v-on="on"
+                color="#E77381"
+            >
+              mdi-help-circle-outline
+            </v-icon>
+          </template>
+          <span>
+            La imagen debe ser cuadrada. De no insertar un link, se borrara la foto de perfil actual
+          </span>
+        </v-tooltip>
+      </v-col>
+    </v-row>
+
     <v-text-field class="inputField"
                   v-model="avatarImage"
                   outlined
@@ -34,6 +56,7 @@
 <script>
 
 import LoginStore from "../store/LoginStore";
+import ProfileStore from "../store/ProfileStore";
 
 export default {
   data: () => ({
@@ -44,39 +67,37 @@ export default {
     error_first_name: false,
     error_last_name: false,
     error_avatar_image: false,
-    store: LoginStore,
+    loginStore: LoginStore,
+    profileStore: ProfileStore,
   }),
   methods: {
     exit() {
       window.location.href = '/#/Profile'
     },
     saveInfo() {
-      this.validations();
+      const userInfo = {
+        firstName: this.firstName === "" ? this.profileStore.userInfo.firstName : this.firstName,
+        lastName: this.lastName == "" ? this.profileStore.userInfo.lastName : this.lastName,
+        gender: "male",
+        birthdate: 284007600000,
+        phone: "98295822",
+        avatarUrl: this.avatarImage,
+        metadata: null
+      }
+      this.profileStore.modifyAccount(userInfo).then(x => this.setUserInfoValues(x));
+      if (this.avatarImage === undefined || this.avatarImage === "") {
+        console.log("no hay foto para mostrar");
+        this.profileStore.availableAvatar = false;
+      } else {
+        console.log("hay foto para mostrar");
+        this.profileStore.availableAvatar = true;
+      }
+      window.location.href = "/#/profile";
     },
-    validations() {
-      if (this.firstName == null || this.firstName == "") {
-        this.error_first_name = true;
-      } else {
-        this.error_first_name = false;
-      }
-      if (this.lastName == null || this.lastName == "") {
-        this.error_last_name = true;
-      } else {
-        this.error_last_name = false;
-      }
-      if (!this.isValidAvatarUrl()) {
-        this.error_avatar_image = true;
-      } else {
-        this.error_avatar_image = false;
-      }
-      return !this.error_first_name && !this.error_last_name
-          && !this.error_avatar_image;
+    setUserInfoValues(newUserInfo) {
+      this.profileStore.userInfo = newUserInfo
+      console.log(this.profileStore.userInfo.avatarUrl);
     },
-    // https://flic.kr/p/3ntH2u
-    isValidAvatarUrl() {
-      let flickrSubstring = this.avatarImage.substring(0,16);
-      return flickrSubstring == "https://flic.kr/";
-    }
   }
 }
 </script>

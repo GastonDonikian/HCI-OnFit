@@ -31,29 +31,4 @@ export default {
 .Register {
   margin: 0 auto;
 }
-.container-scoped {
-  position: absolute;
-  bottom: 0px
-}
-
-/*.LogInDiv {*/
-/*  position: fixed;*/
-/*  bottom: 100px;*/
-/*  right: 800px;*/
-/*  width: 400px;*/
-/*  border: 2px solid #707070;*/
-/*  background-color: #EBEBEB;*/
-/*  border-radius: 20px;*/
-/*  padding: 40px;*/
-/*}*/
-/*.RegistrarseDiv {*/
-/*  position: fixed;*/
-/*  bottom: 30px;*/
-/*  right: 300px;*/
-/*  width: 400px;*/
-/*  border: 2px solid #707070;*/
-/*  background-color: #EBEBEB;*/
-/*  border-radius: 20px;*/
-/*  padding: 40px;*/
-/*}*/
 </style>

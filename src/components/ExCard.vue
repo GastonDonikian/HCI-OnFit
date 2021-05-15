@@ -5,16 +5,13 @@
         width="344"
         height="200"
         color="#EBEBEB"
-    ><!--color cambia con la API-->
+    >
       <v-list-item three-line>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">
             {{ exercise.name }}
             <v-btn @click="deleteExercise(exercise.id)" depressed style="margin-left: 10px" color="red"
                    fab x-small>
-              <!--              TODO: ¿Porque me tira un unathorized cuando refresheo esta parte y no con Routine?-->
-              <!--              TODO ¿PREGUNTAR COMO HACER ESTO SIN EL PROPERTY NULL, ERROR QUE TIRA-->
-              <!--              TODO: Sacar errores de consola-->
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
           </v-list-item-title>
@@ -36,14 +33,13 @@
                 small
                 text
                 color="#E46271"
-
+                @click="editEx(exercise.id)"
             >
               Editar ejercicio
             </v-btn>
           </v-card-actions>
         </v-list-item-content>
       </v-list-item>
-
     </v-card>
   </div>
 </template>
@@ -59,20 +55,27 @@ export default {
     };
   },
   props: {
-    exercise: {
-      id: Number,
-      name: String,
-      detail: String,
-      type: String,
-      metadata: {
-        repetitions: Number, duration: Number
-      }
-    }
+    exercise: {type: Object, required: true}
   },
   methods: {
     async deleteExercise(id) {
-      console.log(this.exercise);
       await this.store.deleteExercise(id);
+    },
+    async editEx(id){
+      let ex = await this.store.getExercise(id);
+      this.store.name = ex.name;
+      this.store.detail = ex.detail;
+      if(ex.metadata.duration === null)
+        this.store.duration = "";
+      else
+        this.store.duration = ex.metadata.duration;
+      if(ex.metadata.repetitions === null)
+        this.store.repetitions = "";
+      else
+        this.store.repetitions = ex.metadata.repetitions;
+      this.store.id = ex.id;
+      this.store.edit = true;
+      this.store.overlayCreator = true;
     }
   },
 }

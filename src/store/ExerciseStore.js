@@ -3,31 +3,54 @@ import {ExerciseApi} from "../api/ExerciseApi";
 
 const ExerciseStore = {
     overlayCreator: false,
-    async addExercise(name, detail, repetitions, duration) {
-        let exercises = (await this.getAllExercises());
-        if (repetitions !== null && duration !== null)
+    edit: false,
+    repeatedName:false,
+    name : "",
+    detail: "",
+    repetitions: "",
+    duration: "",
+    id: "",
+    async addExercise(name, detail, repetitions, duration, id) {
+        this.repeatedName = false;
+        if (repetitions !== "" && duration !== "")
             return false;
-        for (let i = 0; i < exercises.length; i++) {
-            if (exercises[i].name === name)
-                return false;
-        }
         let ex = {
             name: name,
             detail: detail,
             type: "exercise",
             date: 0,
             metadata: {
-                repetitions: repetitions,
-                duration: duration,
+                repetitions: null,
+                duration: null,
             }
-        };
-        await ExerciseApi.createExercise(ex, null).then(r => console.log(r));
+        }
+        if(repetitions !== ""){
+            ex.metadata.repetitions = repetitions;
+        } else if(duration !== ""){
+            ex.metadata.duration = duration;
+        }
+        try {
+            if(!this.edit) {
+                await ExerciseApi.createExercise(ex, null);
+            } else {
+                this.edit = false;
+                await ExerciseApi.modifyExercise(id, ex, null);
+            }
+        }catch(Error){
+            if(Error.code === 2){ //nombre repetido
+                this.repeatedName = true;
+            }
+        }
         bus.$emit('exercisechange');
         return true;
     },
 
     async getAllExercises() {
         return (await ExerciseApi.getExercises(null));
+    },
+
+    async getExercise(id) {
+        return (await ExerciseApi.getExercise(id));
     },
 
     async deleteExercise(id) {

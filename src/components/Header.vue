@@ -51,7 +51,7 @@ export default {
     tabsLoggedIn: [
       {name: "Mis Rutinas", icon: null, route: "/Rutinas"},
       {name: "Explorar", icon: null, route: "/Explore"},
-      {name: "Mis Trofeos", icon: null, route: "/Logros"},
+      {name: "Favoritos", icon: null, route: "/Favoritos"},
       {name: "Mi Perfil", icon: null, route: "/profile"},
     ],
     active: 0,

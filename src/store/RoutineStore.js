@@ -1,10 +1,13 @@
 import {RoutineApi} from "../api/RoutineApi";
 import {CycleApi} from "../api/CycleApi";
 import {bus} from "../main";
+import CreateRoutineStore from "./CreateRoutineStore";
+import {ProfileApi} from "../api/ProfileApi";
 
 
 const RoutineStore = {
     currentRoutine: -1,
+    fromExplore: false,
     routines: [{
 
         name: "Rutina 1",
@@ -25,19 +28,34 @@ const RoutineStore = {
         metadata: null,
     }],
 
-    async getAllByCategory() {
-        return (await RoutineApi.getRoutines(null));
-
+    async getAllPublicRoutines() {
+        return (await RoutineApi.getAllPublicRoutines(null));
     },
+
+    async getPesasRoutines() {
+        return (await RoutineApi.getPesasRotines());
+    },
+
+    async getCasaRoutines() {
+        return (await RoutineApi.getCasaRotines());
+    },
+
+    async getRunningRoutines() {
+        return (await RoutineApi.getRunningRotines());
+    },
+
+    async getUserRoutines(){
+        return (await ProfileApi.getUserRoutines()).content;
+    },
+
     async add(tempRoutine) {
         let routine = {
             name: tempRoutine.titulo,
             detail: tempRoutine.detail,
             isPublic: tempRoutine.isPublic,
             difficulty: "rookie",
-            category: {
-                id: 2,
-            },
+
+            category: tempRoutine.category,
             metadata: null
         }
         let currentRoutine = await RoutineApi.createRoutine(routine, null);
@@ -45,8 +63,11 @@ const RoutineStore = {
         bus.$emit('routinechange');
     },
 
+    async getRoutineAverageRating(routine){
+        return (await RoutineApi.getRoutine(routine.id)).averageRating;
+    },
+
     async addInfo(routine, tempRoutine){
-        console.log("cargando la info");
         let entrada = {
             name: "entrada en calor",
             detail: "",
@@ -65,7 +86,6 @@ const RoutineStore = {
             metadata: null,
         }
         await RoutineApi.createCycle(routine.id, principal, null).then(r => CycleApi.addEx(r.id, tempRoutine.principal, null));
-        console.log(tempRoutine.repeticionesPrincipal)
         let elongacion = {
             name: "elongación",
             detail: "",
@@ -77,11 +97,29 @@ const RoutineStore = {
         await RoutineApi.createCycle(routine.id, elongacion, null).then(r => CycleApi.addEx(r.id, tempRoutine.elongacion, null));
     },
 
+    async edit(tempRoutine) {
+        let editRoutine = CreateRoutineStore.rutineAEditar;
+        await RoutineApi.retriveCycles(editRoutine.id, true).then(() => this.addInfo(editRoutine, tempRoutine));
+        let routine = {
+            name: tempRoutine.titulo,
+            detail: tempRoutine.detail,
+            isPublic: tempRoutine.isPublic,
+            difficulty: "rookie",
+            category: {
+                id: 2,
+            },
+            metadata: null
+        }
+        await RoutineApi.editRoutine(editRoutine.id, routine);
+        bus.$emit('routinechange');
+    },
+
     async deleteRoutine(id) {
-        await CycleApi.deleteCycles(id);
+        await RoutineApi.retriveCycles(id, true);
         await RoutineApi.deleteRoutine(id, null);
         bus.$emit('routinechange');
     },
+
     findIx(name){
         for (let i = 0; i < this.routines.length; i++) {
             if(this.routines[i].titulo === name) {
@@ -95,36 +133,17 @@ const RoutineStore = {
 
         return this.routines[index];
     },
-
-    findByName(name) {
-        console.log(name)
-        for (const routine of this.routines) {
-            if(routine.titulo === name) {
-                let aux = JSON.parse(JSON.stringify(routine));
-                this.remove(routine)
-                return aux;
-            }
-        }
-    },
     getColor(routine) {
-        if (routine.category.id === 1) //Pesas
+        if (routine.category.id === 2) //Pesas
             return "#7885FF";
-        if (routine.category.id === 2) //Running
+        if (routine.category.id === 3) //Running
             return "#F1B0B8";
-        if (routine.category.id === 3) //En Casa
+        if (routine.category.id === 1) //En Casa
             return "#B495C2";
     },
-    // getAllByCategory(category) {
-    //     if (category === 'En Casa')
-    //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.EnCasa);
-    //     if (category === 'Running')
-    //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.Running);
-    //     if (category === 'Pesas')
-    //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.Pesas);
-    //     if (category === 'Destacados') //ESTA OBVIO QUE VA A CAMBIAR CON LA API
-    //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.Destacados);
-    //     return this.routines;
-    // }
+    async getAllRoutines(){
+        return (await ProfileApi.getAllRoutines()).content;
+    },
 }
 
 export default RoutineStore;

@@ -1,16 +1,13 @@
 <template>
-  <v-card max-width="300px" min-height="250px" color="#EBEBEB" style="padding: 30px">
+  <v-card max-width="300px" min-height="250px" color="#EBEBEB" style="padding: 30px; border-radius: 5px">
     <div align="left" style="color: #E46271">
       <h3>CONFIGURACIÓN</h3>
     </div>
-    <v-avatar  style="margin-top: 5%; border-style: solid; border-color:darkgrey;" size="50">
-      <v-img draggable="false"
-             @load="viewImg">
-      </v-img>
-    </v-avatar>
-
-    <s1 style="color: black; margin-left: 10px">{{this.profileStore.userInfo.firstName.toUpperCase()}}
-       {{this.profileStore.userInfo.lastName.toUpperCase()}}</s1>
+<!--    <v-avatar  style="margin-top: 5%; border-style: solid; border-color:darkgrey;" size="50">-->
+<!--      <v-img draggable="false"-->
+<!--             @load="viewImg">-->
+<!--      </v-img>-->
+<!--    </v-avatar>-->
 
     <v-btn @click="editAvatar"
       class="settingsButton"
@@ -68,10 +65,11 @@ export default {
     },
     deleteAccount() {
       window.location.href = '/#/Home';
+      localStorage.removeItem('user');
+      LoginStore.closeSession();
       this.profileStore.deleteAccount();
     },
     editAvatar() {
-      console.log(this.profileStore.userInfo.firstName);
       window.location.href='/#/EditAccount';
     },
   }
