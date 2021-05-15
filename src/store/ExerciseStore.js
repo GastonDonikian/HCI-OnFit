@@ -37,7 +37,7 @@ const ExerciseStore = {
                 await ExerciseApi.modifyExercise(id, ex, null);
             }
         }catch(Error){
-            if(Error.code == 2){ //nombre repetido
+            if(Error.code === 2){ //nombre repetido
                 this.repeatedName = true;
             }
         }

@@ -17,7 +17,6 @@ const LoginStore = {
     repeatedMail: false,
     rememberMe: false,
     isLogged() {
-        // return LoginApi.currentUser(null).username !== "";
         return this.loggedIn;
     },
     async closeSession() {
@@ -39,7 +38,7 @@ const LoginStore = {
         try {
             await LoginApi.create(user, null);
         }catch(Error){
-            if(Error.code == 2){ //mail repetido
+            if(Error.code === 2){ //mail repetido
                 this.repeatedMail = true;
             }
         }
@@ -53,10 +52,10 @@ const LoginStore = {
         try {
             (await LoginApi.login({username: username, password: password}, null));
         } catch (Error) {
-            if (Error.code == 4) { //password y contrasenia mal
+            if (Error.code === 4) { //password y contrasenia mal
                 this.correctData = false;
             }
-            if(Error.code == 8){ //no estas authorized
+            if(Error.code === 8){ //no estas authorized
                 this.authorized=false;
             }
         }
@@ -71,34 +70,19 @@ const LoginStore = {
         try{
             await LoginApi.validateEmail({email: email, code: code}, null)
         }catch(Error){
-            if(Error.code == 8){ //codigo incorrecto
+            if(Error.code === 8){
                 this.correctCode = false;
             }
-            if(Error.code == 3){ //no esta el mail
+            if(Error.code === 3){
                 this.found = false;
             }
-            if(Error.code == 1){
+            if(Error.code === 1){
                 this.correctCode=false;
                 this.found=false;
             }
         }
         if(this.found && this.correctCode) {
             this.connect = true;
-        //     let enCasa = {
-        //         name: "En Casa",
-        //         detail: "en casa",
-        //     }
-        //     CategoryApi.addCategory(enCasa, null);
-        //     let pesas = {
-        //         name: "Pesas",
-        //         detail: "pesas",
-        //     }
-        //     CategoryApi.addCategory(pesas, null);
-        //     let runninng = {
-        //         name: "Running",
-        //         detail: "running",
-        //     }
-        //     CategoryApi.addCategory(runninng, null);
         }
     },
 
@@ -109,21 +93,11 @@ const LoginStore = {
         try {
             await LoginApi.resendEmail({email: email}, null);
         }catch(Error){
-            if(Error.code == 1){
+            if(Error.code === 1){
                 this.incompleteMail = false;
             }
         }
     },
-
-    isCurrentUserVerified() {
-        return LoginApi.currentUser(null).verified;
-    },
-
-    isUserLogged() {
-        return LoginApi.isUserLogged();
-    },
-
-
     load() {
         let data = localStorage.getItem('item');
         this.userName = data.split("|")[0];
