@@ -74,29 +74,26 @@ export default {
     exit() {
       window.location.href = '/#/Profile'
     },
-    saveInfo() {
+    async saveInfo() {
       const userInfo = {
         firstName: this.firstName === "" ? this.profileStore.userInfo.firstName : this.firstName,
-        lastName: this.lastName == "" ? this.profileStore.userInfo.lastName : this.lastName,
+        lastName: this.lastName === "" ? this.profileStore.userInfo.lastName : this.lastName,
         gender: "male",
         birthdate: 284007600000,
         phone: "98295822",
         avatarUrl: this.avatarImage,
         metadata: null
       }
-      this.profileStore.modifyAccount(userInfo).then(x => this.setUserInfoValues(x));
+      await (this.profileStore.modifyAccount(userInfo)).then(x => this.setUserInfoValues(x));
       if (this.avatarImage === undefined || this.avatarImage === "") {
-        console.log("no hay foto para mostrar");
         this.profileStore.availableAvatar = false;
       } else {
-        console.log("hay foto para mostrar");
         this.profileStore.availableAvatar = true;
       }
       window.location.href = "/#/profile";
     },
     setUserInfoValues(newUserInfo) {
       this.profileStore.userInfo = newUserInfo
-      console.log(this.profileStore.userInfo.avatarUrl);
     },
   }
 }
