@@ -19,7 +19,7 @@ class ProfileApi {
         return await Api.post(`${ProfileApi.url}/logout`, true, null, null);
     }
 
-    static async getAllRoutines(){
+    static async getUserRoutines(){
         return (await Api.get(`${ProfileApi.url}/current/routines/`, true));
     }
 

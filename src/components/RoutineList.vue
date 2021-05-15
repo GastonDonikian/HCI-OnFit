@@ -49,9 +49,9 @@ export default {
       let routineArray = [];
       let routines = {type: Object};
       if(this.canEdit){
-        routines = (await RoutineStore.getAllRoutines());
+        routines = (await RoutineStore.getUserRoutines());
       } else
-        routines = (await RoutineStore.getAllByCategory());
+        routines = (await RoutineStore.getAllPublicRoutines());
       let listSize = this.getListSize();
       for (i = 0; i + listSize < routines.length; i += listSize) {
         routineArray.push(routines.slice(i, i + listSize));

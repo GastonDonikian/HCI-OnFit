@@ -21,7 +21,7 @@ const ProfileStore = {
     },
 
     async getRoutineCount() {
-        return (await ProfileApi.getAllRoutines()).content.length;
+        return (await ProfileApi.getUserRoutines()).content.length;
     },
 
     async getExerciseCount() {

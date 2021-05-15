@@ -27,12 +27,24 @@ const RoutineStore = {
         metadata: null,
     }],
 
-    async getAllByCategory() {
-        return (await RoutineApi.getPublicRoutines(null));
+    async getAllPublicRoutines() {
+        return (await RoutineApi.getAllPublicRoutines(null));
     },
 
-    async getAllRoutines(){
-        return (await ProfileApi.getAllRoutines()).content;
+    async getPesasRoutines() {
+        return (await RoutineApi.getPesasRotines());
+    },
+
+    async getCasaRoutines() {
+        return (await RoutineApi.getCasaRotines());
+    },
+
+    async getRunningRoutines() {
+        return (await RoutineApi.getRunningRotines());
+    },
+
+    async getUserRoutines(){
+        return (await ProfileApi.getUserRoutines()).content;
     },
 
     async add(tempRoutine) {
@@ -101,6 +113,7 @@ const RoutineStore = {
         await RoutineApi.deleteRoutine(id, null);
         bus.$emit('routinechange');
     },
+
     findIx(name){
         for (let i = 0; i < this.routines.length; i++) {
             if(this.routines[i].titulo === name) {
