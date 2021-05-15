@@ -4,7 +4,7 @@
         class="mx-auto"
         width="344"
         v-bind:color=this.getColor()
-    ><!--color cambia con la API-->
+    >
       <v-list-item three-line>
         <v-list-item-avatar class="imageCard"
             rounded
@@ -14,7 +14,6 @@
         ><v-img
             v-if="this.routine.category.id === 2"
             src="../assets/Fotopesas.png">
-
         </v-img>
           <v-img
               v-if="this.routine.category.id === 3"
@@ -23,7 +22,6 @@
           <v-img
               v-if="this.routine.category.id === 1"
               src="../assets/FotoEnCasa.png">
-
           </v-img>
         </v-list-item-avatar>
         <v-list-item-content>
@@ -34,10 +32,9 @@
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
           </v-list-item-title>
-
           <v-list-item-subtitle class="black--text">{{ routine.detail }}</v-list-item-subtitle>
           <v-rating
-              v-model=this.routine.averageRating
+              :value=this.average
               background-color="black"
               color="black"
               small
@@ -94,6 +91,7 @@ export default {
     store: RoutineStore,
     storeCreate: CreateRoutineStore,
     isFav: false,
+    average: null,
   }),
   methods: {
     getColor(){
@@ -115,6 +113,9 @@ export default {
       this.storeCreate.cargarTemp(routine);
       window.location.href = '/#/RoutineCreator'
     },
+    getRutineRaiting(routine){
+      return this.store.getRoutineAverageRating(routine);
+    },
     async deleteRoutine(id) {
       await this.store.deleteRoutine(id);
     },
@@ -133,18 +134,14 @@ export default {
           return true;
       }
       return false;
-    }
+    },
   },
   async mounted() {
     this.isFav = await this.routineIsFav(this.routine);
+    this.average = await this.getRutineRaiting(this.routine);
   }
 }
 </script>
 export default {}
 <style scoped>
-.imageCard {
-  /*padding-right: 20px;*/
-  /*margin-left: -16px;*/
-  /*position: absolute /!important;*/
-}
 </style>

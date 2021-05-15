@@ -5,7 +5,7 @@
         width="344"
         height="200"
         color="#EBEBEB"
-    ><!--color cambia con la API-->
+    >
       <v-list-item three-line>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1 black--text">

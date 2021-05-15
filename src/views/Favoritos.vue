@@ -71,8 +71,6 @@ export default {
   }
 }
 
-
-//TODO:mañana prometo que lo hago
 </script>
 <style scoped>
 
