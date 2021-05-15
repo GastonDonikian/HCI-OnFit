@@ -35,9 +35,11 @@
             style="background-color: transparent; margin-top: 2%"
             elevation="0"
         >
+
           <v-card-title
               class="justify-center"
-          >FAVORITOS</v-card-title>
+          ><h2 style="display: inline-block; margin-top: 1%; margin-bottom: 2%">FAVORITOS</h2>
+          </v-card-title>
             <div>
             <v-row justify="center">
               <RoutineCard v-for="fav in this.favs" :key="fav.id" :routine="fav" :can-edit="false" style="margin-bottom: 5%; margin-left: 2%"></RoutineCard>
