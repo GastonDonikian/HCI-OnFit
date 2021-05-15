@@ -43,11 +43,6 @@ export default {
     this.routineArray = await this.getDisplayRoutine();
   },
   methods: {
-    async getRutineSize(){
-      console.log((await this.store.getAllRoutines()).length === 0)
-      if((await this.store.getAllRoutines()).length === 0)
-        this.showPlus = false;
-    },
     async getDisplayRoutine() {
       let i;
       let routineArray = [];

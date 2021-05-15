@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 20px">
+  <div style="margin-top: 20px; margin-left: 60px">
     <v-card width="600px" min-height="500px" style="color: #EBEBEB; padding-bottom: 20px">
       <v-row style="padding-top: 10px; padding-bottom: 20px">
         <h3 style="color: black;display: inline;margin-top: 20px ;padding-left: 5%">EJERCICIOS</h3>
@@ -54,7 +54,6 @@ export default {
   }
 }
 </script>
-<!--            aca estaria bueno tener una funcion que al hacer click, me acutualice la tarjerta de la creacion de ritina-->
 <style scoped>
 
 </style>

@@ -84,10 +84,8 @@ export default {
       this.wrongCode=false;
       await this.store.resendEmail(this.email);
       if(!this.store.incompleteMail){
-        console.log("RESEND")
         this.incompleteMail = true;
       }
-      console.log(this.incompleteMail);
       this.email = '';
       this.code = '';
     }

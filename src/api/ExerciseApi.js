@@ -12,14 +12,6 @@ class ExerciseApi {
     }
 
     static async createExercise(exercise, controller) {
-        /*TIENE QUE SER DE LA
-        * FORMA
-        * {
-        *   name: "",
-        *   detail: "",
-        *   type: ""
-        *   metadata: null
-        * }*/
         return await (Api.post(`${ExerciseApi.url}`, true,exercise, controller));
     }
 

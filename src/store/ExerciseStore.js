@@ -31,13 +31,13 @@ const ExerciseStore = {
         }
         try {
             if(!this.edit) {
-                await ExerciseApi.createExercise(ex, null).then((r) => console.log(r));
+                await ExerciseApi.createExercise(ex, null);
             } else {
                 this.edit = false;
                 await ExerciseApi.modifyExercise(id, ex, null);
             }
         }catch(Error){
-            if(Error.code == 2){ //nombre repetido
+            if(Error.code === 2){ //nombre repetido
                 this.repeatedName = true;
             }
         }

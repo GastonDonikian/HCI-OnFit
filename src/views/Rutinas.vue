@@ -47,12 +47,10 @@ import RoutineList from "../components/RoutineList";
 import ExerciseList from "../components/ExerciseList";
 import CreateExerciseOverlay from "../components/CreateExerciseOverlay";
 import ExerciseStore from "../store/ExerciseStore";
-import RoutineStore from "../store/RoutineStore";
-
 
 export default {
   name: "Rutinas.vue",
-  components: { CreateExerciseOverlay, ExerciseList, RoutineList},
+  components: {CreateExerciseOverlay, ExerciseList, RoutineList},
   data() {
     return {
       routines: [],
@@ -63,28 +61,12 @@ export default {
     }
   },
   methods: {
-    //TODO: recargar en evento. No actualiza si borras. Pasa lo mismo con hasExcercise
-    async hasRutines(){
-      this.boolHasRutines = (await RoutineStore.getAllRoutines()).length === 0
-    },
-    async hasExcercise(){
-      this.booleanHasExc = (await ExerciseStore.getAllExercises()).length === 0
-    },
     salir(){
       this.store.overlayCreator = false;
       if(this.store.edit)
         this.store.edit = false;
     }
   },
-  computed: {
-    isValidDescriptionName() {
-      return (this.description.length)
-    }
-  },
-  created() {
-    this.hasRutines();
-    this.hasExcercise();
-  }
 }
 </script>
 export default {}

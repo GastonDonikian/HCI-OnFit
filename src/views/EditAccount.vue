@@ -75,14 +75,12 @@ export default {
       window.location.href = '/#/Profile'
     },
     saveInfo() {
-      // this.validations();
       const userInfo = {
-        firstName: this.firstName == "" ? this.profileStore.userInfo.firstName : this.firstName,
+        firstName: this.firstName === "" ? this.profileStore.userInfo.firstName : this.firstName,
         lastName: this.lastName == "" ? this.profileStore.userInfo.lastName : this.lastName,
         gender: "male",
         birthdate: 284007600000,
         phone: "98295822",
-        // avatarUrl: this.avatarUrl == "" ? this.profileStore.userInfo.avatarUrl : this.avatarUrl,
         avatarUrl: this.avatarImage,
         metadata: null
       }
@@ -100,31 +98,6 @@ export default {
       this.profileStore.userInfo = newUserInfo
       console.log(this.profileStore.userInfo.avatarUrl);
     },
-
-    // Esta de mas la funcion validations pero como estuve tanto tiempo haciendola le agarre cariño y no la pienso borrar
-    validations() {
-      if (this.firstName == null || this.firstName == "") {
-        this.error_first_name = true;
-      } else {
-        this.error_first_name = false;
-      }
-      if (this.lastName == null || this.lastName == "") {
-        this.error_last_name = true;
-      } else {
-        this.error_last_name = false;
-      }
-      if (!this.isValidAvatarUrl()) {
-        this.error_avatar_image = true;
-      } else {
-        this.error_avatar_image = false;
-      }
-      return !this.error_first_name && !this.error_last_name
-          && !this.error_avatar_image;
-    },
-    isValidAvatarUrl() {
-      let flickrSubstring = this.avatarImage.substring(0,16);
-      return flickrSubstring == "https://flic.kr/";
-    }
   }
 }
 </script>
