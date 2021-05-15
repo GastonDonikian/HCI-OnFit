@@ -7,6 +7,9 @@ const CreateRoutineStore = {
     popup: false,
     currentSeccion: "",
     edit: false,
+    errorEntradaEnCalor:false,
+    errorPrincipal:false,
+    errorElongar:false,
     rutineAEditar: {type: Object},
     tempRoutine: {
         titulo: "",
@@ -49,11 +52,14 @@ const CreateRoutineStore = {
         RoutineStore.edit(this.tempRoutine);
     },
 
-    //TODO: agrtegar para que muestre el error
     addExercise(exercise) {
+        this.errorEntradaEnCalor=false;
+        this.errorPrincipal=false;
+        this.errorElongar=false;
         if (this.currentSeccion === "entradaEnCalor") {
             for (const ex of this.tempRoutine.entradaEnCalor) {
                 if(ex.id === exercise.id){
+                    this.errorEntradaEnCalor=true;
                     return;
                 }
             }
@@ -62,6 +68,7 @@ const CreateRoutineStore = {
         else if (this.currentSeccion === "principal") {
             for (const ex of this.tempRoutine.principal) {
                 if(ex.id === exercise.id){
+                    this.errorPrincipal=true;
                     return;
                 }
             }
@@ -70,6 +77,7 @@ const CreateRoutineStore = {
         else {
             for (const ex of this.tempRoutine.elongacion) {
                 if(ex.id === exercise.id){
+                    this.errorElongar=true;
                     return;
                 }
             }
@@ -77,8 +85,10 @@ const CreateRoutineStore = {
         }
     },
 
-    //TODO: ver como eliminar del temp los ejercicios cuando estoy creando la rutina
     remove(id, category, number) {
+        this.errorEntradaEnCalor=false;
+        this.errorPrincipal=false;
+        this.errorElongar=false;
         if (category === 'principal') {
             this.removePrin(id, number);
         } else if (category === 'elongación') {
