@@ -10,7 +10,7 @@
               height="80"
               :color=category.color
               class="textStyle"
-              @click="this.changeFilter(category)"
+              @click="changeFilter(category.name)"
           >
             <v-icon
                 x-large
@@ -23,8 +23,9 @@
         </div>
       </v-col>
     </v-row>
+    <v-row style="margin-top: 10%"></v-row>
     <div>
-      <v-row>
+      <v-row justify="center">
         <RoutineCard v-for="routine in this.routinesFiltered" :key="routine.id" :routine="routine" :can-edit="false" style="margin-bottom: 5%; margin-left: 2%"></RoutineCard>
       </v-row>
     </div>
@@ -40,7 +41,6 @@ import RutinasEnum from "../store/RutinasEnum";
 
 
 export default {
-  //TODO: ver como acceder a todas las rutinas publicas de todos los usuarios
   name: "Explore.vue",
   components: {RoutineCard},
   data: function () {
@@ -50,10 +50,12 @@ export default {
       routinesFiltered: [],
       categoryArray: [{name: 'Destacados', icon: 'mdi-star-shooting-outline', color: RutinasEnum.Destacados}, {
         name: 'Pesas',
-        icon: 'mdi-dumbbell', color: RutinasEnum.Pesas
-      }, {name: 'Running', icon: 'mdi-run-fast', color: RutinasEnum.Running}, {
+        icon: 'mdi-dumbbell', color: RutinasEnum.Pesas,
+        categoryId: 2
+      }, {name: 'Running', icon: 'mdi-run-fast', color: RutinasEnum.Running, categoryId: 3}, {
         name: 'En Casa',
         icon: 'mdi-home-roof',
+        categoryId: 1,
         color: RutinasEnum.EnCasa
       }]
     }
@@ -72,10 +74,8 @@ export default {
   },
   computed: {},
   async created() {
-    console.log("hola")
     this.routinesFiltered = (await this.routineStore.getAllPublicRoutines());
-    console.log(this.routinesFiltered)
-  }
+  },
 }
 </script>
 
