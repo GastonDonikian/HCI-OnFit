@@ -2,10 +2,11 @@
   <div>
     <v-row>
       <v-col>
-        <CreateRoutineCard ></CreateRoutineCard>
+        <v-spacer/>
+        <CreateRoutineCard style="margin-top: 50px"></CreateRoutineCard>
       </v-col>
       <v-col>
-        <AddExCard v-if="store.popup"></AddExCard>
+        <AddExCard style="position: fixed; margin-top: 50px" v-if="store.popup"></AddExCard>
       </v-col>
     </v-row>
   </div>
