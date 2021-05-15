@@ -33,15 +33,6 @@
                    fab x-small>
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
-            <v-avatar v-else style="margin-left: 100px;border-color: grey;"
-                      size="50">
-              <img v-if="routine.user.avatarUrl.length !== 0"
-                  :src="routine.user.avatarUrl"
-              />
-              <v-icon v-else color="white" size="50">
-                mdi-account-circle
-              </v-icon>
-            </v-avatar>
           </v-list-item-title>
           <v-list-item-subtitle class="black--text">{{ routine.detail }}</v-list-item-subtitle>
           <v-rating
@@ -72,11 +63,21 @@
             >
               Editar rutina
             </v-btn>
+            <v-avatar v-else
+                      size="40">
+              <img v-if="routine.user.avatarUrl.length !== 0"
+                   :src="routine.user.avatarUrl"
+              />
+              <v-icon v-else color="white" size="40">
+                mdi-account-circle
+              </v-icon>
+            </v-avatar>
+            <v-spacer></v-spacer>
             <div
                 v-if="!this.canEdit"
             >
-              <v-icon v-if="!isFav" @click="addToFavs(routine)" color="black">mdi-heart-outline</v-icon>
-              <v-icon v-if="isFav" @click="removeFavs(routine)" color="red">mdi-cards-heart</v-icon>
+              <v-icon v-if="!isFav" @click="addToFavs(routine)" color="black" size="30">mdi-heart-outline</v-icon>
+              <v-icon v-if="isFav" @click="removeFavs(routine)" color="red" size="30">mdi-cards-heart</v-icon>
             </div>
           </v-card-actions>
         </v-list-item-content>

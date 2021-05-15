@@ -23,7 +23,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-row style="margin-top: 10%"></v-row>
+    <v-row style="margin-top: 5%"></v-row>
     <div>
       <v-row justify="center">
         <RoutineCard v-for="routine in this.routinesFiltered" :key="routine.id" :routine="routine" :can-edit="false" style="margin-bottom: 5%; margin-left: 2%"></RoutineCard>
