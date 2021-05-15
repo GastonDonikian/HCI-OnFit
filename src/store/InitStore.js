@@ -19,6 +19,8 @@ const InitStore = {
         await CategoryApi.addCategory(runninng, null);
         this.connect = true;
 
+
+
     },
 }
 
