@@ -20,7 +20,7 @@
               class="my-2"
               v-model="store.tempRoutine.disciplina"
               :items="dropdown_icon"
-              label="Categorias"
+              label="Categorías"
               segmented
               target="#dropdown-example-2"
               style="padding-right: 5%"
