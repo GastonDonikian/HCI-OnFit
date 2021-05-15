@@ -1,4 +1,5 @@
 import {Api} from "./Api";
+import ProfileStore from "../store/ProfileStore";
 
 export {LoginApi};
 
@@ -11,6 +12,7 @@ class LoginApi {
         const result = await Api.post(`${LoginApi.url}/login`, false, user, controller,);
         sessionStorage.setItem('token', result.token);
         Api.token = result.token;
+        ProfileStore.token = result.token;
         return result;
     }
 

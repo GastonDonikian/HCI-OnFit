@@ -12,6 +12,7 @@
 import Header from "./components/Header";
 import BackgroundImage from "./components/BackgroundImage";
 import LoginStore from "./store/LoginStore";
+// import ProfileStore from "./store/ProfileStore";
 
 export default {
   name: 'App',
@@ -22,20 +23,15 @@ export default {
   },
   data() {
     return {
-      tasks: []
+      tasks: [],
     }
   },
   methods: {
 
   },
-  computed: {
-
-  },
-  beforeCreate() {
-    if (localStorage.getItem('item') === null) {
-      window.location.href = '/#/Home';
-    }
-    //this.store.startSession();
+  created() {
+    window.location.href = '/#/Home';
+    // LoginStore.closeSession();
   }
 };
 </script>
