@@ -53,12 +53,17 @@ const RoutineStore = {
             detail: tempRoutine.detail,
             isPublic: tempRoutine.isPublic,
             difficulty: "rookie",
+
             category: tempRoutine.category,
             metadata: null
         }
         let currentRoutine = await RoutineApi.createRoutine(routine, null);
         await this.addInfo(currentRoutine, tempRoutine);
         bus.$emit('routinechange');
+    },
+
+    async getRoutineAverageRating(routine){
+        return (await RoutineApi.getRoutine(routine.id)).averageRating;
     },
 
     async addInfo(routine, tempRoutine){
@@ -127,17 +132,6 @@ const RoutineStore = {
 
         return this.routines[index];
     },
-
-    findByName(name) {
-
-        for (const routine of this.routines) {
-            if(routine.titulo === name) {
-                let aux = JSON.parse(JSON.stringify(routine));
-                this.remove(routine)
-                return aux;
-            }
-        }
-    },
     getColor(routine) {
         if (routine.category.id === 2) //Pesas
             return "#7885FF";
@@ -146,17 +140,6 @@ const RoutineStore = {
         if (routine.category.id === 1) //En Casa
             return "#B495C2";
     },
-    // getAllByCategory(category) {
-    //     if (category === 'En Casa')
-    //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.EnCasa);
-    //     if (category === 'Running')
-    //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.Running);
-    //     if (category === 'Pesas')
-    //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.Pesas);
-    //     if (category === 'Destacados') //ESTA OBVIO QUE VA A CAMBIAR CON LA API
-    //         return this.routines.filter(routine => routine.disciplina === RutinasEnum.Destacados);
-    //     return this.routines;
-    // }
     async getAllRoutines(){
         return (await ProfileApi.getAllRoutines()).content;
     },
