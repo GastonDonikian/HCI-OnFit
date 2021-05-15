@@ -3,41 +3,46 @@
     <div align="left" style="color: #E46271">
       <h3>CONFIGURACIÓN</h3>
     </div>
-<!--    <v-avatar  style="margin-top: 5%; border-style: solid; border-color:darkgrey;" size="50">-->
-<!--      <v-img draggable="false"-->
-<!--             @load="viewImg">-->
-<!--      </v-img>-->
-<!--    </v-avatar>-->
-
     <v-btn @click="editAvatar"
-      class="settingsButton"
-      rounded
-      large
-      dark
-      text
-      min-width="240px"
-      >
+           class="settingsButton"
+           rounded
+           large
+           dark
+           text
+           min-width="240px"
+    >
       <v-icon>mdi-account-edit</v-icon>
       Editar Cuenta
     </v-btn>
+    <v-btn @click="forgetPassword"
+           class="settingsButton"
+           rounded
+           large
+           dark
+           text
+           min-width="240px"
+    >
+      <v-icon>mdi-key</v-icon>
+      Olvidar Contraseña
+    </v-btn>
     <v-btn @click="closeSession"
-        class="settingsButton"
-        rounded
-        large
-        dark
-        text
-        min-width="240px"
+           class="settingsButton"
+           rounded
+           large
+           dark
+           text
+           min-width="240px"
     >
       <v-icon>mdi-logout</v-icon>
       Cerrar sesión
     </v-btn>
     <v-btn @click="deleteAccount"
-        class="settingsButton"
-        rounded
-        large
-        dark
-        text
-        min-width="240px"
+           class="settingsButton"
+           rounded
+           large
+           dark
+           text
+           min-width="240px"
     >
       <v-icon>mdi-delete</v-icon>
       Eliminar Cuenta
@@ -72,6 +77,9 @@ export default {
     editAvatar() {
       window.location.href='/#/EditAccount';
     },
+    forgetPassword() {
+      localStorage.removeItem('user');
+    }
   }
 }
 </script>

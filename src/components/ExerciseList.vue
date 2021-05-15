@@ -58,7 +58,9 @@ export default {
       return 2;
       if (innerWidth <= 1400)
         return 3;
-      return 4;
+      if (innerWidth <= 1750)
+        return 4;
+      return 5;
     },
     async onResize() {
       this.exercisesArray = await this.getDisplayExercises();
