@@ -2,6 +2,7 @@ import RoutineStore from "./RoutineStore";
 import RutinasEnum from "./RutinasEnum";
 import {RoutineApi} from "../api/RoutineApi";
 import {CycleApi} from "../api/CycleApi";
+import {ReviewsApi} from "../api/ReviewsApi";
 
 const CreateRoutineStore = {
     popup: false,
@@ -173,7 +174,9 @@ const CreateRoutineStore = {
         this.currentSeccion = seccion;
         this.popup = true;
     },
-
+    async voteRaiting(id, score){
+        await ReviewsApi.addReview(id, score);
+    },
     deactivate() {
         this.popup = false;
     }
