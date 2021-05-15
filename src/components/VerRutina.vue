@@ -17,9 +17,9 @@
           </v-col>
         </v-row>
         <v-row>
-          <h4 style="color: #E46271; font-weight: normal">Categoría: </h4>
+          <h4 style="color: #E46271; font-weight: normal" >Categoría: </h4>
           <h4 style="width: 10px"></h4>
-          <h4 style="font-weight: normal">{{ findCategory(this.store.tempRoutine.category) }}</h4>
+          <h4 style="font-weight: normal">{{ findCategory(this.store.tempRoutine.category.id) }}</h4>
         </v-row>
         <v-row>
           <h4 style="color: #E46271; font-weight: normal">Descripción: </h4>

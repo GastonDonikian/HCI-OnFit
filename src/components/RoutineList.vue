@@ -8,6 +8,9 @@
                          v-bind:routine="routine"
                           :can-edit="canEdit.valueOf()"/>
           </v-col>
+          <v-col>
+            <PlusCard></PlusCard>
+          </v-col>
         </v-row>
       </v-carousel-item>
     </v-carousel>
@@ -19,11 +22,12 @@
 import RoutineCard from "./RoutineCard";
 import RoutineStore from "../store/RoutineStore";
 import {bus} from "../main";
+import PlusCard from "./PlusCard";
 
 
 export default {
   name: "RoutineList",
-  components: {RoutineCard},
+  components: {PlusCard, RoutineCard},
   showPlus:true,
   props: {
     category: null,
