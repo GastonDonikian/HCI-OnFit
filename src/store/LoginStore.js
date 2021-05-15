@@ -26,7 +26,6 @@ const LoginStore = {
             alert(error.code + ' error: ' + error.description);
         }
         this.loggedIn = false;
-        localStorage.clear();
     },
     setUserName(userName) {
         this.userName = userName;

@@ -28,7 +28,6 @@
         <v-icon
             v-if="!this.profileStore.availableAvatar"
             size="90">mdi-account</v-icon>
-<!--        https://www.famousbirthdays.com/faces/miranda-lin-manuel-image.jpg-->
         <v-img
             v-if="this.profileStore.availableAvatar"
             :src="this.profileStore.userInfo.avatarUrl"
@@ -71,7 +70,7 @@
         dark
         text
         min-width="240px"
-    ><!--si  pongo el style abajo no funciona bien-->
+    >
       {{this.exerciseCount}} ejercicios creados
     </v-btn>
     <v-btn
@@ -83,7 +82,7 @@
         dark
         text
         min-width="240px"
-    ><!--si  pongo el style abajo no funciona bien-->
+    >
       {{this.exerciseCount}} ejercicio creado
     </v-btn>
     <v-btn
